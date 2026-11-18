@@ -1652,6 +1652,8 @@ function App() {
   };
 
   // 미리보기 모드에서 막힌 동작을 눌렀을 때 안내 + 고객 가입 화면으로 가는 링크
+  // 원장님·관리자 화면 ↔ 고객 화면(미리보기) 전환. 버튼: 원장님·관리자 헤더, 미리보기 띠
+  const switchMode = (mode) => { setAppMode(mode); resetBookingFlow(); setSelectedDesign(null); setSelectedShop(null); setShowNotifications(false); };
   const goCustomerSignup = () => {
     logout();
     setAuthView('signup');
@@ -2785,29 +2787,8 @@ function App() {
           </div>
         ) : (
         <>
-        <div className="px-5 pt-3 pb-2 flex justify-between items-center border-b border-slate-100 shrink-0 text-xs text-slate-500 font-semibold z-40">
+        <div className="px-5 pt-3 pb-2 flex items-center border-b border-slate-100 shrink-0 text-xs text-slate-500 font-semibold z-40">
           <div>9:41</div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-black px-2 py-0.5 rounded-full" style={{ color: PINK, background: '#FFF0F4', border: '1px solid #FBDCE4' }}>네일뭐해 LIVE</span>
-            {currentUser.type === 'owner' && (
-              <button
-                onClick={() => { setAppMode(appMode === 'B2C' ? 'B2B' : 'B2C'); resetBookingFlow(); setSelectedDesign(null); setSelectedShop(null); setShowNotifications(false); }}
-                className="text-white px-2 py-1 rounded-md text-xs font-bold active:scale-95 transition-all"
-                style={{ background: PINK }}
-              >
-                {appMode === 'B2C' ? '원장님모드' : '고객모드'}
-              </button>
-            )}
-            {currentUser.type === 'admin' && (
-              <button
-                onClick={() => { setAppMode(appMode === 'ADMIN' ? 'B2C' : 'ADMIN'); resetBookingFlow(); setSelectedDesign(null); setSelectedShop(null); setShowNotifications(false); }}
-                className="text-white px-2 py-1 rounded-md text-xs font-bold active:scale-95 transition-all"
-                style={{ background: '#4338ca' }}
-              >
-                {appMode === 'ADMIN' ? '고객화면 보기' : '관리자모드'}
-              </button>
-            )}
-          </div>
         </div>
 
         <div className="flex-1 overflow-hidden relative flex flex-col bg-slate-50">
@@ -2817,7 +2798,7 @@ function App() {
               {isPreview && (
                 <div role="status" className="shrink-0 bg-indigo-700 text-white px-4 py-2 flex items-center justify-between gap-2 z-30">
                   <span className="text-xs font-bold leading-snug">👀 미리보기 모드 · {currentUser.type === 'owner' ? '원장님' : '관리자'} 계정은 예약·결제·후기·신고·찜을 할 수 없어요</span>
-                  <button onClick={() => setAppMode(currentUser.type === 'owner' ? 'B2B' : 'ADMIN')} className="shrink-0 text-xs font-black bg-white text-indigo-700 px-2 py-1 rounded-md">{currentUser.type === 'owner' ? '원장님모드로' : '관리자모드로'}</button>
+                  <button onClick={() => switchMode(currentUser.type === 'owner' ? 'B2B' : 'ADMIN')} className="shrink-0 text-xs font-black bg-white text-indigo-700 px-2 py-1 rounded-md">{currentUser.type === 'owner' ? '원장님모드로' : '관리자모드로'}</button>
                 </div>
               )}
               {myRestriction && !isPreview && (
@@ -3374,6 +3355,7 @@ function App() {
                   )}
                 </div>
                 <div className="flex items-center gap-3">
+                  <button onClick={() => switchMode('B2C')} title="고객 화면 미리보기" className="text-white px-2 py-1 rounded-md text-xs font-bold active:scale-95 transition-all" style={{ background: PINK }}>고객모드</button>
                   <button onClick={openNotifications} className="relative text-slate-300" aria-label={`매장 알림${unreadCount ? ` (읽지 않은 알림 ${unreadCount}개)` : ''}`}>
                     <Bell className="w-5 h-5" />
                     {unreadCount > 0 && <span className="absolute -top-1.5 -right-2 min-w-[1rem] h-4 px-1 rounded-full text-white text-[0.625rem] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{unreadCount > 9 ? '9+' : unreadCount}</span>}
@@ -3888,6 +3870,7 @@ function App() {
                   <h2 className="text-sm font-black text-slate-900 mt-1">플랫폼 관리자</h2>
                 </div>
                 <div className="flex items-center gap-3">
+                  <button onClick={() => switchMode('B2C')} title="고객 화면 미리보기" className="text-white px-2 py-1 rounded-md text-xs font-bold active:scale-95 transition-all" style={{ background: '#4338ca' }}>고객화면 보기</button>
                   <button onClick={openNotifications} className="relative text-slate-600" aria-label={`관리자 알림${unreadCount ? ` (읽지 않은 알림 ${unreadCount}개)` : ''}`}>
                     <Bell className="w-5 h-5" />
                     {unreadCount > 0 && <span className="absolute -top-1.5 -right-2 min-w-[1rem] h-4 px-1 rounded-full text-white text-[0.625rem] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{unreadCount > 9 ? '9+' : unreadCount}</span>}
