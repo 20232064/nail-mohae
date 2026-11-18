@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>네일뭐해 로고 배너</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, #FFD6E0 0%, #FBC7DA 35%, #F3B9DD 65%, #D9BEEA 100%);
+    font-family: "Jua", "Apple SD Gothic Neo", sans-serif;
+    overflow: hidden;
+  }
+  .sparkle {
+    position: absolute;
+    color: rgba(255,255,255,0.85);
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.6));
+  }
+  .frame {
+    position: relative;
+    width: 380px;
+    padding: 70px 30px 46px;
+    border: 1.5px solid rgba(255,255,255,0.55);
+    border-radius: 190px;
+    text-align: center;
+    background: rgba(255,255,255,0.06);
+  }
+  .logo {
+    font-size: 58px;
+    line-height: 1.15;
+    color: #fff;
+    letter-spacing: 4px;
+    margin: 0;
+    text-shadow:
+      0 0 4px #ffffff,
+      0 0 10px #ffffff,
+      0 0 18px #ff9ec7,
+      0 0 32px #ff9ec7,
+      0 0 48px #f78fc0;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 34px;
+    padding: 10px 22px;
+    border: 1px solid rgba(180,90,140,0.35);
+    border-radius: 999px;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #A5527A;
+    background: rgba(255,255,255,0.25);
+  }
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 200px;
+    margin: 26px auto 16px;
+  }
+  .divider .line {
+    flex: 1;
+    height: 1px;
+    background: rgba(165,82,122,0.35);
+  }
+  .divider .heart {
+    color: #E8799F;
+    font-size: 13px;
+  }
+  .subtitle {
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: #9A6FA8;
+  }
+</style>
+</head>
+<body>
+  <div class="sparkle" style="top:8%;left:8%;font-size:26px;">✦</div>
+  <div class="sparkle" style="top:6%;right:10%;font-size:14px;">◆</div>
+  <div class="sparkle" style="bottom:14%;left:9%;font-size:16px;">✦</div>
+  <div class="sparkle" style="bottom:10%;right:8%;font-size:24px;">✦</div>
+
+  <div class="frame">
+    <p class="logo">네일뭐해</p>
+    <div class="badge">✦&nbsp; 네일 고민, 여기서 끝 &nbsp;✦</div>
+    <div class="divider"><span class="line"></span><span class="heart">♥</span><span class="line"></span></div>
+    <div class="subtitle">PREMIUM NAIL CARE &amp; DESIGN</div>
+  </div>
+</body>
+</html>
