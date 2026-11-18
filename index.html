@@ -62,6 +62,24 @@ function Heart({ className, style }) {
 // ═══════════════════════════════════════════════════════════════
 const DEMO_MODE = true;
 
+// ═══════════════════════════════════════════════════════════════
+// 사업자 정보 — 화면 하단·약관·개인정보처리방침에 쓰이는 값을 여기 한 곳에서 바꿈.
+// 지금은 자리 표시(○○○)이며, 사업자 등록·통신판매업 신고 후 실제 값으로 교체. (실제 개인 연락처는 넣지 말 것)
+// ═══════════════════════════════════════════════════════════════
+const BUSINESS_INFO = {
+  name: '네일뭐해(가칭)',
+  ceo: '○○○',
+  bizNo: '000-00-00000',
+  mailOrderNo: '제0000-전남순천-0000호',
+  address: '전남 순천시 ○○',
+  csPhone: '000-0000-0000',
+  privacyOfficer: { name: '○○○', title: '○○', contact: '○○○ (이메일·전화)' },
+  termsEffectiveDate: '○○○○년 ○○월 ○○일',
+  privacyEffectiveDate: '○○○○년 ○○월 ○○일',
+  pgCompany: '○○○ (PG사 확정 후 기재)',
+  messagingVendor: '○○○ (알림 발송 대행사 확정 후 기재)'
+};
+
 const PINK = '#C77C8A';
 const PINK_DARK = '#B06578';
 
@@ -102,7 +120,7 @@ const INITIAL_DESIGNS = [
   { id: 'bd4', bizType: 'brow', title: '눈썹 리터치 (시술 후 1~2개월)', shopId: 'b4', shopName: '눈썹한잔 중앙점', location: '중앙동', cat: '콤보눈썹', price: 80000, discount: null, rating: 4.8, reviews: 44, badge: null, tags: ['리터치', '재방문'], colorA: '#f6ece4', colorB: '#c9a487', pattern: 'brow', img: '' },
 
   // ── 두피관리 샘플 (가상 상호·가상 상품, SVG 대체 이미지) ──
-  // 효능 표현은 의료·화장품 광고 규정상 주의 필요 [검토 필요] — '치료', '발모' 등 표현 금지
+  // 효능 표현은 의료·화장품 광고 규정상 주의 필요 — '치료', '발모' 등 표현 금지
   { id: 'sd1', bizType: 'scalp', title: '기본 두피 스케일링', shopId: 'sc1', shopName: '두피숲 연향점', location: '연향동', cat: '두피스케일링', price: 45000, discount: 15, rating: 4.8, reviews: 52, badge: '인기', tags: ['스케일링', '각질', '개운함'], colorA: '#dff3ea', colorB: '#8fcfb4', pattern: 'scalp', img: '' },
   { id: 'sd2', bizType: 'scalp', title: '두피 상태 체크 + 딥클렌징', shopId: 'sc2', shopName: '맑은결 두피랩 조례점', location: '조례동', cat: '두피스케일링', price: 60000, discount: null, rating: 4.9, reviews: 31, badge: 'NEW', tags: ['두피체크', '딥클렌징'], colorA: '#e3f0fb', colorB: '#94bfe6', pattern: 'scalp', img: '' },
   { id: 'sd3', bizType: 'scalp', title: '볼륨 고민 두피 집중 케어', shopId: 'sc3', shopName: '뿌리케어 신대점', location: '신대지구', cat: '탈모케어', price: 85000, discount: 10, rating: 4.7, reviews: 23, badge: null, tags: ['볼륨', '영양', '집중케어'], colorA: '#eef3dc', colorB: '#b4c97c', pattern: 'scalp', img: '' },
@@ -115,7 +133,7 @@ const TERMS_TEXT = `네일뭐해 이용약관 (프로토타입 예시본)
 이 약관은 네일뭐해(이하 "회사")가 제공하는 네일샵 예약 중개 서비스(이하 "서비스")의 이용조건 및 절차, 회사와 회원 간의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
 
 제2조 (회사의 지위 — 통신판매중개자 고지)
-회사는 통신판매중개자로서 회원과 매장 간 거래의 당사자가 아니며, 시술 서비스의 제공·품질·환불 등에 관한 1차적 의무와 책임은 해당 매장(통신판매업자)에 있습니다. 회사는 매장 정보를 고객에게 제공하고 분쟁 발생 시 원만한 해결을 위해 협조합니다. [법률 검토 필요: 전자상거래법 제20조 고지 문구]
+회사는 통신판매중개자로서 회원과 매장 간 거래의 당사자가 아니며, 시술 서비스의 제공·품질·환불 등에 관한 1차적 의무와 책임은 해당 매장(통신판매업자)에 있습니다. 회사는 매장 정보를 고객에게 제공하고 분쟁 발생 시 원만한 해결을 위해 협조합니다.
 
 제3조 (회원 구분 및 가입)
 ① 회원은 서비스 이용 목적에 따라 다음과 같이 구분됩니다.
@@ -133,7 +151,6 @@ const TERMS_TEXT = `네일뭐해 이용약관 (프로토타입 예시본)
 ① 방문 예정 시각 24시간 전까지 취소하는 경우 예약금 전액을 환불합니다.
 ② 방문 예정 시각 24시간 이내 취소 또는 무단 불참(노쇼)의 경우 예약금은 환불되지 않으며 매장에 정산됩니다.
 ③ 매장 사정으로 예약이 취소되는 경우 예약금 전액을 환불합니다.
-[법률 검토 필요: 전자상거래법상 청약철회 규정 및 소비자분쟁해결기준과의 정합성, 환불 기한(영업일) 명시]
 
 제6조 (리뷰 작성)
 회원은 실제 이용한 시술에 한하여 리뷰를 작성할 수 있으며, 허위 사실 또는 타인의 명예를 훼손하는 내용은 관계 법령에 따라 게시가 중단될 수 있습니다.
@@ -143,10 +160,10 @@ const TERMS_TEXT = `네일뭐해 이용약관 (프로토타입 예시본)
 ② 천재지변, 시스템 장애 등 불가항력적 사유로 인한 서비스 중단에 대해 회사는 책임을 지지 않습니다. 다만 회사의 고의 또는 중과실이 있는 경우는 제외합니다.
 
 제8조 (분쟁 해결 및 관할)
-서비스 이용과 관련한 분쟁은 상호 협의로 해결하며, 협의가 되지 않을 경우 민사소송법상 관할 법원에 제기합니다. [법률 검토 필요]
+서비스 이용과 관련한 분쟁은 상호 협의로 해결하며, 협의가 되지 않을 경우 민사소송법상 관할 법원에 제기합니다.
 
 부칙
-이 약관은 ○○○○년 ○○월 ○○일부터 시행합니다.
+이 약관은 ${BUSINESS_INFO.termsEffectiveDate}부터 시행합니다.
 ※ 본 약관은 프로토타입 예시이며, 실제 서비스 운영 전 반드시 법률 전문가의 검토를 받아야 합니다.`;
 
 const PRIVACY_TEXT = `네일뭐해 개인정보처리방침 (프로토타입 예시본)
@@ -178,11 +195,11 @@ const PRIVACY_TEXT = `네일뭐해 개인정보처리방침 (프로토타입 예
 - 제공받는 자: 회원이 예약한 매장
 - 제공 항목: 예약자명, 휴대폰번호, 예약 일시 및 시술 내용
 - 제공 목적: 예약 확인 및 시술 제공
-- 보유 기간: 시술 완료 후 [○개월] [법률 검토 필요]
+- 보유 기간: 시술 완료 후 [○개월]
 
 5. 개인정보 처리의 위탁
-- 결제 처리: [PG사명 기재 예정] — 예약금 결제 및 환불
-- 알림 발송: [발송 대행사명 기재 예정] — 예약 알림 문자/알림톡
+- 결제 처리: ${BUSINESS_INFO.pgCompany} — 예약금 결제 및 환불
+- 알림 발송: ${BUSINESS_INFO.messagingVendor} — 예약 알림 문자/알림톡
 [실제 위탁사 확정 후 기재 필요]
 
 6. 개인정보의 파기 절차 및 방법
@@ -198,11 +215,11 @@ const PRIVACY_TEXT = `네일뭐해 개인정보처리방침 (프로토타입 예
 회사는 로그인 유지 등을 위해 브라우저 저장소(쿠키·로컬스토리지)를 사용합니다. 이용자는 브라우저 설정에서 이를 거부·삭제할 수 있으며, 이 경우 로그인 유지 기능 이용이 제한될 수 있습니다.
 
 10. 개인정보 보호책임자
-- 성명: [○○○] / 직책: [○○] / 연락처: [이메일·전화 기재 예정]
+- 성명: ${BUSINESS_INFO.privacyOfficer.name} / 직책: ${BUSINESS_INFO.privacyOfficer.title} / 연락처: ${BUSINESS_INFO.privacyOfficer.contact}
 개인정보 침해 신고: 개인정보침해신고센터(국번없이 118), 개인정보분쟁조정위원회(1833-6972)
 
 11. 개인정보처리방침의 변경
-이 방침은 ○○○○년 ○○월 ○○일부터 적용되며, 변경 시 시행 7일 전부터 공지합니다.
+이 방침은 ${BUSINESS_INFO.privacyEffectiveDate}부터 적용되며, 변경 시 시행 7일 전부터 공지합니다.
 
 ※ 본 방침은 프로토타입 예시이며, 실제 서비스 운영 전 반드시 개인정보보호법 등 관계 법령에 따라 법률 전문가의 검토를 받아야 합니다.`;
 
@@ -214,7 +231,7 @@ const MARKETING_TEXT = `[선택] 마케팅 정보 수신 동의
 - 동의를 거부하셔도 서비스 이용에는 제한이 없습니다. MY 탭에서 언제든지 철회할 수 있습니다.`;
 
 // 사업자 정보 표시 (전자상거래법상 사이버몰 운영자 표시 의무) — 사업자 등록 후 실제 값으로 교체
-const COMPANY_INFO = '상호: 네일뭐해(가칭) · 대표: ○○○ · 사업자등록번호: 000-00-00000 · 통신판매업 신고: 제0000-전남순천-0000호 · 주소: 전남 순천시 ○○ · 고객센터: 000-0000-0000';
+const COMPANY_INFO = `상호: ${BUSINESS_INFO.name} · 대표: ${BUSINESS_INFO.ceo} · 사업자등록번호: ${BUSINESS_INFO.bizNo} · 통신판매업 신고: ${BUSINESS_INFO.mailOrderNo} · 주소: ${BUSINESS_INFO.address} · 고객센터: ${BUSINESS_INFO.csPhone}`;
 
 const INITIAL_COUPONS = [
   { id: 'c1', name: '신규 회원 10% 할인', type: 'percent', value: 10, used: false },
@@ -473,7 +490,7 @@ function ShopMap({ lat, lng, label, height = 150, draggable = false, onMove }) {
 
   return (
     // isolation: Leaflet 내부 z-index(400~1000)가 하단 탭바·모달 위로 올라오지 않도록 격리
-    <div style={{ position: 'relative', width: '100%', height: `${height}px`, isolation: 'isolate', background: '#eef3ec' }}>
+    <div style={{ position: 'relative', width: '100%', height: `${height / 16}rem`, isolation: 'isolate', background: '#eef3ec' }}>
       <div ref={elRef} role="img" aria-label={`${label} 위치 지도`} style={{ position: 'absolute', inset: 0 }} />
     </div>
   );
@@ -484,7 +501,7 @@ function MapPreview({ lat, lng, label, height = 150 }) {
   // 좌표를 시드로 사용해 도로/구획을 살짝 다르게 배치 (매장마다 다른 느낌)
   const seed = Math.abs(Math.round((lat + lng) * 1000)) % 100;
   return (
-    <div style={{ position: 'relative', width: '100%', height: `${height}px`, background: '#eaf2ea', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', width: '100%', height: `${height / 16}rem`, background: '#eaf2ea', overflow: 'hidden' }}>
       <svg viewBox="0 0 400 150" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
         <rect width="400" height="150" fill="#eef3ec" />
         <rect x="0" y={20 + (seed % 20)} width="400" height="14" fill="#dbe6f5" opacity="0.7" />
@@ -495,9 +512,9 @@ function MapPreview({ lat, lng, label, height = 150 }) {
         <rect x={90 - (seed % 10)} y={100 + (seed % 10)} width="40" height="28" rx="4" fill="#d9e8d9" opacity="0.8" />
       </svg>
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -100%)', textAlign: 'center' }}>
-        <div style={{ fontSize: '28px', filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.25))' }}>📍</div>
+        <div style={{ fontSize: '1.75rem', filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.25))' }}>📍</div>
       </div>
-      <div style={{ position: 'absolute', bottom: '6px', left: '8px', fontSize: '10px', fontWeight: 700, color: '#64748b', background: 'rgba(255,255,255,0.85)', padding: '2px 6px', borderRadius: '6px' }}>
+      <div style={{ position: 'absolute', bottom: '0.375rem', left: '0.5rem', fontSize: '0.625rem', fontWeight: 700, color: '#64748b', background: 'rgba(255,255,255,0.85)', padding: '0.125rem 0.375rem', borderRadius: '0.375rem' }}>
         {label}
       </div>
     </div>
@@ -637,17 +654,60 @@ const DEMO_ACCOUNTS = [
 ];
 
 // ───────────── 운영 정책 설정값 ─────────────
-// 정산 수수료율: 예시값 [검토 필요] — 수수료 방식·세금계산서·PG 수수료 처리 확정 후 변경
+// 정산 수수료율: 예시값 — 수수료 방식·세금계산서·PG 수수료 처리 확정 후 변경
 const SETTLEMENT_CONFIG = { commissionRate: 0.1 };
 // 노쇼 누적 기준: warnAt 회 이상이면 예약 시 경고, blockAt 회 이상이면 예약 제한
 const NOSHOW_POLICY = { warnAt: 3, blockAt: 5 };
+// ── 예약 취소 사유와 환불·정산 규칙 (설정값 — 수치·정책) ──
+// shop / force(천재지변·기타): 예약금 전액 환불, 정산 제외, 고객 쿠폰 복구(+예약 적립 포인트는 사과 의미로 유지), 사과 알림 + 다시 예약 버튼
+// customer(원장님이 고객 요청을 받아 취소) / customer_app(고객이 앱에서 취소):
+//   방문 CANCEL_FREE_HOURS 시간 전까지 → 전액 환불, 정산 제외 / 이후 → 환불 없음, 예약금은 정산에 포함. 쿠폰 복구 + 예약 적립 포인트 회수
+// 노쇼: 예약금만 원장님 정산(수수료 차감), 고객 노쇼 횟수 +1 — 예약 시간이 지난 뒤에만 처리 (DEMO_MODE 에선 시연용 우회 링크)
+const CANCEL_REASONS = {
+  customer: { label: '고객 요청', desc: '전화·메시지로 고객이 취소를 요청했어요', status: '취소(고객 요청)', byShop: false },
+  shop: { label: '가게 사정', desc: '원장님 사정·휴무·장비·시설 문제', status: '취소(가게 사정)', byShop: true },
+  force: { label: '천재지변·기타', desc: '날씨·재난 등 어쩔 수 없는 사정', status: '취소(가게 사정)', byShop: true },
+  customer_app: { label: '고객 앱 취소', desc: '고객이 앱에서 직접 취소', status: '취소(고객 요청)', byShop: false }
+};
+const SHOP_CANCEL_POLICY = { warnPerMonth: 3 }; // 가게 사정(천재지변 포함) 취소가 한 달에 이 횟수 이상이면 관리자 화면 경고
+
+// 예약 상태 표시: 방문확정 / 시술완료 / 노쇼 / 취소(고객 요청) / 취소(가게 사정) (+ 이의 제기로 취소된 노쇼)
+function bookingStatusLabel(b) {
+  if (b.status === 'confirmed') return '방문확정';
+  if (b.status === 'completed') return '시술완료';
+  if (b.status === 'noshow') return '노쇼';
+  if (b.status === 'noshow_reversed') return '노쇼 취소(이의 인정)';
+  if (b.status === 'cancelled') return (CANCEL_REASONS[b.cancelReason] || CANCEL_REASONS.customer_app).status;
+  return b.status;
+}
+
+// 취소 결과 미리 계산 (원장님·고객 확인창과 실제 처리에 같은 함수 사용)
+function cancelOutcome(b, reason, now = Date.now()) {
+  const deposit = b.deposit || PAYMENT_CONFIG.depositAmount;
+  const r = CANCEL_REASONS[reason] || CANCEL_REASONS.customer_app;
+  if (r.byShop) return { refund: deposit, settlementDeposit: 0, restoreCoupon: true, reclaimPoints: false, apology: true };
+  const free = (slotTime(b.date, b.time) - now) / 3600000 >= CANCEL_FREE_HOURS;
+  return free
+    ? { refund: deposit, settlementDeposit: 0, restoreCoupon: true, reclaimPoints: true, apology: false }
+    : { refund: 0, settlementDeposit: deposit, restoreCoupon: true, reclaimPoints: true, apology: false };
+}
+const dotsFromKey = (dateKey) => String(dateKey || '').replace(/-/g, '.'); // '2026-11-20' → '2026.11.20'
+
 // 후기 수정 가능 기간(일). 삭제는 본인이 언제든 가능
 const REVIEW_EDIT_DAYS = 7;
+// 디자인 상세 기본값 — 원장님이 소요 시간·포함 내용을 입력하지 않은 상품에 표시 (매장마다 다를 수 있다는 안내와 함께)
+const DEFAULT_DURATION_MIN = { 네일아트: 90, 페디큐어: 70, 자연눈썹: 120, 콤보눈썹: 130, 두피스케일링: 60, 탈모케어: 80 };
+const DEFAULT_INCLUDES = {
+  nail: ['젤 컬러·아트', '기본 큐티클 케어', '기존 젤 제거는 매장 문의'],
+  brow: ['눈썹 디자인 상담', '시술 부위 진정 케어', '리터치는 별도 상품'],
+  scalp: ['두피 상태 체크', '클렌징·스케일링', '드라이·스타일링 미포함']
+};
+const formatDuration = (min) => (min >= 60 ? `${Math.floor(min / 60)}시간${min % 60 ? ` ${min % 60}분` : ''}` : `${min}분`);
 const REPORT_REASONS = ['욕설·비방', '허위·과장 후기', '광고·스팸', '개인정보 노출', '기타'];
 
 // 입점 심사 상태: pending(심사 대기) / approved(승인) / rejected(반려). 승인된 샵만 고객 화면에 노출.
 // 상태값이 없는 기존 가상 샵은 승인으로 간주.
-const SHOP_STATUS_LABEL = { pending: '심사 대기', approved: '승인', rejected: '반려' };
+const SHOP_STATUS_LABEL = { pending: '심사 대기', approved: '승인', rejected: '반려', suspended: '영업 정지' };
 function shopStatus(s) {
   if (!s) return 'pending';
   if (s.status) return s.status;
@@ -728,18 +788,37 @@ function makeSeedBookings() {
 
 // ───────────── 검색 ─────────────
 const squash = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
-// 공백으로 나눈 모든 단어가 포함되어야 일치 ("조례 글리터" → 조례동 샵의 글리터 디자인)
-function searchScore(fields, query) {
-  const tokens = String(query || '').toLowerCase().split(/\s+/).filter(Boolean).map(squash);
-  if (!tokens.length) return 0;
+// 검색에서 무시하는 일반 단어 ("조례동 네일샵" → "조례동"으로 검색). 검색어가 전부 일반 단어면 그대로 사용
+const SEARCH_STOPWORDS = ['네일샵', '네일숍', '샵', '숍', '가게', '매장', '곳', '추천', '근처', '잘하는', '잘하는곳', '예약', '순천'];
+function searchTokens(query) {
+  const all = String(query || '').toLowerCase().split(/\s+/).filter(Boolean).map(squash).filter(Boolean);
+  const meaningful = all.filter(t => !SEARCH_STOPWORDS.includes(t));
+  return { tokens: meaningful.length ? meaningful : all, ignored: meaningful.length ? all.filter(t => SEARCH_STOPWORDS.includes(t)) : [] };
+}
+// 띄어쓰기로 나눈 단어 중 하나라도 맞으면 결과에 포함. 모두 맞으면 all=true (목록 위쪽), 첫 필드(제목·상호) 일치에 가중치
+function searchMatch(fields, query) {
+  const { tokens } = searchTokens(query);
+  if (!tokens.length) return { matched: 0, all: false, score: 0 };
   const hay = fields.map(squash);
+  let matched = 0;
   let score = 0;
   for (const t of tokens) {
     const idx = hay.findIndex(h => h.includes(t));
-    if (idx < 0) return 0;
-    score += idx === 0 ? 3 : 1; // 첫 필드(제목/상호) 일치에 가중치
+    if (idx < 0) continue;
+    matched += 1;
+    score += idx === 0 ? 3 : 1;
   }
-  return score;
+  return { matched, all: matched === tokens.length, score };
+}
+const bySearchRank = (a, b) => (Number(b.m.all) - Number(a.m.all)) || (b.m.matched - a.m.matched) || (b.m.score - a.m.score);
+// 광고 키워드 일치: 의미 있는 검색 단어가 광고 키워드에 들어 있거나, 광고 키워드 단어가 검색어에 들어 있으면 일치
+function adKeywordMatches(keyword, query) {
+  if (!keyword || !query) return false;
+  const kw = searchTokens(keyword).tokens;
+  const qt = searchTokens(query).tokens;
+  const kwAll = squash(keyword);
+  const qAll = squash(query);
+  return qt.some(t => kwAll.includes(t)) || kw.some(t => qAll.includes(t));
 }
 
 // ───────────── 이미지 최적화 ─────────────
@@ -830,43 +909,76 @@ const GLOBAL_CSS = `
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .nm-logo { font-family: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; color: #fff; letter-spacing: 3px;
   text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #ff9ec7, 0 0 32px #ff9ec7, 0 0 48px #f78fc0; }
-/* 데스크톱(마우스): 가로 스크롤 줄에 얇은 스크롤바 표시 */
+/* 가로 목록 좌우 버튼: 터치 기기에선 숨김(손가락으로 밀면 됨) */
+.nm-hbtn { display: none; }
+/* 데스크톱(마우스): 가로 스크롤 줄에 얇은 스크롤바 + 드래그 커서 + 마우스를 올리면 좌우 버튼 표시 */
 @media (hover: hover) and (pointer: fine) {
-  .hscroll { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+  .hscroll { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; cursor: grab; }
   .hscroll::-webkit-scrollbar { height: 6px; }
   .hscroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  .nm-hbtn { display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 5; width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: rgba(255,255,255,0.95); color: #334155;
+    font-size: 1.1rem; font-weight: 900; line-height: 1; box-shadow: 0 1px 4px rgba(15,23,42,0.25); opacity: 0; transition: opacity .15s; }
+  .nm-hrow:hover .nm-hbtn, .nm-hbtn:focus-visible { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+
+/* ── 화면 틀 ──
+   휴대폰·태블릿(터치): 틀 없이 화면 꽉 채움.
+   데스크톱(마우스 + 가로 640px 이상): 폰 비율 9:19.5 틀. 기준 크기 390×845px 를 rem 으로 잡고(24.375rem × 52.8125rem),
+   html 글자 크기(=1rem)를 창 높이·너비에 맞춰 바꿔서 틀·글자·여백이 비율 그대로 커지고 작아지게 함.
+   (transform 확대 방식은 지도 핀 드래그 좌표가 어긋나서 쓰지 않음)
+   1rem 범위: 10px ~ 26px */
+.nm-stage { display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; min-height: 100dvh; background: #e2e8f0; }
+.nm-frame { position: relative; display: flex; flex-direction: column; overflow: hidden; background: #fff; width: 100%; height: 100vh; height: 100dvh; }
+.nm-aside { display: none; }
+@media (min-width: 640px) and (hover: hover) and (pointer: fine) {
+  html { font-size: clamp(10px, min(calc((100vh - 48px) / 52.8125), calc((100vw - 48px) / 24.375)), 26px); }
+  @supports (height: 100dvh) { html { font-size: clamp(10px, min(calc((100dvh - 48px) / 52.8125), calc((100vw - 48px) / 24.375)), 26px); } }
+  .nm-stage { align-items: center; padding: 24px; gap: 3rem; }
+  .nm-frame { width: 24.375rem; height: 52.8125rem; flex-shrink: 0; border-radius: 2rem; border: 1px solid #cbd5e1; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+}
+/* 넓은 화면: 왼쪽 소개 패널(21rem) + 간격(3rem) 까지 한 줄에 들어가도록 너비 기준을 바꿈. 패널 높이 = 틀 높이 */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  html { font-size: clamp(10px, min(calc((100vh - 48px) / 52.8125), calc((100vw - 48px) / 48.375)), 26px); }
+  @supports (height: 100dvh) { html { font-size: clamp(10px, min(calc((100dvh - 48px) / 52.8125), calc((100vw - 48px) / 48.375)), 26px); } }
+  .nm-aside { display: flex; flex-direction: column; justify-content: center; gap: 1.25rem; width: 21rem; height: 52.8125rem; flex-shrink: 0; overflow-y: auto; }
+}
+.nm-logo-sm { font-family: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; color: #fff; letter-spacing: 0.12em;
+  text-shadow: 0 0 3px #fff, 0 0 8px #ff9ec7, 0 0 14px #f78fc0; }
 `;
 const LOGO_GRADIENT = 'linear-gradient(160deg, #FFD6E0 0%, #FBC7DA 35%, #F3B9DD 65%, #D9BEEA 100%)';
 
 // logo-banner.html 시안을 앱 컴포넌트로 옮김. compact = 홈 상단용 얇은 띠
+// 크기는 모두 rem — 화면 틀 크기에 맞춰 함께 커지고 작아짐.
+// shrink-0: 세로로 쌓인 화면(로그인 등)이 좁아져도 배너가 눌려 글자가 테두리 밖으로 밀려나지 않게 함.
 function LogoBanner({ compact = false }) {
   if (compact) {
+    // 홈 상단 띠: 반짝이는 글자와 겹치지 않는 자리(왼쪽 아래·가운데 위)에 두고, 글자는 위에 올려 잘리지 않게 함
     return (
-      <div className="relative overflow-hidden rounded-2xl px-4 py-3 flex items-center justify-between" style={{ background: LOGO_GRADIENT }}>
-        <span aria-hidden="true" className="absolute text-white" style={{ top: 4, left: 8, fontSize: 12, opacity: 0.8 }}>✦</span>
-        <span aria-hidden="true" className="absolute text-white" style={{ bottom: 4, right: 10, fontSize: 14, opacity: 0.8 }}>✦</span>
-        <p className="nm-logo m-0" style={{ fontSize: 24, lineHeight: 1.1 }}>네일뭐해</p>
-        <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ color: '#A5527A', background: 'rgba(255,255,255,0.35)', border: '1px solid rgba(180,90,140,0.3)' }}>✦ 네일 고민, 여기서 끝 ✦</span>
+      <div className="relative shrink-0 rounded-2xl pl-5 pr-3 py-3 flex items-center justify-between gap-2" style={{ background: LOGO_GRADIENT }}>
+        <span aria-hidden="true" className="absolute text-white" style={{ bottom: '0.2rem', left: '0.45rem', fontSize: '0.65rem', opacity: 0.8 }}>✦</span>
+        <span aria-hidden="true" className="absolute text-white" style={{ top: '0.2rem', left: '45%', fontSize: '0.6rem', opacity: 0.7 }}>✦</span>
+        <p className="nm-logo-sm relative z-10 m-0 shrink-0" style={{ fontSize: '1.5rem', lineHeight: 1.3 }}>네일뭐해</p>
+        <span className="relative z-10 text-xs font-semibold px-3 py-1 rounded-full truncate" style={{ color: '#A5527A', background: 'rgba(255,255,255,0.35)', border: '1px solid rgba(180,90,140,0.3)' }}>✦ 네일 고민, 여기서 끝 ✦</span>
       </div>
     );
   }
   return (
-    <div className="relative overflow-hidden rounded-3xl px-4 py-8 flex justify-center" style={{ background: LOGO_GRADIENT }}>
-      <span aria-hidden="true" className="absolute text-white" style={{ top: '8%', left: '8%', fontSize: 22, opacity: 0.85 }}>✦</span>
-      <span aria-hidden="true" className="absolute text-white" style={{ top: '6%', right: '10%', fontSize: 12, opacity: 0.85 }}>◆</span>
-      <span aria-hidden="true" className="absolute text-white" style={{ bottom: '12%', left: '9%', fontSize: 14, opacity: 0.85 }}>✦</span>
-      <span aria-hidden="true" className="absolute text-white" style={{ bottom: '10%', right: '8%', fontSize: 20, opacity: 0.85 }}>✦</span>
-      <div className="text-center w-full" style={{ maxWidth: 320, padding: '34px 20px 24px', border: '1.5px solid rgba(255,255,255,0.55)', borderRadius: 160, background: 'rgba(255,255,255,0.06)' }}>
-        <h1 className="nm-logo m-0" style={{ fontSize: 44, lineHeight: 1.15 }}>네일뭐해</h1>
+    <div className="relative shrink-0 overflow-hidden rounded-3xl px-4 py-8 flex justify-center" style={{ background: LOGO_GRADIENT }}>
+      <span aria-hidden="true" className="absolute text-white" style={{ top: '8%', left: '8%', fontSize: '1.375rem', opacity: 0.85 }}>✦</span>
+      <span aria-hidden="true" className="absolute text-white" style={{ top: '6%', right: '10%', fontSize: '0.75rem', opacity: 0.85 }}>◆</span>
+      <span aria-hidden="true" className="absolute text-white" style={{ bottom: '12%', left: '9%', fontSize: '0.875rem', opacity: 0.85 }}>✦</span>
+      <span aria-hidden="true" className="absolute text-white" style={{ bottom: '10%', right: '8%', fontSize: '1.25rem', opacity: 0.85 }}>✦</span>
+      <div className="relative text-center w-full" style={{ maxWidth: '20rem', padding: '2.125rem 1.25rem 1.5rem', border: '1.5px solid rgba(255,255,255,0.55)', borderRadius: '10rem', background: 'rgba(255,255,255,0.06)' }}>
+        <h1 className="nm-logo m-0" style={{ fontSize: '2.75rem', lineHeight: 1.15, whiteSpace: 'nowrap' }}>네일뭐해</h1>
         <div className="inline-flex items-center mt-5 px-4 py-1.5 rounded-full text-xs font-semibold" style={{ color: '#A5527A', border: '1px solid rgba(180,90,140,0.35)', background: 'rgba(255,255,255,0.25)' }}>✦&nbsp; 네일 고민, 여기서 끝 &nbsp;✦</div>
-        <div className="flex items-center gap-3 mx-auto mt-4 mb-2" style={{ width: 160 }} aria-hidden="true">
+        <div className="flex items-center gap-3 mx-auto mt-4 mb-2" style={{ width: '10rem' }} aria-hidden="true">
           <span className="flex-1" style={{ height: 1, background: 'rgba(165,82,122,0.35)' }} />
-          <span style={{ color: '#E8799F', fontSize: 12 }}>♥</span>
+          <span style={{ color: '#E8799F', fontSize: '0.75rem' }}>♥</span>
           <span className="flex-1" style={{ height: 1, background: 'rgba(165,82,122,0.35)' }} />
         </div>
-        <p className="m-0" style={{ fontFamily: 'Poppins, sans-serif', fontSize: 10, fontWeight: 500, letterSpacing: 3, color: '#9A6FA8' }}>PREMIUM NAIL CARE &amp; DESIGN</p>
+        <p className="m-0" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '0.625rem', fontWeight: 500, letterSpacing: '0.19rem', color: '#9A6FA8' }}>PREMIUM NAIL CARE &amp; DESIGN</p>
       </div>
     </div>
   );
@@ -890,12 +1002,82 @@ function Field({ label, error, hint, children }) {
   );
 }
 
+// 가로 목록(배너·카테고리·타임세일·날짜 줄).
+// 마우스 휠은 페이지 세로 스크롤에 양보하고(가로로 가로채지 않음), 가로 이동은
+// Shift+휠(브라우저 기본) · 마우스 드래그 · 좌우 버튼(마우스 사용 시 표시) · 키보드 화살표(안의 버튼에 포커스가 있을 때)로 함.
+function HRow({ className = '', style, snap = false, children, ...rest }) {
+  const ref = useRef(null);
+  const drag = useRef(null);
+  const [edges, setEdges] = useState({ left: false, right: false });
+  const update = () => {
+    const el = ref.current;
+    if (!el) return;
+    const left = el.scrollLeft > 2;
+    const right = el.scrollLeft < el.scrollWidth - el.clientWidth - 2;
+    setEdges(prev => (prev.left === left && prev.right === right ? prev : { left, right }));
+  };
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    el.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => { el.removeEventListener('scroll', update); window.removeEventListener('resize', update); };
+  }, []);
+  useEffect(update); // 내용이 바뀌면 버튼 표시 갱신 (값이 같으면 다시 그리지 않음)
+  const snapType = snap ? 'x mandatory' : '';
+  const step = (dir) => {
+    const el = ref.current;
+    if (el) el.scrollBy({ left: dir * Math.max(el.clientWidth * (snap ? 1 : 0.8), 80), behavior: 'smooth' });
+  };
+  const onMouseDown = (e) => {
+    if (e.button !== 0 || !ref.current) return;
+    drag.current = { x: e.clientX, left: ref.current.scrollLeft, moved: false };
+    const move = (ev) => {
+      const d = drag.current;
+      const el = ref.current;
+      if (!d || !el) return;
+      const dx = ev.clientX - d.x;
+      if (!d.moved && Math.abs(dx) > 5) { d.moved = true; el.style.scrollSnapType = 'none'; el.style.cursor = 'grabbing'; }
+      if (d.moved) el.scrollLeft = d.left - dx;
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+      const el = ref.current;
+      if (el) { el.style.cursor = ''; el.style.scrollSnapType = snapType; }
+      setTimeout(() => { drag.current = null; }, 0); // 드래그 직후 click 이 카드 열기로 이어지지 않게 한 틱 유지
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+  const onClickCapture = (e) => {
+    if (drag.current && drag.current.moved) { e.preventDefault(); e.stopPropagation(); }
+  };
+  return (
+    <div className="nm-hrow relative">
+      <div
+        ref={ref}
+        className={`hscroll overflow-x-auto ${className}`}
+        style={{ scrollSnapType: snapType || undefined, ...style }}
+        onMouseDown={onMouseDown}
+        onClickCapture={onClickCapture}
+        onDragStart={(e) => e.preventDefault()}
+        {...rest}
+      >
+        {children}
+      </div>
+      {edges.left && <button type="button" className="nm-hbtn" style={{ left: '0.25rem' }} aria-label="왼쪽으로 넘기기" onClick={() => step(-1)}>‹</button>}
+      {edges.right && <button type="button" className="nm-hbtn" style={{ right: '0.25rem' }} aria-label="오른쪽으로 넘기기" onClick={() => step(1)}>›</button>}
+    </div>
+  );
+}
+
 // 하단에서 올라오는 공통 모달 (role=dialog, 제목 연결)
 function Sheet({ title, onClose, height = '85%', children }) {
   const titleId = useId();
   return (
     <div className="absolute inset-0 flex items-end justify-center z-50" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }} onClick={onClose}>
-      <div role="dialog" aria-modal="true" aria-labelledby={titleId} className="bg-white w-full flex flex-col" style={{ height, borderTopLeftRadius: '24px', borderTopRightRadius: '24px' }} onClick={(e) => e.stopPropagation()}>
+      <div role="dialog" aria-modal="true" aria-labelledby={titleId} className="bg-white w-full flex flex-col" style={{ height, borderTopLeftRadius: '1.5rem', borderTopRightRadius: '1.5rem' }} onClick={(e) => e.stopPropagation()}>
         <div className="p-4 border-b border-slate-100 flex justify-between items-center shrink-0">
           <h3 id={titleId} className="text-sm font-black">{title}</h3>
           <button onClick={onClose} aria-label="닫기"><X className="w-5 h-5 text-slate-500" /></button>
@@ -1007,10 +1189,13 @@ function App() {
   const [loginFails, setLoginFails] = usePersistentState('loginFails', {});
   const [currentUser, setCurrentUser] = useState(null);
   const isLoggedIn = !!currentUser;
+  // 원장님·관리자 계정의 고객 화면 = 확인용 미리보기. 예약·결제·후기 작성·후기 신고·찜 불가
+  const isPreview = !!currentUser && currentUser.type !== 'customer' && appMode === 'B2C';
   const [authView, setAuthView] = useState('login');
   const [authBusy, setAuthBusy] = useState(false);
   const [loginForm, setLoginForm] = useState({ phone: '', password: '' });
   const [keepLogin, setKeepLogin] = useState(true);
+  const [showDemoAccounts, setShowDemoAccounts] = useState(false); // 로그인 화면 시연 계정 펼침 (DEMO_MODE 전용)
   const [loginError, setLoginError] = useState('');
   const [signupType, setSignupType] = useState('customer');
   const EMPTY_SIGNUP = { name: '', phone: '', email: '', password: '', password2: '', birthYear: '', gender: '', shopName: '', ceoName: '', bizNo: '', bizAddress: '', mailOrderNo: '', bizType: 'nail' };
@@ -1060,6 +1245,8 @@ function App() {
   const [newImg, setNewImg] = useState('');
   const [newBizType, setNewBizType] = useState('nail');
   const [newCat, setNewCat] = useState('네일아트');
+  const [newDuration, setNewDuration] = useState(''); // 소요 시간(분)
+  const [newIncludes, setNewIncludes] = useState(''); // 포함 내용(쉼표 구분)
   const [editingId, setEditingId] = useState(null);
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -1096,10 +1283,11 @@ function App() {
     setStaffForm({ name: '', specialty: '' });
     showToast(`${name} 디자이너를 추가했어요.`);
   };
-  const deactivateStaff = (member) => {
+  const deactivateStaff = async (member) => {
     const upcoming = bookings.filter(b => b.shopId === myShopId && b.designerId === member.id && b.status === 'confirmed');
     if (upcoming.length) { showToast(`${member.name}님에게 확정된 예약이 ${upcoming.length}건 있어요. 예약 처리 후 비활성화해주세요.`); return; }
-    if (!confirm(`${member.name}님을 예약 선택지에서 뺄까요? 지난 예약 기록은 유지돼요.`)) return;
+    if (!(await askConfirm({ title: '디자이너 비활성화', message: `${member.name}님을 예약 선택지에서 뺄까요?
+지난 예약 기록은 유지돼요.`, confirmText: '비활성화' }))) return;
     setStaffByShop(prev => ({ ...prev, [myShopId]: (prev[myShopId] || []).map(s => s.id === member.id ? { ...s, active: false } : s) }));
   };
   const reactivateStaff = (member) => {
@@ -1133,11 +1321,24 @@ function App() {
   // 승인된 샵 + 숨기지 않은 디자인만 고객에게 노출 (업종 필터는 홈 화면에서 bizType 기준)
   const approvedShopIds = new Set(shops.filter(s => shopStatus(s) === 'approved').map(s => s.id));
   const designBizType = (d) => d.bizType || ((shops.find(s => s.id === d.shopId) || {}).bizType) || 'nail';
-  const publicDesigns = designs.filter(d => !hiddenDesignIds.includes(d.id) && approvedShopIds.has(d.shopId)); // 검색·찜·샵 상세용 (전 업종)
+  const publicDesigns = designs.filter(d => !hiddenDesignIds.includes(d.id) && !d.adminHidden && approvedShopIds.has(d.shopId)); // 검색·찜·샵 상세용 (전 업종)
   const publicShops = shops.filter(s => approvedShopIds.has(s.id));
   const visibleDesigns = publicDesigns.filter(d => designBizType(d) === bizType); // 홈 화면용 (선택 업종)
   const visibleShops = publicShops.filter(s => (s.bizType || 'nail') === bizType);
 
+  // 앱 안 확인창 — 브라우저 기본 confirm() 은 일부 앱 내장 브라우저·미리보기에서 막혀(항상 취소) 삭제·취소가 안 될 수 있어 직접 그림.
+  // 사용: if (!(await askConfirm({ title, message, details: [['항목', '값']], confirmText, danger }))) return;
+  const [confirmDlg, setConfirmDlg] = useState(null);
+  const [confirmInput, setConfirmInput] = useState('');
+  const askConfirm = (opts) => new Promise((resolve) => { setConfirmInput(opts.input && opts.input.initial ? opts.input.initial : ''); setConfirmDlg({ ...opts, resolve }); });
+  // 사유 입력 확인창: 확인 시 입력한 사유(문자열), 취소 시 null. 관리자 수정은 모두 이걸로 사유를 받음(필수)
+  const askReason = (opts) => askConfirm({ ...opts, input: { label: '사유 (필수 · 처리 이력에 남아요)', placeholder: '예) 고객 문의로 확인 후 정정', ...(opts.input || {}) } });
+  const closeConfirm = (ok) => {
+    setConfirmDlg(prev => {
+      if (prev) prev.resolve(prev.input ? (ok ? confirmInput.trim() : null) : ok);
+      return null;
+    });
+  };
   const toastTimer = useRef(null);
   const showToast = (msg) => {
     setToast(msg);
@@ -1145,10 +1346,11 @@ function App() {
     toastTimer.current = setTimeout(() => setToast(''), 2600);
   };
 
-  const notify = (target, text) => {
+  // action: 알림 안 버튼 (예: { type: 'rebook', designId, label } · { type: 'dispute', bookingId, label })
+  const notify = (target, text, action) => {
     // 받는 대상(회원·매장·관리자)별로 최근 100개씩 보관 — 다른 대상 알림이 많아도 내 알림이 밀려나지 않음
     setNotifications(prev => {
-      const next = [{ id: 'n_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6), target, text, at: Date.now(), read: false }, ...prev];
+      const next = [{ id: 'n_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6), target, text, at: Date.now(), read: false, action: action || null }, ...prev];
       const seen = {};
       return next.filter(n => (seen[n.target] = (seen[n.target] || 0) + 1) <= 100);
     });
@@ -1379,8 +1581,8 @@ function App() {
     showToast(on ? '마케팅 정보 수신에 동의했어요.' : '마케팅 정보 수신 동의를 철회했어요.');
   };
 
-  const resetDemoData = () => {
-    if (!confirm('이 브라우저에 저장된 모든 계정·예약·데이터를 지우고 처음 상태로 되돌릴까요?')) return;
+  const resetDemoData = async () => {
+    if (!(await askConfirm({ title: '시연 데이터 초기화', message: '이 브라우저에 저장된 모든 계정·예약·데이터를 지우고 처음 상태로 되돌릴까요?', confirmText: '초기화', danger: true }))) return;
     storage.clearAll();
     window.location.reload();
   };
@@ -1396,6 +1598,8 @@ function App() {
 
   const confirmBooking = async (design) => {
     if (paying) return;
+    if (isPreview) { previewGuard(); return; }
+    if (myRestriction) { showToast(`이용이 제한된 계정이라 예약할 수 없어요. (사유: ${myRestriction.reason})`); return; }
     if (noShowCount(uid) >= NOSHOW_POLICY.blockAt) { showToast('노쇼 누적으로 예약이 제한된 계정이에요.'); return; }
     const shop = shops.find(s => s.id === design.shopId);
     const params = { shopId: design.shopId, designerId: selectedDesigner ? selectedDesigner.id : null, date: selectedDate, time: selectedTime, userId: uid, hours: shop && shop.hours, staff: staffOf(design.shopId) };
@@ -1447,45 +1651,312 @@ function App() {
     setBookingStep(3);
   };
 
-  const cancelBooking = (b) => {
-    const hoursLeft = (slotTime(b.date, b.time) - Date.now()) / 3600000;
-    const refundable = hoursLeft >= CANCEL_FREE_HOURS;
-    const msg = refundable
-      ? '예약을 취소할까요? 방문 24시간 전이라 예약금 10,000원이 전액 환불돼요.'
-      : '방문 24시간 이내라 예약금은 환불되지 않아요. 그래도 취소할까요?';
-    if (!confirm(msg)) return;
-    setBookings(prev => prev.map(x => x.id === b.id ? { ...x, status: 'cancelled', cancelledAt: Date.now(), refunded: refundable } : x));
-    // 예약 때 쓴 쿠폰은 되돌려 주고, 예약 적립 포인트는 회수 (0P 아래로는 내려가지 않음)
+  // 미리보기 모드에서 막힌 동작을 눌렀을 때 안내 + 고객 가입 화면으로 가는 링크
+  const goCustomerSignup = () => {
+    logout();
+    setAuthView('signup');
+    setSignupType('customer');
+    setSignupErrors({});
+  };
+  const previewGuard = async () => {
+    const who = currentUser && currentUser.type === 'admin' ? '관리자' : '원장님';
+    const ok = await askConfirm({
+      title: '미리보기 모드',
+      message: `${who} 계정은 고객 화면을 미리보기만 할 수 있어요.\n직접 예약하려면 고객용 계정으로 가입해 주세요.`,
+      confirmText: '고객용 계정으로 가입하기',
+      cancelText: '계속 미리보기'
+    });
+    if (ok) goCustomerSignup();
+  };
+
+  // 다른 회원(예약한 고객)의 쿠폰·포인트를 고칠 때 사용 — 원장님 취소·관리자 정정 등
+  const defaultPointsFor = (userId) => (userId === 'u_demo_customer' ? 3200 : 1000);
+  const patchUserDataFor = (userId, fn) => setUserData(prev => {
+    const cur = prev[userId] || {};
+    return { ...prev, [userId]: { ...cur, ...fn(cur) } };
+  });
+  const pointsOf = (d, userId) => (d.points != null ? d.points : defaultPointsFor(userId));
+
+  // 예약 취소 공통 처리 (고객 앱 취소·원장님 취소 모두). reason: CANCEL_REASONS 키, by: 'customer' | 'owner'
+  const applyCancel = (b, reason, memo, by) => {
+    const out = cancelOutcome(b, reason);
+    const r = CANCEL_REASONS[reason];
+    setBookings(prev => prev.map(x => x.id === b.id ? {
+      ...x, status: 'cancelled', cancelReason: reason, cancelMemo: memo || '', cancelledBy: by, cancelledAt: Date.now(),
+      refunded: out.refund > 0, refundAmount: out.refund, settlementDeposit: out.settlementDeposit
+    } : x));
+    // 복구 내역은 현재 상태로 미리 계산(알림 문구에 쓰기 위해). 실제 반영은 최신 상태 기준으로 다시 계산
+    const cur = userData[b.userId] || {};
     const restored = [];
-    if (b.couponId && myCoupons.some(c => c.id === b.couponId && c.used)) {
-      setMyCoupons(myCoupons.map(c => c.id === b.couponId ? { ...c, used: false } : c));
-      restored.push('쿠폰 복구');
-    }
-    if (b.pointsEarned) {
-      setMyPoints(Math.max(0, myPoints - b.pointsEarned));
-      restored.push(`적립 ${b.pointsEarned}P 회수`);
-    }
+    if (out.restoreCoupon && b.couponId && (cur.coupons || INITIAL_COUPONS).some(c => c.id === b.couponId && c.used)) restored.push('쿠폰 복구');
+    if (out.reclaimPoints && b.pointsEarned) restored.push(`적립 ${b.pointsEarned}P 회수`);
+    patchUserDataFor(b.userId, (d) => {
+      const patch = {};
+      const coupons = d.coupons || INITIAL_COUPONS;
+      if (out.restoreCoupon && b.couponId && coupons.some(c => c.id === b.couponId && c.used)) {
+        patch.coupons = coupons.map(c => c.id === b.couponId ? { ...c, used: false } : c);
+      }
+      if (out.reclaimPoints && b.pointsEarned) patch.points = Math.max(0, pointsOf(d, b.userId) - b.pointsEarned);
+      return patch;
+    });
     const d = designs.find(x => x.id === b.designId);
+    const s = shops.find(x => x.id === b.shopId);
     const when = `${formatDateLabel(b.date)} ${b.time}`;
-    notify(uid, `예약이 취소되었어요: ${when}${refundable ? ' · 예약금 환불 예정' : ''}${restored.length ? ' · ' + restored.join(', ') : ''}`);
-    if (restored.length) showToast(`예약 취소 완료 · ${restored.join(', ')}`);
-    notify('shop:' + b.shopId, `❌ 예약 취소: ${b.userName} 고객 · ${d ? d.title : ''} · ${when}`);
+    const refundText = out.refund > 0 ? `예약금 ${out.refund.toLocaleString()}원 환불` : '예약금 환불 없음(취소 규정)';
+    if (out.apology) {
+      notify(b.userId, `🙏 죄송해요. ${s ? s.name : '매장'} 사정으로 ${when} 예약이 취소되었어요 (사유: ${r.label}${memo ? ' - ' + memo : ''}). ${refundText}${restored.length ? ' · ' + restored.join(', ') : ''}`, { type: 'rebook', designId: b.designId, label: '다른 시간 예약하기' });
+    } else {
+      notify(b.userId, `예약이 취소되었어요 (${r.status}): ${when} · ${refundText}${restored.length ? ' · ' + restored.join(', ') : ''}`);
+    }
+    notify('shop:' + b.shopId, `❌ 예약 취소 (${r.label}): ${b.userName} 고객 · ${d ? d.title : ''} · ${when}${out.settlementDeposit ? ` · 예약금 ${out.settlementDeposit.toLocaleString()}원 정산 포함` : ''}`);
+    return { out, restored };
+  };
+
+  // 고객이 스케줄에서 직접 취소
+  const cancelBooking = async (b) => {
+    const out = cancelOutcome(b, 'customer_app');
+    const ok = await askConfirm({
+      title: '예약 취소',
+      message: out.refund > 0
+        ? `방문 ${CANCEL_FREE_HOURS}시간 전이라 예약금이 전액 환불돼요.`
+        : `방문 ${CANCEL_FREE_HOURS}시간 이내라 예약금은 환불되지 않아요. 그래도 취소할까요?`,
+      details: [['환불 예약금', `${out.refund.toLocaleString()}원`], ['쿠폰', b.couponId ? '다시 사용 가능' : '-'], ['예약 적립 포인트', b.pointsEarned ? `-${b.pointsEarned}P` : '-']],
+      confirmText: '예약 취소', cancelText: '닫기', danger: true
+    });
+    if (!ok) return;
+    const { restored } = applyCancel(b, 'customer_app', '', 'customer');
+    showToast(`예약을 취소했어요${restored.length ? ' · ' + restored.join(', ') : ''}`);
+  };
+
+  // 원장님 예약 취소 (사유 선택 시트)
+  const [ownerCancel, setOwnerCancel] = useState(null); // { booking, reason, memo }
+  const submitOwnerCancel = async () => {
+    if (!ownerCancel) return;
+    const { booking: b, reason, memo } = ownerCancel;
+    if (!reason) { showToast('취소 사유를 선택해주세요.'); return; }
+    const out = cancelOutcome(b, reason);
+    const ok = await askConfirm({
+      title: '예약 취소 확정',
+      message: '취소하면 되돌릴 수 없어요. 아래 내용으로 처리할까요?',
+      details: [['사유', CANCEL_REASONS[reason].label], ['고객 환불', `${out.refund.toLocaleString()}원`], ['매장 정산 포함', `${out.settlementDeposit.toLocaleString()}원`], ['고객 쿠폰', b.couponId ? '복구' : '-']],
+      confirmText: '예약 취소', cancelText: '돌아가기', danger: true
+    });
+    if (!ok) return;
+    applyCancel(b, reason, memo.trim(), 'owner');
+    setOwnerCancel(null);
+    showToast('예약을 취소했어요. 고객에게 알림을 보냈어요.');
   };
 
   const completeBooking = (b) => {
+    // [출시 전 점검] 지금은 시연을 위해 예약 시간 전에도 완료 처리 가능 (2차 요청서 13번: 현상유지)
     setBookings(prev => prev.map(x => x.id === b.id ? { ...x, status: 'completed', completedAt: Date.now() } : x));
     notify(b.userId, '💅 시술이 완료되었어요! 후기를 남기면 300P를 드려요.');
   };
 
-  const markNoShow = (b) => {
-    if (!confirm('노쇼로 처리할까요? 예약금이 매장에 정산됩니다.')) return;
-    setBookings(prev => prev.map(x => x.id === b.id ? { ...x, status: 'noshow', noShowAt: Date.now() } : x));
+  // 노쇼: 예약 시간이 지난 뒤에만. demoBypass 는 DEMO_MODE 시연 링크에서만 true
+  const markNoShow = async (b, demoBypass = false) => {
+    if (slotTime(b.date, b.time) > Date.now() && !(DEMO_MODE && demoBypass)) {
+      showToast('노쇼는 예약 시간이 지난 뒤에 처리할 수 있어요.');
+      return;
+    }
+    const deposit = b.deposit || PAYMENT_CONFIG.depositAmount;
+    const fee = Math.round(deposit * SETTLEMENT_CONFIG.commissionRate);
     const total = noShowCount(b.userId) + 1;
-    notify(b.userId, `방문하지 않은 예약이 노쇼로 처리되었어요: ${formatDateLabel(b.date)} ${b.time} (누적 ${total}회${total >= NOSHOW_POLICY.blockAt ? ' · 예약 제한' : total >= NOSHOW_POLICY.warnAt ? ` · ${NOSHOW_POLICY.blockAt}회 시 예약 제한` : ''})`);
+    const ok = await askConfirm({
+      title: '노쇼 처리',
+      message: '노쇼로 처리하면 되돌릴 수 없어요. (고객은 이의 제기를 할 수 있어요)',
+      details: [['예약금', `${deposit.toLocaleString()}원`], ['수수료(예시)', `-${fee.toLocaleString()}원`], ['원장님 정산', `${(deposit - fee).toLocaleString()}원`], ['고객 노쇼 누적', `${total}회${total >= NOSHOW_POLICY.blockAt ? ' (예약 제한)' : total >= NOSHOW_POLICY.warnAt ? ' (경고)' : ''}`]],
+      confirmText: '노쇼 처리', danger: true
+    });
+    if (!ok) return;
+    setBookings(prev => prev.map(x => x.id === b.id ? { ...x, status: 'noshow', noShowAt: Date.now() } : x));
+    notify(b.userId, `방문하지 않은 예약이 노쇼로 처리되었어요: ${formatDateLabel(b.date)} ${b.time} (누적 ${total}회${total >= NOSHOW_POLICY.blockAt ? ' · 예약 제한' : total >= NOSHOW_POLICY.warnAt ? ` · ${NOSHOW_POLICY.blockAt}회 시 예약 제한` : ''})`, { type: 'dispute', bookingId: b.id, label: '이의 제기' });
+  };
+
+  // ── 관리자 처리 이력 ── 관리자가 바꾼 모든 항목: [일시·관리자·대상·변경 전→후·사유(필수)]
+  const [adminLogs, setAdminLogs] = usePersistentState('adminLogs', []);
+  const logAdmin = (entry) => {
+    setAdminLogs(prev => [{ id: 'log_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6), at: Date.now(), adminId: uid, adminName: currentUser ? currentUser.name : '', ...entry }, ...prev].slice(0, 500));
+  };
+
+  // ── 관리자: 회원·샵 관리 ──
+  // 원칙: 원장님이 쓴 소개·디자인·가격은 관리자가 직접 고치지 않음(분쟁 소지) → 부적절한 내용 숨김·삭제만.
+  //       대신 포인트·쿠폰 조정, 노쇼 횟수 수정, 예약 상태 정정, 샵 승인/정지/해제, 후기 숨김, 회원 이용 제한은 가능.
+  //       모든 변경은 사유 필수 + 처리 이력(logAdmin) + 해당 원장님/고객 알림.
+  const [adminDetail, setAdminDetail] = useState(null); // { type: 'shop' | 'user', id }
+  const [adminQuery, setAdminQuery] = useState('');
+  const [adminFilter, setAdminFilter] = useState('all');
+  const [revealedPhones, setRevealedPhones] = useState({});
+  const accountOf = (id) => accounts.find(a => a.id === id);
+  const patchAccount = (id, patch) => setAccounts(prev => prev.map(a => (a.id === id ? { ...a, ...patch } : a)));
+  const ownerOfShop = (shopId) => accounts.find(a => a.owner && a.owner.shopId === shopId);
+  const myRestriction = (accountOf(uid) || {}).restricted || null;
+
+  const adminSetShopStatus = async (shop, next) => {
+    const before = shopStatus(shop);
+    if (before === next) return;
+    const reason = await askReason({
+      title: `샵 상태 변경: ${SHOP_STATUS_LABEL[next]}`,
+      message: `${shop.name}을(를) '${SHOP_STATUS_LABEL[before]}' → '${SHOP_STATUS_LABEL[next]}'(으)로 바꿀까요?${next === 'suspended' ? '\n영업 정지하면 고객 화면에서 바로 사라져요.' : ''}`,
+      confirmText: '변경', danger: next === 'suspended'
+    });
+    if (!reason) return;
+    setShops(prev => prev.map(s => (s.id === shop.id ? {
+      ...s, status: next, statusReason: reason, reviewedAt: Date.now(),
+      ...(next === 'suspended' ? { suspendReason: reason, suspendedAt: Date.now() } : {}),
+      ...(next === 'approved' ? { suspendReason: '', rejectReason: '' } : {}),
+      ...(next === 'rejected' ? { rejectReason: reason } : {})
+    } : s)));
+    logAdmin({ targetType: 'shop', targetId: shop.id, targetName: shop.name, field: '샵 상태', before: SHOP_STATUS_LABEL[before], after: SHOP_STATUS_LABEL[next], reason });
+    notify('shop:' + shop.id, next === 'suspended' ? `⛔ 운영 정책에 따라 매장이 영업 정지되었어요. 고객 화면에 노출되지 않아요. 사유: ${reason}` : `매장 상태가 '${SHOP_STATUS_LABEL[next]}'(으)로 변경되었어요. 사유: ${reason}`);
+    showToast(`${shop.name}: ${SHOP_STATUS_LABEL[next]}`);
+  };
+  const adminToggleShopInfo = async (shop) => {
+    const on = !shop.infoHidden;
+    const reason = await askReason({ title: on ? '샵 소개 숨김' : '샵 소개 숨김 해제', message: on ? '부적절한 소개 글을 고객 화면에서 숨겨요. 원장님 글은 수정하지 않아요.' : '숨긴 소개 글을 다시 보이게 할까요?', confirmText: on ? '숨김' : '해제', danger: on });
+    if (!reason) return;
+    setShops(prev => prev.map(s => (s.id === shop.id ? { ...s, infoHidden: on, infoHiddenReason: on ? reason : '' } : s)));
+    logAdmin({ targetType: 'shop', targetId: shop.id, targetName: shop.name, field: '샵 소개', before: on ? '공개' : '숨김', after: on ? '숨김' : '공개', reason });
+    notify('shop:' + shop.id, on ? `매장 소개가 운영 정책에 따라 숨김 처리되었어요. 내용을 고친 뒤 고객센터에 해제를 요청해 주세요. 사유: ${reason}` : '매장 소개 숨김이 해제되었어요.');
+  };
+  const adminToggleDesignHidden = async (d) => {
+    const on = !d.adminHidden;
+    const reason = await askReason({ title: on ? '디자인 숨김(관리자)' : '디자인 숨김 해제', message: `‘${d.title}’ ${on ? '을(를) 고객 화면에서 숨길까요? 원장님은 직접 해제할 수 없어요.' : '숨김을 해제할까요?'}`, confirmText: on ? '숨김' : '해제', danger: on });
+    if (!reason) return;
+    setDesigns(prev => prev.map(x => (x.id === d.id ? { ...x, adminHidden: on, adminHiddenReason: on ? reason : '' } : x)));
+    logAdmin({ targetType: 'design', targetId: d.id, targetName: `${d.title} (${d.shopName})`, field: '디자인 노출', before: on ? '공개' : '관리자 숨김', after: on ? '관리자 숨김' : '공개', reason });
+    notify('shop:' + d.shopId, on ? `‘${d.title}’ 디자인이 운영 정책에 따라 숨김 처리되었어요. 사유: ${reason}` : `‘${d.title}’ 디자인 숨김이 해제되었어요.`);
+  };
+  const adminDeleteDesign = async (d) => {
+    const reason = await askReason({ title: '디자인 삭제(관리자)', message: `‘${d.title}’ 을(를) 삭제할까요? 되돌릴 수 없어요. 분쟁 대비 기록이 필요하면 ‘숨김’을 쓰세요.`, confirmText: '삭제', danger: true });
+    if (!reason) return;
+    setDesigns(prev => prev.filter(x => x.id !== d.id));
+    logAdmin({ targetType: 'design', targetId: d.id, targetName: `${d.title} (${d.shopName})`, field: '디자인', before: `${d.title} · ${d.price.toLocaleString()}원`, after: '삭제', reason });
+    notify('shop:' + d.shopId, `‘${d.title}’ 디자인이 운영 정책에 따라 삭제되었어요. 사유: ${reason}`);
+  };
+  const adminHideReview = async (r, shopId) => {
+    const on = !r.hidden;
+    const reason = await askReason({ title: on ? '후기 숨김' : '후기 숨김 해제', message: `“${r.comment.slice(0, 40)}”`, confirmText: on ? '숨김' : '해제', danger: on });
+    if (!reason) return;
+    updateReview(r.id, { hidden: on, hiddenAt: on ? Date.now() : null });
+    logAdmin({ targetType: 'review', targetId: r.id, targetName: `${r.author} 후기 (${(shops.find(s => s.id === shopId) || {}).name || ''})`, field: '후기 노출', before: on ? '공개' : '숨김', after: on ? '숨김' : '공개', reason });
+    if (r.authorId) notify(r.authorId, on ? `작성하신 후기가 운영 정책에 따라 숨김 처리되었어요. 사유: ${reason}` : '작성하신 후기 숨김이 해제되었어요.');
+    notify('shop:' + shopId, on ? '매장 후기 1건이 운영 정책에 따라 숨김 처리되었어요.' : '숨김 처리된 후기 1건이 다시 공개되었어요.');
+  };
+  const adminToggleRestrict = async (acc) => {
+    const on = !acc.restricted;
+    const reason = await askReason({ title: on ? '회원 이용 제한' : '이용 제한 해제', message: on ? `${acc.name}님의 예약·후기 작성·신고를 막을까요? (로그인은 가능)` : `${acc.name}님의 이용 제한을 해제할까요?`, confirmText: on ? '이용 제한' : '해제', danger: on });
+    if (!reason) return;
+    patchAccount(acc.id, { restricted: on ? { reason, at: Date.now() } : null });
+    logAdmin({ targetType: 'user', targetId: acc.id, targetName: acc.name, field: '이용 제한', before: on ? '정상' : '이용 제한', after: on ? '이용 제한' : '정상', reason });
+    notify(acc.id, on ? `운영 정책에 따라 계정 이용(예약·후기·신고)이 제한되었어요. 사유: ${reason}` : '계정 이용 제한이 해제되었어요.');
+  };
+  const adminAdjustPoints = async (acc, delta) => {
+    if (!delta) return;
+    const before = pointsOf(userData[acc.id] || {}, acc.id);
+    const after = Math.max(0, before + delta);
+    const reason = await askReason({ title: '포인트 조정', details: [['현재', `${before.toLocaleString()}P`], ['변경 후', `${after.toLocaleString()}P`]], confirmText: '조정' });
+    if (!reason) return;
+    patchUserDataFor(acc.id, () => ({ points: after }));
+    logAdmin({ targetType: 'user', targetId: acc.id, targetName: acc.name, field: '포인트', before: `${before}P`, after: `${after}P`, reason });
+    notify(acc.id, `포인트가 조정되었어요: ${before.toLocaleString()}P → ${after.toLocaleString()}P (사유: ${reason})`);
+  };
+  const adminToggleCoupon = async (acc, coupon) => {
+    const reason = await askReason({ title: coupon.used ? '쿠폰 복구' : '쿠폰 사용 처리', message: coupon.name, confirmText: '변경' });
+    if (!reason) return;
+    patchUserDataFor(acc.id, (d) => ({ coupons: (d.coupons || INITIAL_COUPONS).map(c => (c.id === coupon.id ? { ...c, used: !coupon.used } : c)) }));
+    logAdmin({ targetType: 'user', targetId: acc.id, targetName: acc.name, field: `쿠폰(${coupon.name})`, before: coupon.used ? '사용완료' : '사용가능', after: coupon.used ? '사용가능' : '사용완료', reason });
+    notify(acc.id, `쿠폰 ‘${coupon.name}’ 상태가 ${coupon.used ? '사용가능으로 복구' : '사용완료로 변경'}되었어요. (사유: ${reason})`);
+  };
+  const adminGrantCoupon = async (acc) => {
+    const reason = await askReason({ title: '쿠폰 지급', message: '5,000원 즉시 할인 쿠폰 1장을 지급할까요?', confirmText: '지급' });
+    if (!reason) return;
+    const coupon = { id: 'c_adm_' + Date.now(), name: '운영팀 지급 5,000원 할인', type: 'amount', value: 5000, used: false };
+    patchUserDataFor(acc.id, (d) => ({ coupons: [...(d.coupons || INITIAL_COUPONS), coupon] }));
+    logAdmin({ targetType: 'user', targetId: acc.id, targetName: acc.name, field: '쿠폰 지급', before: '-', after: coupon.name, reason });
+    notify(acc.id, `🎟️ 운영팀에서 쿠폰을 지급했어요: ${coupon.name} (사유: ${reason})`);
+  };
+  const adminAdjustNoShow = async (acc, delta) => {
+    const before = noShowCount(acc.id);
+    const after = Math.max(0, before + delta);
+    if (after === before) return;
+    const reason = await askReason({ title: '노쇼 횟수 수정', details: [['현재', `${before}회`], ['변경 후', `${after}회`]], message: `경고 ${NOSHOW_POLICY.warnAt}회 · 예약 제한 ${NOSHOW_POLICY.blockAt}회 기준에 바로 반영돼요.`, confirmText: '수정' });
+    if (!reason) return;
+    patchAccount(acc.id, { noShowAdjust: (acc.noShowAdjust || 0) + (after - before) });
+    logAdmin({ targetType: 'user', targetId: acc.id, targetName: acc.name, field: '노쇼 횟수', before: `${before}회`, after: `${after}회`, reason });
+    notify(acc.id, `노쇼 누적 횟수가 ${before}회 → ${after}회로 정정되었어요. (사유: ${reason})`);
+  };
+  const BOOKING_STATUS_OPTIONS = [['confirmed', '방문확정'], ['completed', '시술완료'], ['noshow', '노쇼'], ['cancelled', '취소']];
+  const adminCorrectBooking = async (b, next) => {
+    if (!next || next === b.status) return;
+    // 방문확정으로 되돌릴 때 같은 매장·디자이너·시간에 다른 확정 예약이 있으면 중복 예약이 되므로 막음
+    if (next === 'confirmed') {
+      const clash = bookings.find(x => x.id !== b.id && x.status === 'confirmed' && x.shopId === b.shopId && x.date === b.date && x.time === b.time && (x.designerId === b.designerId || !x.designerId || !b.designerId));
+      if (clash) { showToast(`같은 시간에 이미 확정된 예약(${clash.userName} 고객)이 있어 방문확정으로 정정할 수 없어요.`); return; }
+    }
+    const beforeLabel = bookingStatusLabel(b);
+    const afterLabel = (BOOKING_STATUS_OPTIONS.find(([k]) => k === next) || [])[1];
+    const reason = await askReason({ title: '예약 상태 정정', message: `${b.userName} 고객 · ${formatDateLabel(b.date)} ${b.time}`, details: [['현재', beforeLabel], ['정정 후', afterLabel]], confirmText: '정정' });
+    if (!reason) return;
+    setBookings(prev => prev.map(x => (x.id === b.id ? {
+      ...x, status: next, correctedAt: Date.now(), correctedReason: reason,
+      ...(next === 'completed' ? { completedAt: x.completedAt || Date.now() } : {}),
+      ...(next === 'noshow' ? { noShowAt: Date.now() } : {}),
+      ...(next === 'cancelled' ? { cancelReason: x.cancelReason || 'customer', cancelledAt: Date.now(), cancelledBy: 'admin' } : {})
+    } : x)));
+    logAdmin({ targetType: 'booking', targetId: b.id, targetName: `${b.userName} 고객 예약 ${formatDateLabel(b.date)} ${b.time}`, field: '예약 상태', before: beforeLabel, after: afterLabel, reason });
+    notify(b.userId, `예약 상태가 정정되었어요 (${formatDateLabel(b.date)} ${b.time}): ${beforeLabel} → ${afterLabel}. 사유: ${reason}`);
+    notify('shop:' + b.shopId, `예약 상태가 운영팀에 의해 정정되었어요: ${b.userName} 고객 ${formatDateLabel(b.date)} ${b.time} ${beforeLabel} → ${afterLabel}`);
+  };
+  const revealPhone = (acc) => {
+    setRevealedPhones(prev => ({ ...prev, [acc.id]: true }));
+    // 개인정보 열람 기록 (출시 시 서버 감사 로그로 이전)
+    logAdmin({ targetType: 'user', targetId: acc.id, targetName: acc.name, field: '개인정보 열람(전화번호)', before: '가림', after: '전체 보기', reason: '관리자 상세 화면에서 전체 보기' });
+  };
+
+  // ── 노쇼 이의 제기(분쟁) ──
+  const [disputes, setDisputes] = usePersistentState('disputes', []);
+  const [disputeTarget, setDisputeTarget] = useState(null); // booking
+  const [disputeText, setDisputeText] = useState('');
+  const openDispute = (bookingId) => {
+    const b = bookings.find(x => x.id === bookingId);
+    if (!b || b.status !== 'noshow') { showToast('이의 제기할 수 있는 노쇼 예약이 아니에요.'); return; }
+    if (disputes.some(d => d.bookingId === bookingId && d.status === 'open')) { showToast('이미 이의 제기가 접수되어 운영팀이 확인 중이에요.'); return; }
+    setShowNotifications(false);
+    setDisputeText('');
+    setDisputeTarget(b);
+  };
+  const submitDispute = () => {
+    const text = disputeText.trim();
+    if (text.length < 5) { showToast('이의 제기 사유를 5자 이상 적어주세요.'); return; }
+    const b = disputeTarget;
+    setDisputes(prev => [...prev, { id: 'dp_' + Date.now(), bookingId: b.id, userId: b.userId, shopId: b.shopId, text, at: Date.now(), status: 'open' }]);
+    notify('admin', `⚖️ 노쇼 이의 제기: ${b.userName} 고객 · ${formatDateLabel(b.date)} ${b.time}`);
+    notify('shop:' + b.shopId, `⚖️ 고객이 노쇼 처리에 이의를 제기했어요 (${formatDateLabel(b.date)} ${b.time}). 운영팀이 확인 후 알려드려요.`);
+    setDisputeTarget(null);
+    showToast('이의 제기가 접수되었어요. 운영팀이 확인 후 알려드려요.');
+  };
+  // 관리자 판단: reverse = 노쇼 취소(예약금 환불, 노쇼 횟수 -1) / keep = 노쇼 유지
+  const [disputeMemos, setDisputeMemos] = useState({});
+  const resolveDispute = (dp, action) => {
+    const memo = (disputeMemos[dp.id] || '').trim();
+    if (!memo) { showToast('처리 사유를 입력해주세요. (처리 이력에 남아요)'); return; }
+    const b = bookings.find(x => x.id === dp.bookingId);
+    if (action === 'reverse' && b) {
+      setBookings(prev => prev.map(x => x.id === b.id ? { ...x, status: 'noshow_reversed', refunded: true, refundAmount: b.deposit || PAYMENT_CONFIG.depositAmount, reversedAt: Date.now() } : x));
+    }
+    setDisputes(prev => prev.map(x => x.id === dp.id ? { ...x, status: action === 'reverse' ? 'reversed' : 'kept', resolvedAt: Date.now(), memo } : x));
+    logAdmin({ targetType: 'booking', targetId: dp.bookingId, targetName: b ? `${b.userName} 고객 예약 ${formatDateLabel(b.date)} ${b.time}` : dp.bookingId, field: '노쇼 이의 제기', before: '노쇼', after: action === 'reverse' ? '노쇼 취소(예약금 환불)' : '노쇼 유지', reason: memo });
+    notify(dp.userId, action === 'reverse' ? `✅ 이의 제기가 받아들여졌어요. 노쇼가 취소되고 예약금이 환불돼요. (${memo})` : `이의 제기를 검토한 결과 노쇼가 유지되었어요. (${memo})`);
+    notify('shop:' + dp.shopId, action === 'reverse' ? `노쇼 이의 제기가 인정되어 해당 예약금이 정산에서 빠졌어요. (${memo})` : `노쇼 이의 제기가 기각되어 노쇼가 유지돼요.`);
+    showToast(action === 'reverse' ? '노쇼를 취소했어요.' : '노쇼를 유지했어요.');
   };
 
   // ── 관리자: 입점 심사 ──
-  const approveShop = (shop) => {
+  const approveShop = async (shop) => {
+    const reason = await askReason({ title: '입점 승인', message: `${shop.name} 입점을 승인할까요? 승인하면 고객 화면에 바로 노출돼요.`, confirmText: '승인', input: { initial: '사업자 정보 확인 완료' } });
+    if (!reason) return;
+    logAdmin({ targetType: 'shop', targetId: shop.id, targetName: shop.name, field: '입점 심사', before: SHOP_STATUS_LABEL[shopStatus(shop)], after: '승인', reason });
     setShops(prev => prev.map(s => s.id === shop.id ? { ...s, status: 'approved', reviewedAt: Date.now(), rejectReason: '' } : s));
     notify('shop:' + shop.id, '🎉 입점 심사가 승인되었어요! 이제 고객 화면에 매장이 노출됩니다.');
     showToast(`${shop.name} 승인 완료`);
@@ -1494,6 +1965,7 @@ function App() {
     const reason = (rejectDrafts[shop.id] || '').trim();
     if (!reason) { showToast('반려 사유를 입력해주세요.'); return; }
     setShops(prev => prev.map(s => s.id === shop.id ? { ...s, status: 'rejected', reviewedAt: Date.now(), rejectReason: reason } : s));
+    logAdmin({ targetType: 'shop', targetId: shop.id, targetName: shop.name, field: '입점 심사', before: SHOP_STATUS_LABEL[shopStatus(shop)], after: '반려', reason });
     notify('shop:' + shop.id, `입점 심사가 반려되었어요. 사유: ${reason}`);
     setRejectDrafts({ ...rejectDrafts, [shop.id]: '' });
     showToast(`${shop.name} 반려 처리`);
@@ -1524,6 +1996,10 @@ function App() {
     if (action === 'hide') updateReview(report.reviewId, { hidden: true, hiddenAt: Date.now() });
     setReports(prev => prev.map(x => x.reviewId === report.reviewId && x.status === 'open' ? { ...x, status: action === 'hide' ? 'hidden' : 'kept', resolvedAt: Date.now() } : x));
     if (action === 'hide') notify('shop:' + report.shopId, '신고된 후기 1건이 운영 정책에 따라 숨김 처리되었어요.');
+    const reasons = [...new Set(reports.filter(x => x.reviewId === report.reviewId && x.status === 'open').map(x => x.reason))].join(', ');
+    const fr = findReview(report.reviewId);
+    logAdmin({ targetType: 'review', targetId: report.reviewId, targetName: fr ? `${fr.review.author} 후기 (${(shops.find(s => s.id === report.shopId) || {}).name || ''})` : report.reviewId, field: '신고 처리', before: '공개(신고 접수)', after: action === 'hide' ? '숨김' : '유지', reason: `신고 사유: ${reasons}` });
+    if (action === 'hide' && fr && fr.review.authorId) notify(fr.review.authorId, `작성하신 후기가 신고 검토 결과 숨김 처리되었어요. (신고 사유: ${reasons})`);
     showToast(action === 'hide' ? '후기를 숨김 처리했어요.' : '후기를 유지했어요.');
   };
   const [reportTarget, setReportTarget] = useState(null); // { review, shopId }
@@ -1534,6 +2010,8 @@ function App() {
   const alreadyReported = (reviewId) => reports.some(x => x.reviewId === reviewId && x.reporterId === uid);
 
   const openReport = (review, shopId) => {
+    if (isPreview) { previewGuard(); return; }
+    if (myRestriction) { showToast('이용이 제한된 계정이라 신고할 수 없어요.'); return; }
     if (review.authorId === uid) return;
     if (alreadyReported(review.id)) { showToast('이미 신고한 후기예요. 운영팀이 확인 중이에요.'); return; }
     setReportReason('');
@@ -1559,10 +2037,10 @@ function App() {
     setEditingReview(null);
     showToast('후기를 수정했어요.');
   };
-  const deleteReview = (r) => {
+  const deleteReview = async (r) => {
     if (r.authorId !== uid) return;
     const reclaim = r.pointsGranted || 0;
-    if (!confirm(`이 후기를 삭제할까요? 삭제한 후기는 되돌릴 수 없어요.${reclaim ? `\n후기 작성으로 받은 ${reclaim}P도 회수돼요.` : ''}`)) return;
+    if (!(await askConfirm({ title: '후기 삭제', message: `이 후기를 삭제할까요? 삭제한 후기는 되돌릴 수 없어요.${reclaim ? `\n후기 작성으로 받은 ${reclaim}P도 회수돼요.` : ''}`, confirmText: '삭제', danger: true }))) return;
     if (reclaim) setMyPoints(Math.max(0, myPoints - reclaim));
     setShopReviews(prev => {
       const next = {};
@@ -1612,9 +2090,10 @@ function App() {
     );
   };
 
-  const unhideReview = (reviewId) => {
-    updateReview(reviewId, { hidden: false });
-    showToast('숨김을 해제했어요.');
+  const unhideReview = async (reviewId) => {
+    const fr = findReview(reviewId);
+    if (!fr) return;
+    await adminHideReview(fr.review, fr.shopId);
   };
 
   // ── 샵 평점·리뷰 수 ──
@@ -1632,23 +2111,70 @@ function App() {
   };
   const ratingText = (s) => { const st = shopStats(s); return st.rating == null ? '신규 매장' : `⭐ ${st.rating.toFixed(1)} (${st.count})`; };
 
+  // ── 디자인별 후기·별점 ──
+  // 디자인 후기 = 이 디자인을 예약한 건에 남긴 후기(숨김 제외). 기존 샘플 디자인의 rating/reviews 는 기준값으로 더함.
+  // 기준값도 앱 후기도 없으면 rating=null → "신규" 표시 (★5 (0) 같은 표시 방지)
+  const bookingDesignOf = (bookingId) => { const b = bookings.find(x => x.id === bookingId); return b ? b.designId : null; };
+  const designReviewsOf = (d) => (shopReviews[d.shopId] || []).filter(r => r.bookingId && !r.hidden && bookingDesignOf(r.bookingId) === d.id);
+  const designStats = (d) => {
+    const added = designReviewsOf(d);
+    const baseCount = d.reviews || 0;
+    const count = baseCount + added.length;
+    if (!count) return { rating: null, count: 0 };
+    const sum = (d.rating || 0) * baseCount + added.reduce((a, r) => a + r.rating, 0);
+    return { rating: Math.round((sum / count) * 10) / 10, count };
+  };
+  const designRating = (d) => {
+    const st = designStats(d);
+    return st.rating == null
+      ? <span className="text-xs font-bold px-1.5 py-0.5 rounded" style={{ color: PINK, background: '#FFF0F4' }}>신규</span>
+      : <span className="text-xs font-bold text-amber-500">⭐ {st.rating.toFixed(1)} <span className="text-slate-500 font-medium">({st.count})</span></span>;
+  };
+  // 정렬용: 후기 없는 신규 디자인은 맨 뒤 (예전엔 5.0으로 1등이 됐음)
+  const ratingKey = (d) => { const st = designStats(d); return st.rating == null ? -1 : st.rating; };
+  const designInfo = (d) => {
+    const biz = d.bizType || ((shops.find(s => s.id === d.shopId) || {}).bizType) || 'nail';
+    const hasDuration = Number(d.durationMin) > 0;
+    const hasIncludes = Array.isArray(d.includes) && d.includes.length > 0;
+    return {
+      duration: hasDuration ? Number(d.durationMin) : (DEFAULT_DURATION_MIN[d.cat] || 60),
+      includes: hasIncludes ? d.includes : (DEFAULT_INCLUDES[biz] || DEFAULT_INCLUDES.nail),
+      isDefault: !hasDuration || !hasIncludes
+    };
+  };
+
   // ── 노쇼 누적 ──
-  const noShowCount = (userId) => bookings.filter(b => b.userId === userId && b.status === 'noshow').length;
+  // 노쇼 횟수 = 노쇼 처리된 예약 수 + 관리자 정정분(noShowAdjust). 0 아래로는 내려가지 않음
+  const noShowCount = (userId) => Math.max(0, bookings.filter(b => b.userId === userId && b.status === 'noshow').length + ((accounts.find(a => a.id === userId) || {}).noShowAdjust || 0));
 
   // ── 정산 (예시 계산) ──
-  // 원장님 홈 카드와 관리자 정산 현황이 같은 계산을 쓰도록 하나로 둠. 기준: 이번 달(1일 0시~) 완료·노쇼 처리분.
+  // ── 이번 달 매장 숫자 (리포트·원장님 홈 정산 카드·관리자 정산이 모두 이 함수 하나로 계산) ──
+  // 기준: 예약 시술일이 이번 달인 예약. 금액·수수료율은 예시 설정값
+  //  · 매출 = 시술 완료 예약의 결제 예정 금액(쿠폰 반영)
+  //  · 예약금 수입 = 노쇼 예약금 + 고객 사정 늦은 취소 예약금(settlementDeposit)
+  //  · 수수료 = (매출 + 예약금 수입) × 수수료율, 정산 예정 = 매출 + 예약금 수입 − 수수료
+  //  · 가게 사정·천재지변 취소, 이의 제기로 취소된 노쇼는 정산 제외
   const monthStart = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), 1).getTime(); })();
+  const nextMonthStart = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth() + 1, 1).getTime(); })();
+  const inThisMonth = (b) => { const t = slotTime(b.date, b.time); return t >= monthStart && t < nextMonthStart; };
+  const bookingPrice = (b) => { const d = designs.find(x => x.id === b.designId); return b.finalPrice != null ? b.finalPrice : (d ? d.price : 0); };
   const shopSettlement = (s) => {
-    const done = bookings.filter(b => b.shopId === s.id && b.status === 'completed' && (b.completedAt || 0) >= monthStart);
-    const sales = done.reduce((sum, b) => {
-      const d = designs.find(x => x.id === b.designId);
-      return sum + (b.finalPrice != null ? b.finalPrice : (d ? d.price : 0));
-    }, 0);
-    const commission = Math.round(sales * SETTLEMENT_CONFIG.commissionRate);
-    const noShowDeposit = bookings
-      .filter(b => b.shopId === s.id && b.status === 'noshow' && (b.noShowAt || slotTime(b.date, b.time)) >= monthStart)
-      .reduce((sum, b) => sum + (b.deposit || 0), 0);
-    return { shop: s, count: done.length, sales, commission, payout: sales - commission, noShowDeposit };
+    const mine = bookings.filter(b => b.shopId === s.id && inThisMonth(b));
+    const done = mine.filter(b => b.status === 'completed');
+    const sales = done.reduce((sum, b) => sum + bookingPrice(b), 0);
+    const noShowDeposit = mine.filter(b => b.status === 'noshow').reduce((sum, b) => sum + (b.deposit || PAYMENT_CONFIG.depositAmount), 0);
+    const lateCancelDeposit = mine.filter(b => b.status === 'cancelled').reduce((sum, b) => sum + (b.settlementDeposit || 0), 0);
+    const depositIncome = noShowDeposit + lateCancelDeposit;
+    const commission = Math.round((sales + depositIncome) * SETTLEMENT_CONFIG.commissionRate);
+    const shopCancelCount = mine.filter(b => b.status === 'cancelled' && CANCEL_REASONS[b.cancelReason] && CANCEL_REASONS[b.cancelReason].byShop).length;
+    return {
+      shop: s, count: done.length, sales, noShowDeposit, lateCancelDeposit, depositIncome, commission,
+      payout: sales + depositIncome - commission,
+      booked: mine.filter(b => b.status !== 'cancelled').length,
+      noShowCount: mine.filter(b => b.status === 'noshow').length,
+      cancelCount: mine.filter(b => b.status === 'cancelled').length,
+      shopCancelCount, shopCancelWarn: shopCancelCount >= SHOP_CANCEL_POLICY.warnPerMonth
+    };
   };
   const settlementRows = () => shops.filter(s => shopStatus(s) === 'approved').map(shopSettlement);
 
@@ -1679,33 +2205,26 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 데스크톱: 마우스 휠(세로)로 가로 스크롤 줄(.hscroll)을 넘길 수 있게 함.
-  // 끝까지 스크롤된 방향이면 페이지 세로 스크롤을 그대로 둠.
-  useEffect(() => {
-    let lastSnap = 0;
-    const onWheel = (e) => {
-      const el = e.target && e.target.closest && e.target.closest('.hscroll');
-      if (!el || Math.abs(e.deltaY) <= Math.abs(e.deltaX) || el.scrollWidth <= el.clientWidth) return;
-      const max = el.scrollWidth - el.clientWidth;
-      if ((e.deltaY < 0 && el.scrollLeft <= 0) || (e.deltaY > 0 && el.scrollLeft >= max - 1)) return;
-      e.preventDefault();
-      if (el.dataset.snap === 'page') {
-        const now = Date.now();
-        if (now - lastSnap < 450) return;
-        lastSnap = now;
-        el.scrollBy({ left: Math.sign(e.deltaY) * el.clientWidth, behavior: 'smooth' });
-      } else {
-        el.scrollLeft += e.deltaY;
-      }
-    };
-    window.addEventListener('wheel', onWheel, { passive: false });
-    return () => window.removeEventListener('wheel', onWheel);
-  }, []);
+  // (예전에 있던 "휠을 가로 스크롤로 바꾸는 기능"은 세로 스크롤을 막아서 제거함 — 가로 목록은 HRow 참고)
+
+  // 탭(카테고리·업종 포함)을 바꾸면 해당 화면 스크롤을 맨 위로. 상세 팝업도 다른 항목을 열면 맨 위부터.
+  const b2cScrollRef = useRef(null);
+  const b2bScrollRef = useRef(null);
+  const adminScrollRef = useRef(null);
+  const designScrollRef = useRef(null);
+  const shopScrollRef = useRef(null);
+  const toTop = (ref) => { if (ref.current) ref.current.scrollTop = 0; };
+  useEffect(() => { toTop(b2cScrollRef); }, [b2cTab, category, bizType, appMode]);
+  useEffect(() => { toTop(b2bScrollRef); }, [b2bTab, appMode]);
+  useEffect(() => { toTop(adminScrollRef); }, [adminTab, appMode]);
+  useEffect(() => { toTop(designScrollRef); }, [selectedDesign && selectedDesign.id]);
+  useEffect(() => { toTop(shopScrollRef); }, [selectedShop && selectedShop.id]);
 
   // Esc 로 맨 위 모달 닫기 (키보드 접근성)
   useEffect(() => {
     const onKey = (e) => {
       if (e.key !== 'Escape') return;
+      if (confirmDlg) { closeConfirm(false); return; }
       if (reportTarget) setReportTarget(null);
       else if (showTermsModal) setShowTermsModal(false);
       else if (showPrivacyModal) setShowPrivacyModal(false);
@@ -1720,6 +2239,8 @@ function App() {
   });
 
   const submitReview = (booking) => {
+    if (isPreview) { previewGuard(); return; }
+    if (myRestriction) { showToast('이용이 제한된 계정이라 후기를 쓸 수 없어요.'); return; }
     const draft = reviewDrafts[booking.id] || { rating: 0, text: '' };
     if (!draft.rating) {
       showToast('별점을 선택해주세요!');
@@ -1727,7 +2248,8 @@ function App() {
     }
     const design = designs.find(d => d.id === booking.designId);
     const shop = shops.find(s => s.id === booking.shopId);
-    const dateStr = todayDots();
+    // 날짜는 항상 예약 시술일(예약일). 완료 처리한 시각은 booking.completedAt 에 따로 저장되어 있음
+    const dateStr = dotsFromKey(booking.date);
     const comment = draft.text.trim() || '(작성한 후기 없음)';
     const newReview = { id: 'r_' + Date.now(), author: maskName(currentUser.name), authorId: uid, createdAt: Date.now(), rating: draft.rating, date: dateStr, comment, bookingId: booking.id, pointsGranted: 300 };
     setShopReviews({
@@ -1758,6 +2280,7 @@ function App() {
 
   const toggleLike = (e, id) => {
     e.stopPropagation();
+    if (isPreview) { previewGuard(); return; }
     setLikedIds(likedIds.includes(id) ? likedIds.filter(x => x !== id) : [...likedIds, id]);
   };
 
@@ -1774,35 +2297,38 @@ function App() {
 
   const chargeCredit = (amount) => {
     setCredit(credit + amount);
-    alert(`💳 크레딧 ${amount.toLocaleString()}원이 충전되었습니다. 현재 잔액: ${(credit + amount).toLocaleString()}P`);
+    showToast(`💳 크레딧 ${amount.toLocaleString()}원이 충전되었습니다. 현재 잔액: ${(credit + amount).toLocaleString()}P`);
   };
 
   const registerBank = (e) => {
     e.preventDefault();
     if (!bankForm.bank || !bankForm.account || !bankForm.holder) {
-      alert('은행명, 계좌번호, 예금주를 모두 입력해주세요.');
+      showToast('은행명, 계좌번호, 예금주를 모두 입력해주세요.');
       return;
     }
     setBankInfo({ ...bankForm });
     setShowBankForm(false);
-    alert('✅ 정산 계좌가 등록되었습니다. 고객 결제 대금이 이 계좌로 정산됩니다.');
+    showToast('✅ 정산 계좌가 등록되었습니다. 고객 결제 대금이 이 계좌로 정산됩니다.');
   };
 
   const toggleDesignVisibility = (id) => {
     setHiddenDesignIds(hiddenDesignIds.includes(id) ? hiddenDesignIds.filter(x => x !== id) : [...hiddenDesignIds, id]);
   };
 
-  const deleteMyDesign = (id) => {
-    if (!confirm('이 디자인을 삭제하시겠습니까?')) return;
+  const deleteMyDesign = async (id) => {
+    const target = designs.find(d => d.id === id);
+    if (!(await askConfirm({ title: '디자인 삭제', message: `'${target ? target.title : ''}' 디자인을 삭제할까요?
+삭제하면 고객 화면과 광고에서 사라지고 되돌릴 수 없어요. 잠시 내리려면 '숨김'을 쓰세요.`, confirmText: '삭제', danger: true }))) return;
     setDesigns(designs.filter(d => d.id !== id));
   };
 
   const AD_COST = { '검색 상단 고정': 3000, '홈 배너 노출': 5000, '카테고리 상단 고정': 2000 };
 
+  const [profileSavedAt, setProfileSavedAt] = useState(0); // 마지막 저장 시각 (버튼 옆 표시)
   const saveProfile = async (e) => {
     e.preventDefault();
     if (!profileForm.name || !profileForm.location) {
-      alert('샵 이름과 주소는 필수 입력 항목입니다.');
+      showToast('샵 이름과 주소는 필수 입력 항목입니다.');
       return;
     }
     if (geo.status === 'loading') return;
@@ -1817,9 +2343,11 @@ function App() {
     // 좌표가 비어 있으면(undefined) 기존 매장 좌표를 덮어쓰지 않음
     const patch = Object.fromEntries(Object.entries(next).filter(([, v]) => v !== undefined));
     setShops(prev => prev.map(s => s.id === myShopId ? { ...s, ...patch } : s));
-    alert('✅ 샵 프로필이 저장되었습니다. 고객 화면에 즉시 반영됩니다.' + warn);
+    setProfileSavedAt(Date.now());
+    showToast('✅ 저장되었어요. 고객 화면에 바로 반영돼요.' + warn);
   };
 
+  const [adErrors, setAdErrors] = useState({});
   const startEditAd = (ad) => {
     setEditingAdId(ad.id);
     setAdForm({ designId: ad.designId, type: ad.type, days: ad.days, keyword: ad.keyword || '' });
@@ -1827,35 +2355,43 @@ function App() {
 
   const cancelAdForm = () => {
     setEditingAdId(null);
+    setAdErrors({});
     setAdForm({ designId: '', type: '검색 상단 고정', days: 7, keyword: '' });
   };
 
-  const deleteAd = (id) => {
+  const deleteAd = async (id) => {
     const ad = ads.find(a => a.id === id);
-    if (!confirm('이 광고를 삭제하시겠습니까? 남은 크레딧은 환불되지 않습니다.')) return;
+    if (!(await askConfirm({ title: '광고 삭제', message: '이 광고를 삭제할까요? 남은 크레딧은 환불되지 않습니다.', confirmText: '삭제', danger: true }))) return;
     setAds(ads.filter(a => a.id !== id));
     if (editingAdId === id) cancelAdForm();
   };
 
   const submitAd = (e) => {
     e.preventDefault();
-    if (!adForm.designId) return alert('광고할 디자인을 선택해주세요.');
+    // 필수 항목 검사 — 빠진 항목은 입력칸 아래에 안내
+    const err = {};
+    if (!adForm.designId) err.designId = '광고할 디자인을 선택해주세요.';
+    else if (hiddenDesignIds.includes(adForm.designId)) err.designId = '숨김 처리한 디자인은 광고할 수 없어요. 상품관리에서 다시 노출해 주세요.';
+    if (adForm.type === '검색 상단 고정' && !adForm.keyword.trim()) err.keyword = '검색 상단 고정 광고는 타겟 키워드가 필요해요. (이 키워드로 검색할 때 맨 위에 나와요)';
+    if (!Number.isInteger(adForm.days) || adForm.days < 1 || adForm.days > 90) err.days = '광고 기간은 1~90일로 입력해주세요.';
+    setAdErrors(err);
+    if (Object.keys(err).length) { showToast('필수 항목을 확인해주세요.'); return; }
     const newCost = AD_COST[adForm.type] * adForm.days;
 
     if (editingAdId) {
       const existing = ads.find(a => a.id === editingAdId);
       const diff = newCost - (existing ? existing.cost : 0);
       if (diff > 0 && diff > credit) {
-        return alert(`크레딧이 부족합니다. 추가로 필요한 크레딧: ${diff.toLocaleString()}P (보유: ${credit.toLocaleString()}P)`);
+        return showToast(`크레딧이 부족합니다. 추가로 필요한 크레딧: ${diff.toLocaleString()}P (보유: ${credit.toLocaleString()}P)`);
       }
       setCredit(credit - diff);
       setAds(ads.map(a => a.id === editingAdId ? { ...a, designId: adForm.designId, type: adForm.type, days: adForm.days, keyword: adForm.keyword, cost: newCost } : a));
-      alert(diff === 0 ? '✏️ 광고 정보가 수정되었습니다.' : `✏️ 광고가 수정되었습니다. ${diff > 0 ? diff.toLocaleString() + 'P가 추가 차감' : Math.abs(diff).toLocaleString() + 'P가 환불'}되었습니다.`);
+      showToast(diff === 0 ? '✏️ 광고 정보가 수정되었습니다.' : `✏️ 광고가 수정되었습니다. ${diff > 0 ? diff.toLocaleString() + 'P가 추가 차감' : Math.abs(diff).toLocaleString() + 'P가 환불'}되었습니다.`);
     } else {
-      if (newCost > credit) return alert(`크레딧이 부족합니다. 필요 크레딧: ${newCost.toLocaleString()}P (보유: ${credit.toLocaleString()}P)`);
+      if (newCost > credit) return showToast(`크레딧이 부족합니다. 필요 크레딧: ${newCost.toLocaleString()}P (보유: ${credit.toLocaleString()}P)`);
       setCredit(credit - newCost);
-      setAds([{ id: 'ad_' + Date.now(), designId: adForm.designId, type: adForm.type, days: adForm.days, keyword: adForm.keyword, cost: newCost, status: '진행중' }, ...ads]);
-      alert(`📢 광고가 등록되었습니다! ${newCost.toLocaleString()}P가 차감되었습니다.`);
+      setAds([{ id: 'ad_' + Date.now(), designId: adForm.designId, type: adForm.type, days: adForm.days, keyword: adForm.keyword.trim(), cost: newCost, status: '진행중', startAt: Date.now() }, ...ads]);
+      showToast(`📢 광고가 등록되었습니다! ${newCost.toLocaleString()}P가 차감되었습니다.`);
     }
     cancelAdForm();
   };
@@ -1877,7 +2413,7 @@ function App() {
 
   const saveDiary = (historyId) => {
     setMyHistory(myHistory.map(h => h.id === historyId ? { ...h, diary: diaryDraft } : h));
-    alert('📔 일기가 저장되었습니다!');
+    showToast('📔 일기가 저장되었습니다!');
   };
 
   const handleFileSelect = async (e) => {
@@ -1893,6 +2429,8 @@ function App() {
     setNewImg(d.img || '');
     setNewBizType(designBizType(d));
     setNewCat(d.cat);
+    setNewDuration(d.durationMin ? String(d.durationMin) : '');
+    setNewIncludes(Array.isArray(d.includes) ? d.includes.join(', ') : '');
     setShowAddForm(true);
   };
 
@@ -1903,15 +2441,19 @@ function App() {
     setNewPrice('');
     setNewTags('');
     setNewImg('');
+    setNewDuration('');
+    setNewIncludes('');
   };
 
   const handleUploadArt = (e) => {
     e.preventDefault();
     if (!newTitle || !newPrice) {
-      alert('아트 이름과 시술 가격을 정확히 입력해주세요!');
+      showToast('아트 이름과 시술 가격을 정확히 입력해주세요!');
       return;
     }
     const tagsArr = newTags ? newTags.split(',').map(t => t.trim()) : ['이달의아트'];
+    const durationMin = Number(newDuration) > 0 ? Math.round(Number(newDuration)) : undefined;
+    const includes = newIncludes.split(',').map(t => t.trim()).filter(Boolean);
 
     if (editingId) {
       setDesigns(designs.map(d => d.id === editingId ? {
@@ -1921,9 +2463,11 @@ function App() {
         tags: tagsArr,
         img: newImg || d.img,
         bizType: newBizType,
-        cat: newCat
+        cat: newCat,
+        durationMin,
+        includes
       } : d));
-      alert('✏️ 상품 정보가 수정되었습니다.');
+      showToast('✏️ 상품 정보가 수정되었습니다.');
     } else {
       const newArt = {
         id: 'd_' + Date.now(),
@@ -1935,31 +2479,52 @@ function App() {
         bizType: newBizType,
         price: Number(newPrice),
         discount: null,
-        rating: 5.0,
+        rating: 0,
         reviews: 0,
+        durationMin,
+        includes,
         badge: 'NEW',
         tags: tagsArr,
         img: newImg || undefined,
         colorA: '#fddb92', colorB: '#d1fdff', pattern: newBizType === 'brow' ? 'brow' : newBizType === 'scalp' ? 'scalp' : 'glitter'
       };
       setDesigns([newArt, ...designs]);
-      alert('🎉 신규 아트가 플랫폼에 실시간 등록되었습니다! 고객 홈 화면에서 확인 가능합니다.');
+      showToast('🎉 신규 아트가 플랫폼에 실시간 등록되었습니다! 고객 홈 화면에서 확인 가능합니다.');
     }
     cancelForm();
   };
 
   const q = searchQuery.trim();
   const shopById = (id) => shops.find(s => s.id === id);
+  // ── 진행 중 광고 (모든 매장) ──
+  // 기간: 등록 시각(startAt) + days일. startAt 없는 예전 광고는 진행 중으로 간주. 숨김·미승인 디자인 광고는 노출 안 함.
+  // 노출 위치: 검색 상단 고정 → 키워드가 맞는 검색 결과 맨 위 / 홈 배너 노출 → 홈 추천 탭 이벤트 배너 아래 /
+  //                        카테고리 상단 고정 → 해당 카테고리 둘러보기 맨 위. 모두 "광고" 표시.
+  const adEndsAt = (a) => (a.startAt ? a.startAt + a.days * 86400000 : null);
+  const adActive = (a) => a.status !== '종료' && (!a.startAt || Date.now() < adEndsAt(a));
+  const activeAds = Object.entries(shopOwnerData)
+    .flatMap(([shopId, d]) => (d.ads || []).map(a => ({ ...a, shopId })))
+    .filter(adActive)
+    .map(ad => ({ ad, design: publicDesigns.find(d => d.id === ad.designId && d.shopId === ad.shopId) }))
+    .filter(x => x.design);
+  const searchInfo = searchTokens(q);
+  const searchAds = q ? activeAds.filter(x => x.ad.type === '검색 상단 고정' && adKeywordMatches(x.ad.keyword, q)).slice(0, 2) : [];
+  const searchAdIds = new Set(searchAds.map(x => x.design.id));
   const searchedDesigns = q ? publicDesigns
+    .filter(d => !searchAdIds.has(d.id)) // 광고로 맨 위에 나온 디자인은 아래 목록에서 중복 제외
     .map(d => {
       const s = shopById(d.shopId);
-      return { d, score: searchScore([d.title, (d.tags || []).join(' '), d.shopName, d.location, s ? s.location : '', d.cat], q) };
+      return { d, m: searchMatch([d.title, (d.tags || []).join(' '), d.shopName, d.location, s ? s.location : '', d.cat], q) };
     })
-    .filter(x => x.score > 0)
-    .sort((a, b) => b.score - a.score || b.d.rating - a.d.rating)
+    .filter(x => x.m.matched > 0)
+    .sort((a, b) => bySearchRank(a, b) || ratingKey(b.d) - ratingKey(a.d))
     .map(x => x.d) : [];
   const searchedShops = q
-    ? publicShops.filter(s => searchScore([s.name, s.location, s.info], q) > 0)
+    ? publicShops
+      .map(s => ({ s, m: searchMatch([s.name, s.location, s.info], q) }))
+      .filter(x => x.m.matched > 0)
+      .sort(bySearchRank)
+      .map(x => x.s)
     : visibleShops;
   const popularTags = Object.entries(visibleDesigns.reduce((acc, d) => { (d.tags || []).forEach(t => { acc[t] = (acc[t] || 0) + d.reviews; }); return acc; }, {}))
     .sort((a, b) => b[1] - a[1]).slice(0, 8).map(([t]) => t);
@@ -1983,7 +2548,7 @@ function App() {
     resetBookingFlow();
   };
 
-  const RecCard = ({ design, big }) => {
+  const RecCard = ({ design, big, ad = false }) => {
     const isLiked = likedIds.includes(design.id);
     return (
       <div
@@ -1992,13 +2557,15 @@ function App() {
         onClick={() => openDesign(design)}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDesign(design); } }}
         className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition-all cursor-pointer"
-        style={big ? { width: '160px', flexShrink: 0, boxSizing: 'border-box' } : { width: '100%', boxSizing: 'border-box' }}
+        style={big ? { width: '10rem', flexShrink: 0, boxSizing: 'border-box' } : { width: '100%', boxSizing: 'border-box' }}
       >
         <div style={{ position: 'relative', width: '100%', paddingTop: '100%', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
             <Visual item={design} className="w-full h-full" size={big ? 160 : 200} />
           </div>
-          {design.badge && (
+          {ad ? (
+            <span className="absolute top-2 left-2 text-xs font-black text-slate-900 bg-amber-300 px-2 py-0.5 rounded" aria-label="광고">광고</span>
+          ) : design.badge && (
             <span className="absolute top-2 left-2 text-xs font-bold text-white bg-slate-900 bg-opacity-80 px-2 py-0.5 rounded">{design.badge}</span>
           )}
           <button onClick={(e) => toggleLike(e, design.id)} onKeyDown={(e) => e.stopPropagation()} aria-label={isLiked ? `${design.title} 찜 해제` : `${design.title} 찜하기`} aria-pressed={isLiked} className="absolute top-2 right-2 p-1.5 rounded-full bg-white shadow active:scale-95 transition-all">
@@ -2012,7 +2579,7 @@ function App() {
             {design.discount && <span className="text-sm font-black" style={{ color: PINK }}>{design.discount}%</span>}
             <span className="text-sm font-black text-slate-900">{design.price.toLocaleString()}원</span>
           </div>
-          <div className="flex items-center gap-0.5 mt-0.5 text-xs font-bold text-amber-500">⭐ {design.rating} <span className="text-slate-500 font-medium">({design.reviews})</span></div>
+          <div className="flex items-center gap-0.5 mt-0.5">{designRating(design)}</div>
         </div>
       </div>
     );
@@ -2046,10 +2613,10 @@ function App() {
   };
 
   return (
-    <div className="flex justify-center items-start lg:items-center lg:gap-12 bg-slate-200 min-h-screen sm:py-6">
+    <div className="nm-stage">
       <style>{GLOBAL_CSS}</style>
       {/* 데스크톱 전용 소개 패널 — 앱은 모바일 프레임으로 가운데 표시 */}
-      <aside className="hidden lg:flex flex-col gap-5 w-[340px] xl:w-[380px] shrink-0 lg:max-h-[calc(100dvh-48px)] lg:overflow-y-auto" aria-label="서비스 소개">
+      <aside className="nm-aside" aria-label="서비스 소개">
         <LogoBanner />
         <div className="bg-white rounded-2xl p-5 shadow-sm text-sm text-slate-600 leading-relaxed">
           <p className="font-black text-slate-900 mb-1">순천 네일샵 예약 플랫폼</p>
@@ -2058,7 +2625,7 @@ function App() {
         {DEMO_MODE && <p className="text-xs font-bold text-slate-600 leading-relaxed">※ 시연용 프로토타입 — 매장·디자인·후기·예약은 모두 가상 데이터입니다.</p>}
         <p className="text-xs text-slate-500 leading-relaxed">{COMPANY_INFO}</p>
       </aside>
-      <div className="bg-white overflow-hidden flex flex-col relative w-full max-w-[430px] h-[100dvh] sm:h-[calc(100dvh-48px)] sm:max-h-[860px] sm:rounded-[32px] sm:border sm:border-slate-300 sm:shadow-2xl">
+      <div className="nm-frame">
 
         {!isLoggedIn ? (
           <div className="flex-1 flex flex-col overflow-y-auto p-6">
@@ -2085,8 +2652,12 @@ function App() {
                   아직 회원이 아니신가요?{' '}
                   <button type="button" onClick={() => { setAuthView('signup'); setSignupErrors({}); }} className="font-bold" style={{ color: PINK }}>회원가입</button>
                 </p>
-                {DEMO_MODE && (<div className="bg-slate-50 border border-dashed border-slate-200 rounded-xl p-3 text-xs text-slate-500 leading-relaxed">
-                  <p className="font-bold text-slate-600 mb-1">시연용 데모 계정</p>
+                {/* 시연 계정: DEMO_MODE 일 때만 버튼이 있고, 눌러야 펼쳐짐(관리자 계정 정보 포함). DEMO_MODE=false 면 아예 없음 */}
+                {DEMO_MODE && !showDemoAccounts && (
+                  <button type="button" onClick={() => setShowDemoAccounts(true)} className="w-full text-xs font-bold text-slate-500 underline py-1">시연용 데모 계정 보기</button>
+                )}
+                {DEMO_MODE && showDemoAccounts && (<div className="bg-slate-50 border border-dashed border-slate-200 rounded-xl p-3 text-xs text-slate-500 leading-relaxed">
+                  <div className="flex justify-between items-center mb-1"><p className="font-bold text-slate-600">시연용 데모 계정</p><button type="button" onClick={() => setShowDemoAccounts(false)} className="underline">접기</button></div>
                   <button type="button" className="block underline" onClick={() => setLoginForm({ phone: '010-1234-5678', password: 'demo1234' })}>고객: 010-1234-5678 / demo1234</button>
                   <button type="button" className="block underline mt-0.5" onClick={() => setLoginForm({ phone: '010-9999-0000', password: 'owner1234' })}>원장님: 010-9999-0000 / owner1234</button>
                   <button type="button" className="block underline mt-0.5" onClick={() => setLoginForm({ phone: '010-0000-0000', password: 'admin1234' })}>관리자: 010-0000-0000 / admin1234</button>
@@ -2243,6 +2814,15 @@ function App() {
 
           {appMode === 'B2C' && (
             <div className="flex-1 flex flex-col overflow-hidden">
+              {isPreview && (
+                <div role="status" className="shrink-0 bg-indigo-700 text-white px-4 py-2 flex items-center justify-between gap-2 z-30">
+                  <span className="text-xs font-bold leading-snug">👀 미리보기 모드 · {currentUser.type === 'owner' ? '원장님' : '관리자'} 계정은 예약·결제·후기·신고·찜을 할 수 없어요</span>
+                  <button onClick={() => setAppMode(currentUser.type === 'owner' ? 'B2B' : 'ADMIN')} className="shrink-0 text-xs font-black bg-white text-indigo-700 px-2 py-1 rounded-md">{currentUser.type === 'owner' ? '원장님모드로' : '관리자모드로'}</button>
+                </div>
+              )}
+              {myRestriction && !isPreview && (
+                <div role="alert" className="shrink-0 bg-rose-700 text-white px-4 py-2 text-xs font-bold z-30">⛔ 이용이 제한된 계정이에요 — 예약·후기 작성·신고를 할 수 없어요. 사유: {myRestriction.reason}</div>
+              )}
 
               <div className="bg-white px-5 py-3 flex justify-between items-center border-b border-slate-100 shrink-0 shadow-sm z-30">
                 <button className="flex items-center gap-1 text-base font-black text-slate-900" onClick={() => showToast('현재 순천 지역만 서비스 중이에요. 지역은 곧 확대될 예정이에요!')} aria-label="지역 선택: 순천시">
@@ -2252,12 +2832,12 @@ function App() {
                   <button onClick={() => setB2cTab('search')} aria-label="검색"><Search className="w-5 h-5" /></button>
                   <button onClick={openNotifications} className="relative" aria-label={`알림${unreadCount ? ` (읽지 않은 알림 ${unreadCount}개)` : ''}`}>
                     <Bell className="w-5 h-5" />
-                    {unreadCount > 0 && <span className="absolute -top-1.5 -right-2 min-w-[16px] h-4 px-1 rounded-full text-white text-[10px] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{unreadCount > 9 ? '9+' : unreadCount}</span>}
+                    {unreadCount > 0 && <span className="absolute -top-1.5 -right-2 min-w-[1rem] h-4 px-1 rounded-full text-white text-[0.625rem] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{unreadCount > 9 ? '9+' : unreadCount}</span>}
                   </button>
                 </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto pb-24">
+              <div ref={b2cScrollRef} className="flex-1 overflow-y-auto pb-24">
 
                 {b2cTab === 'home' && (
                   <div>
@@ -2265,7 +2845,7 @@ function App() {
                       <LogoBanner compact />
                       {DEMO_MODE && <p className="text-xs text-slate-500 mt-1.5 px-1">※ 시연용 화면이에요. 매장·디자인·후기는 실제 업체가 아닌 가상 데이터입니다.</p>}
                     </div>
-                    <div className="hscroll px-4 pt-3 flex gap-2 overflow-x-auto" role="group" aria-label="업종 선택">
+                    <HRow className="px-4 pt-3 flex gap-2" role="group" aria-label="업종 선택">
                       {BUSINESS_TYPES.map((t) => (
                         <button
                           key={t.key}
@@ -2277,8 +2857,8 @@ function App() {
                           {t.emoji} {t.label}{!t.open && <span className="ml-1 font-semibold">· 오픈예정</span>}
                         </button>
                       ))}
-                    </div>
-                    <div className="hscroll px-4 pt-4 pb-1 flex gap-4 overflow-x-auto" role="group" aria-label="카테고리">
+                    </HRow>
+                    <HRow className="px-4 pt-4 pb-1 flex gap-4" role="group" aria-label="카테고리">
                       {categoriesFor(bizType).map((cat) => (
                         <button key={cat.key} aria-pressed={category === cat.key} onClick={() => setCategory(cat.key)} className="flex flex-col items-center gap-1.5 shrink-0">
                           <div className="w-14 h-14 rounded-full flex items-center justify-center text-2xl border-2" style={category === cat.key ? { borderColor: PINK, background: '#FFF0F4' } : { borderColor: '#f1f5f9', background: '#f8fafc' }}>
@@ -2287,12 +2867,12 @@ function App() {
                           <span className="text-xs font-bold" style={{ color: category === cat.key ? PINK : '#64748b' }}>{cat.label}</span>
                         </button>
                       ))}
-                    </div>
+                    </HRow>
 
                     {category === '전체' && (
                       <div>
                         <div className="px-4 pt-4">
-                          <div className="hscroll flex gap-3 overflow-x-auto pb-1" data-snap="page" style={{ scrollSnapType: 'x mandatory' }}>
+                          <HRow className="flex gap-3 pb-1" snap>
                             {CAMPAIGNS.map((c, idx) => (
                               <div key={idx} className="rounded-3xl p-5 text-white relative overflow-hidden" style={{ background: c.grad, scrollSnapAlign: 'start', width: '100%', flexShrink: 0, boxSizing: 'border-box' }}>
                                 <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white bg-opacity-25 uppercase tracking-wider">이벤트</span>
@@ -2301,24 +2881,40 @@ function App() {
                                 <div className="absolute right-3 bottom-2 text-5xl opacity-80">{c.emoji}</div>
                               </div>
                             ))}
-                          </div>
+                          </HRow>
                         </div>
+
+                        {(() => {
+                          const homeAds = activeAds.filter(x => x.ad.type === '홈 배너 노출' && designBizType(x.design) === bizType).slice(0, 4);
+                          if (!homeAds.length) return null;
+                          return (
+                            <div aria-label="광고">
+                              <div className="px-5 pt-5 pb-2 flex justify-between items-center">
+                                <h3 className="text-sm font-black text-slate-900">📢 지금 주목할 디자인</h3>
+                                <span className="text-xs font-bold text-slate-500">광고</span>
+                              </div>
+                              <HRow className="px-4 flex gap-3 pb-2">
+                                {homeAds.map(x => <RecCard key={'had-' + x.ad.id} design={x.design} big ad />)}
+                              </HRow>
+                            </div>
+                          );
+                        })()}
 
                         <div className="px-5 pt-5 pb-2 flex justify-between items-center">
                           <h3 className="text-sm font-black text-slate-900 flex items-center gap-1"><Flame className="w-4 h-4 text-orange-500" /> 타임세일</h3>
                           <span className="text-xs font-bold text-slate-500">오늘 자정까지</span>
                         </div>
-                        <div className="hscroll px-4 flex gap-3 overflow-x-auto pb-2">
+                        <HRow className="px-4 flex gap-3 pb-2">
                           {eventDesigns.map((d) => (
                             <RecCard key={d.id} design={d} big />
                           ))}
-                        </div>
+                        </HRow>
 
                         <div className="px-5 pt-5 pb-2 flex justify-between items-center">
                           <h3 className="text-sm font-black text-slate-900">{currentUser.name}님을 위한 추천 디자인</h3>
                           <span className="text-xs font-bold text-slate-500">AI 추천</span>
                         </div>
-                        <div className="px-4" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                        <div className="px-4" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
                           {visibleDesigns.map((design) => (
                             <RecCard key={design.id} design={design} />
                           ))}
@@ -2336,7 +2932,7 @@ function App() {
                                 <h4 className="text-sm font-bold text-slate-800 truncate">{d.title}</h4>
                                 <p className="text-xs text-slate-500 truncate cursor-pointer hover:underline" onClick={(e) => { e.stopPropagation(); openShopFromDesign(d); }}>{d.shopName}</p>
                               </div>
-                              <div className="text-xs font-bold text-amber-500 shrink-0">⭐ {d.rating} <span className="text-slate-500">({d.reviews})</span></div>
+                              <div className="shrink-0">{designRating(d)}</div>
                             </div>
                           ))}
                         </div>
@@ -2357,7 +2953,7 @@ function App() {
                                   <p className="text-xs text-slate-500 truncate flex items-center gap-0.5 mt-0.5"><MapPin className="w-3 h-3" /> {shop.location}</p>
                                 </div>
                                 <div className="flex justify-between items-center">
-                                  <span className="text-xs text-slate-500 truncate max-w-[70%]">{shop.info}</span>
+                                  <span className="text-xs text-slate-500 truncate max-w-[70%]">{shop.infoHidden ? '(운영 정책에 따라 숨김 처리된 소개)' : shop.info}</span>
                                   <span className="text-xs font-bold text-amber-500 shrink-0">{ratingText(shop)}</span>
                                 </div>
                               </div>
@@ -2383,12 +2979,21 @@ function App() {
                             <option value="평점높은순">평점 높은순</option>
                           </select>
                         </div>
-                        <div style={{ columnCount: 2, columnGap: '12px' }}>
+                        {(() => {
+                          const catAds = activeAds.filter(x => x.ad.type === '카테고리 상단 고정' && x.design.cat === category).slice(0, 2);
+                          if (!catAds.length) return null;
+                          return (
+                            <div className="mb-3" aria-label="광고" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+                              {catAds.map(x => <RecCard key={'cad-' + x.ad.id} design={x.design} ad />)}
+                            </div>
+                          );
+                        })()}
+                        <div style={{ columnCount: 2, columnGap: '0.75rem' }}>
                           {[...visibleDesigns.filter(d => d.cat === category)]
                             .sort((a, b) => {
                               if (sortBy === '가격낮은순') return a.price - b.price;
                               if (sortBy === '가격높은순') return b.price - a.price;
-                              if (sortBy === '평점높은순') return b.rating - a.rating || b.reviews - a.reviews;
+                              if (sortBy === '평점높은순') return ratingKey(b) - ratingKey(a) || designStats(b).count - designStats(a).count;
                               return 0;
                             })
                             .map((d, idx) => (
@@ -2401,7 +3006,7 @@ function App() {
                     {category === '인기랭킹' && (
                       <div className="px-4 pt-4 pb-6 space-y-2">
                         <h3 className="text-sm font-black text-slate-900 mb-1">평점 랭킹 TOP</h3>
-                        {[...visibleDesigns].sort((a, b) => b.rating - a.rating || b.reviews - a.reviews).map((d, idx) => (
+                        {[...visibleDesigns].sort((a, b) => ratingKey(b) - ratingKey(a) || designStats(b).count - designStats(a).count).map((d, idx) => (
                           <div key={d.id} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') openDesign(d); }} onClick={() => openDesign(d)} className="bg-white rounded-2xl p-3 flex items-center gap-3 border border-slate-100 shadow-sm cursor-pointer">
                             <span className="text-lg font-black w-6 text-center" style={{ color: idx < 3 ? PINK : '#64748b' }}>{idx + 1}</span>
                             <Visual item={d} className="w-14 h-14 rounded-xl shrink-0" size={72} />
@@ -2409,7 +3014,7 @@ function App() {
                               <h4 className="text-sm font-bold text-slate-800 truncate">{d.title}</h4>
                               <p className="text-xs text-slate-500 truncate">{d.shopName}</p>
                             </div>
-                            <div className="text-xs font-bold text-amber-500 shrink-0">⭐ {d.rating} <span className="text-slate-500">({d.reviews})</span></div>
+                            <div className="shrink-0">{designRating(d)}</div>
                           </div>
                         ))}
                       </div>
@@ -2418,7 +3023,7 @@ function App() {
                     {category === '이벤트' && (
                       <div className="px-4 pt-4 pb-6">
                         <h3 className="text-sm font-black text-slate-900 mb-3 flex items-center gap-1"><Flame className="w-4 h-4 text-orange-500" /> 진행 중인 할인 이벤트</h3>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
                           {eventDesigns.map((d) => <RecCard key={d.id} design={d} />)}
                         </div>
                       </div>
@@ -2479,11 +3084,20 @@ function App() {
                     ) : (
                       <div className="space-y-5">
                         <div>
+                          {searchInfo.ignored.length > 0 && (
+                            <p className="text-xs text-slate-500 px-1 mb-2">‘{searchInfo.ignored.join(', ')}’ 같은 일반 단어는 빼고 ‘{searchInfo.tokens.join(' ')}’(으)로 찾았어요. 모든 단어가 맞는 결과가 위에 나와요.</p>
+                          )}
+                          {searchAds.length > 0 && (
+                            <div className="mb-4" aria-label="광고">
+                              <p className="text-xs font-bold text-slate-500 px-1 mb-2">광고 · 검색 상단 고정</p>
+                              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>{searchAds.map(x => <RecCard key={'ad-' + x.ad.id} design={x.design} ad />)}</div>
+                            </div>
+                          )}
                           <p className="text-xs font-bold text-slate-500 px-1 mb-2">디자인 검색 결과 ({searchedDesigns.length})</p>
                           {searchedDesigns.length === 0 ? (
                             <div className="text-center py-8 text-sm text-slate-500 font-semibold bg-white rounded-2xl border border-dashed border-slate-200">일치하는 디자인이 없습니다.</div>
                           ) : (
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>{searchedDesigns.map((d) => <RecCard key={d.id} design={d} />)}</div>
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>{searchedDesigns.map((d) => <RecCard key={d.id} design={d} />)}</div>
                           )}
                         </div>
                         <div>
@@ -2512,7 +3126,7 @@ function App() {
                     {likedIds.length === 0 ? (
                       <div className="text-center py-16 text-sm text-slate-500 font-semibold bg-white rounded-2xl border border-dashed border-slate-200">하트 누른 디자인이 비어있습니다.<br/>마음에 드는 시안에 하트를 꾹 눌러보세요!</div>
                     ) : (
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
                         {publicDesigns.filter(d => likedIds.includes(d.id)).map(design => <RecCard key={design.id} design={design} />)}
                       </div>
                     )}
@@ -2526,7 +3140,9 @@ function App() {
                       const mine = bookings.filter(b => b.userId === uid).sort((a, b) => slotTime(a.date, a.time) - slotTime(b.date, b.time));
                       const upcoming = mine.filter(b => b.status === 'confirmed');
                       const toReview = mine.filter(b => b.status === 'completed' && !b.reviewed);
-                      const closed = mine.filter(b => b.status === 'cancelled' || b.status === 'noshow').slice(-3).reverse();
+                      // 취소·노쇼는 처리된 시각 기준 최신순 (방금 처리된 노쇼·취소가 목록에서 밀리지 않게)
+                      const closedAt = (b) => b.reversedAt || b.noShowAt || b.cancelledAt || slotTime(b.date, b.time);
+                      const closed = mine.filter(b => ['cancelled', 'noshow', 'noshow_reversed'].includes(b.status)).sort((a, b) => closedAt(b) - closedAt(a)).slice(0, 8);
                       const info = (b) => {
                         const d = designs.find(x => x.id === b.designId);
                         const s = shops.find(x => x.id === b.shopId);
@@ -2590,9 +3206,24 @@ function App() {
                           {closed.map((b) => {
                             const { d, s } = info(b);
                             return (
-                              <div key={b.id} className="bg-slate-100 rounded-xl px-3 py-2.5 text-xs text-slate-600 flex justify-between gap-2">
-                                <span className="truncate">{formatDateLabel(b.date)} {b.time} · {s ? s.name : ''}{d ? ` · ${d.title}` : ''}</span>
-                                <span className="font-bold shrink-0">{b.status === 'noshow' ? '노쇼' : b.refunded ? '취소·환불' : '취소'}</span>
+                              <div key={b.id} className="bg-slate-100 rounded-xl px-3 py-2.5 text-xs text-slate-600">
+                                <div className="flex justify-between gap-2">
+                                  <span className="truncate">{formatDateLabel(b.date)} {b.time} · {s ? s.name : ''}{d ? ` · ${d.title}` : ''}</span>
+                                  <span className="font-bold shrink-0 text-slate-800">{bookingStatusLabel(b)}</span>
+                                </div>
+                                {b.status === 'cancelled' && (
+                                  <p className="mt-1">{b.cancelReason && b.cancelReason !== 'customer_app' ? `사유: ${CANCEL_REASONS[b.cancelReason].label}${b.cancelMemo ? ' - ' + b.cancelMemo : ''} · ` : ''}{b.refunded ? `예약금 ${(b.refundAmount || b.deposit || 0).toLocaleString()}원 환불` : '예약금 환불 없음'}</p>
+                                )}
+                                {b.status === 'cancelled' && CANCEL_REASONS[b.cancelReason] && CANCEL_REASONS[b.cancelReason].byShop && d && (
+                                  <button onClick={() => openDesign(d)} className="mt-1.5 text-xs font-bold underline" style={{ color: PINK }}>다른 시간 예약하기</button>
+                                )}
+                                {b.status === 'noshow' && (() => {
+                                  const dp = disputes.find(x => x.bookingId === b.id);
+                                  return dp
+                                    ? <p className="mt-1 font-bold">이의 제기 {dp.status === 'open' ? '검토 중' : dp.status === 'reversed' ? '인정됨' : '기각(노쇼 유지)'}</p>
+                                    : <button onClick={() => openDispute(b.id)} className="mt-1.5 text-xs font-bold text-slate-800 underline">이의 제기</button>;
+                                })()}
+                                {b.status === 'noshow_reversed' && <p className="mt-1">이의 제기가 인정되어 노쇼가 취소되고 예약금이 환불됐어요.</p>}
                               </div>
                             );
                           })}
@@ -2731,6 +3362,10 @@ function App() {
                   {shopStatus(myShop) === 'pending' && (
                     <p className="text-xs font-bold text-amber-300 mt-0.5">⏳ 입점 심사 대기 중 — 승인 전에는 고객 화면에 노출되지 않아요.</p>
                   )}
+                  {shopStatus(myShop) === 'suspended' && (
+                    <p className="text-xs font-bold text-rose-300 mt-0.5">⛔ 영업 정지 중 — 고객 화면에 노출되지 않아요. 사유: {myShop.suspendReason || myShop.statusReason || '-'} (해제 문의: 고객센터)</p>
+                  )}
+                  {myShop.infoHidden && <p className="text-xs font-bold text-amber-300 mt-0.5">⚠️ 매장 소개가 운영 정책에 따라 숨김 처리됨: {myShop.infoHiddenReason}</p>}
                   {shopStatus(myShop) === 'rejected' && (
                     <div className="mt-1">
                       <p className="text-xs font-bold text-rose-300">❌ 입점 반려: {myShop.rejectReason || '사유 없음'}</p>
@@ -2741,7 +3376,7 @@ function App() {
                 <div className="flex items-center gap-3">
                   <button onClick={openNotifications} className="relative text-slate-300" aria-label={`매장 알림${unreadCount ? ` (읽지 않은 알림 ${unreadCount}개)` : ''}`}>
                     <Bell className="w-5 h-5" />
-                    {unreadCount > 0 && <span className="absolute -top-1.5 -right-2 min-w-[16px] h-4 px-1 rounded-full text-white text-[10px] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{unreadCount > 9 ? '9+' : unreadCount}</span>}
+                    {unreadCount > 0 && <span className="absolute -top-1.5 -right-2 min-w-[1rem] h-4 px-1 rounded-full text-white text-[0.625rem] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{unreadCount > 9 ? '9+' : unreadCount}</span>}
                   </button>
                   <div className="text-right">
                     <p className="text-xs text-slate-400">보유 크레딧</p>
@@ -2750,12 +3385,12 @@ function App() {
                 </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-24">
+              <div ref={b2bScrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 pb-24">
 
                 {b2bTab === 'home' && (
                   <div className="space-y-4">
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-                      <div className="bg-slate-800 p-3.5 rounded-2xl border border-slate-700"><p className="text-xs text-slate-400 font-bold">이번 달 정산 예정금</p><p className="text-base font-black text-emerald-400 mt-1">{shopSettlement(myShop).payout.toLocaleString()}원</p><p className="text-[11px] text-slate-400 mt-0.5">완료 {shopSettlement(myShop).count}건 · 수수료 {Math.round(SETTLEMENT_CONFIG.commissionRate * 100)}%(예시) 차감</p></div>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+                      <div className="bg-slate-800 p-3.5 rounded-2xl border border-slate-700"><p className="text-xs text-slate-400 font-bold">이번 달 정산 예정금</p><p className="text-base font-black text-emerald-400 mt-1">{shopSettlement(myShop).payout.toLocaleString()}원</p><p className="text-[0.6875rem] text-slate-400 mt-0.5">완료 {shopSettlement(myShop).count}건 + 예약금 수입 {shopSettlement(myShop).depositIncome.toLocaleString()}원 − 수수료 {Math.round(SETTLEMENT_CONFIG.commissionRate * 100)}%(예시)</p></div>
                       <div className="bg-slate-800 p-3.5 rounded-2xl border border-slate-700"><p className="text-xs text-slate-400 font-bold">이번 달 노쇼 예약금</p><p className="text-base font-black text-pink-400 mt-1">{shopSettlement(myShop).noShowDeposit.toLocaleString()}원</p></div>
                     </div>
                     <div className="bg-slate-950 rounded-2xl p-4 border border-slate-800">
@@ -2782,14 +3417,29 @@ function App() {
                                   <span className="text-slate-400 text-xs shrink-0 text-right">{formatDateLabel(b.date)}<br />{b.time}</span>
                                 </div>
                                 {!done && (
-                                  <div className="flex gap-2 mt-2.5">
-                                    <button onClick={() => completeBooking(b)} className="flex-1 text-xs font-bold text-white py-2 rounded-lg" style={{ background: '#f472b6' }}>
-                                      ✅ 시술 완료 처리
-                                    </button>
-                                    {past && (
-                                      <button onClick={() => markNoShow(b)} className="text-xs font-bold text-slate-300 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700">노쇼</button>
+                                  <>
+                                    <div className="grid grid-cols-3 gap-2 mt-2.5">
+                                      {/* 시술 완료: 시연을 위해 예약 시간 전에도 가능 (2차 요청서 13번 현상유지, 출시 전 점검 항목) */}
+                                      <button onClick={() => completeBooking(b)} className="text-xs font-bold text-white py-2 rounded-lg" style={{ background: '#f472b6' }}>
+                                        ✅ 시술 완료
+                                      </button>
+                                      <button
+                                        onClick={() => markNoShow(b)}
+                                        disabled={!past}
+                                        title={past ? '노쇼 처리' : '예약 시간이 지난 뒤에 처리할 수 있어요'}
+                                        className="text-xs font-bold text-slate-200 py-2 rounded-lg bg-slate-800 border border-slate-700 disabled:opacity-40 disabled:cursor-not-allowed"
+                                      >
+                                        🚫 노쇼
+                                      </button>
+                                      <button onClick={() => setOwnerCancel({ booking: b, reason: '', memo: '' })} className="text-xs font-bold text-rose-200 py-2 rounded-lg bg-slate-800 border border-rose-900">
+                                        ✖ 예약 취소
+                                      </button>
+                                    </div>
+                                    {!past && <p className="text-[0.6875rem] text-slate-500 mt-1.5">노쇼는 예약 시간({b.time})이 지난 뒤에 처리할 수 있어요.</p>}
+                                    {!past && DEMO_MODE && (
+                                      <button onClick={() => markNoShow(b, true)} className="text-[0.6875rem] font-bold text-amber-300 underline mt-1">시연용: 예약 시간 전 노쇼 처리 (DEMO_MODE 전용)</button>
                                     )}
-                                  </div>
+                                  </>
                                 )}
                               </div>
                             );
@@ -2841,7 +3491,7 @@ function App() {
                             : (geo.msg || '고객 화면 지도에 이 핀 위치가 표시돼요. 핀을 드래그해 보정할 수 있어요.')}
                         </p>
                       </div>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
                         <div>
                           <label className="block text-xs text-slate-400 font-bold mb-1">영업시간</label>
                           <input type="text" value={profileForm.hours} onChange={(e) => setProfileForm({ ...profileForm, hours: e.target.value })} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none" />
@@ -2855,7 +3505,8 @@ function App() {
                         <input type="checkbox" checked={profileForm.isPremium} onChange={(e) => setProfileForm({ ...profileForm, isPremium: e.target.checked })} className="w-4 h-4" />
                         안심 제휴 매장 뱃지 표시
                       </label>
-                      <button type="submit" className="w-full bg-pink-500 text-white text-sm font-black py-2.5 rounded-xl mt-1">프로필 저장하기</button>
+                      <button type="submit" disabled={geo.status === 'loading'} className="w-full bg-pink-500 text-white text-sm font-black py-2.5 rounded-xl mt-1 disabled:opacity-60">{geo.status === 'loading' ? '저장 중… (주소 위치 확인)' : '프로필 저장하기'}</button>
+                      {profileSavedAt > 0 && <p className="text-xs text-emerald-400 font-bold text-center" role="status">✅ {new Date(profileSavedAt).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })}에 저장되었어요</p>}
                     </form>
                     <div className="bg-slate-800 rounded-2xl p-4 border border-slate-700 flex justify-between items-center text-sm">
                       <span className="text-slate-300 font-semibold">누적 리뷰 · 평점</span>
@@ -2986,7 +3637,8 @@ function App() {
                       ) : (
                         <form onSubmit={registerBank} className="space-y-2">
                           <input type="text" value={bankForm.bank} onChange={(e) => setBankForm({ ...bankForm, bank: e.target.value })} placeholder="은행명 (예: 국민은행)" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
-                          <input type="text" value={bankForm.account} onChange={(e) => setBankForm({ ...bankForm, account: e.target.value })} placeholder="계좌번호" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
+                          <input type="text" aria-label="계좌번호" aria-describedby="nm-bank-warn" value={bankForm.account} onChange={(e) => setBankForm({ ...bankForm, account: e.target.value })} placeholder="계좌번호" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
+                          <p id="nm-bank-warn" className="text-xs font-bold text-amber-300">⚠️ 이 시연 버전에서는 실제 계좌번호를 입력하지 마세요. (입력값이 이 브라우저에 그대로 저장돼요)</p>
                           <input type="text" value={bankForm.holder} onChange={(e) => setBankForm({ ...bankForm, holder: e.target.value })} placeholder="예금주명" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
                           <button type="submit" className="w-full bg-pink-500 text-white text-sm font-black py-2.5 rounded-xl mt-1">계좌 등록하기</button>
                         </form>
@@ -3023,7 +3675,7 @@ function App() {
                               )}
                             </div>
                           </div>
-                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                             <select aria-label="업종" value={newBizType} onChange={(e) => { const bt = e.target.value; setNewBizType(bt); setNewCat((BROWSE_CATEGORIES[bt] || [])[0] ? BROWSE_CATEGORIES[bt][0].key : ''); }} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
                               {BUSINESS_TYPES.filter(b => b.open).map(b => <option key={b.key} value={b.key}>{b.emoji} {b.label}</option>)}
                             </select>
@@ -3032,10 +3684,15 @@ function App() {
                             </select>
                           </div>
                           <input type="text" aria-label="디자인 이름" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="예: 영롱 핑크 오팔 스톤" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
-                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
                             <input type="number" aria-label="시술 가격(원)" value={newPrice} onChange={(e) => setNewPrice(e.target.value)} placeholder="55000" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
                             <input type="text" aria-label="태그 (쉼표로 구분)" value={newTags} onChange={(e) => setNewTags(e.target.value)} placeholder="오팔, 스톤 (설명 태그)" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
                           </div>
+                          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "0.75rem" }}>
+                            <input type="number" min="10" step="10" aria-label="소요 시간(분)" value={newDuration} onChange={(e) => setNewDuration(e.target.value)} placeholder="소요 시간(분)" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
+                            <input type="text" aria-label="포함 내용 (쉼표로 구분)" value={newIncludes} onChange={(e) => setNewIncludes(e.target.value)} placeholder="포함 내용: 젤, 케어, 제거 포함" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
+                          </div>
+                          <p className="text-xs text-slate-400">비워 두면 고객 화면에 업종별 기본 안내가 표시돼요.</p>
                           <div className="flex gap-2">
                             {editingId && (
                               <button type="button" onClick={cancelForm} className="flex-1 bg-slate-700 text-white text-sm font-black py-2.5 rounded-xl">취소</button>
@@ -3054,15 +3711,20 @@ function App() {
                             <div className="flex-1 min-w-0">
                               <h4 className="text-sm font-bold text-white truncate">{d.title}</h4>
                               <p className="text-xs text-slate-400">{d.price.toLocaleString()}원 · {isHidden ? '숨김' : '노출중'}</p>
+                              {d.adminHidden && <p className="text-xs font-bold text-rose-300">관리자 숨김: {d.adminHiddenReason} (해제는 고객센터 문의)</p>}
                             </div>
-                            <button onClick={() => toggleDesignVisibility(d.id)} aria-label={isHidden ? `${d.title} 다시 노출` : `${d.title} 숨기기`} className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center shrink-0">
+                            {/* 아이콘 + 글자 라벨 + 툴팁(title). 삭제는 앱 안 확인창을 거침 */}
+                            <button onClick={() => toggleDesignVisibility(d.id)} title={isHidden ? '고객 화면에 다시 보이기' : '고객 화면에서 숨기기 (삭제 아님)'} aria-label={isHidden ? `${d.title} 다시 노출` : `${d.title} 숨기기`} className="w-11 py-1 rounded-lg bg-slate-900 border border-slate-700 flex flex-col items-center justify-center shrink-0">
                               {isHidden ? <EyeOff className="w-4 h-4 text-slate-400" /> : <Eye className="w-4 h-4 text-emerald-400" />}
+                              <span className="text-[0.625rem] font-bold text-slate-300 mt-0.5">{isHidden ? '노출' : '숨김'}</span>
                             </button>
-                            <button onClick={() => startEditDesign(d)} aria-label={`${d.title} 수정`} className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center shrink-0">
-                              <span className="text-sm">📝</span>
+                            <button onClick={() => startEditDesign(d)} title="상품 정보 수정" aria-label={`${d.title} 수정`} className="w-11 py-1 rounded-lg bg-slate-900 border border-slate-700 flex flex-col items-center justify-center shrink-0">
+                              <span className="text-sm" aria-hidden="true">📝</span>
+                              <span className="text-[0.625rem] font-bold text-slate-300 mt-0.5">수정</span>
                             </button>
-                            <button onClick={() => deleteMyDesign(d.id)} aria-label={`${d.title} 삭제`} className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center shrink-0">
+                            <button onClick={() => deleteMyDesign(d.id)} title="상품 삭제 (확인 후 삭제)" aria-label={`${d.title} 삭제`} className="w-11 py-1 rounded-lg bg-slate-900 border border-slate-700 flex flex-col items-center justify-center shrink-0">
                               <Trash2 className="w-4 h-4 text-red-400" />
+                              <span className="text-[0.625rem] font-bold text-red-300 mt-0.5">삭제</span>
                             </button>
                           </div>
                         );
@@ -3074,28 +3736,35 @@ function App() {
 
                 {b2bTab === 'report' && (
                   (() => {
-                    // 조회수: 이 브라우저에서 상세를 연 횟수(designViews). 예약·완료: 예약 원장 기준(이번 달).
-                    // DEMO_MODE 에서는 시연용 기준값(DESIGN_REPORTS)을 더해 보여줌.
+                    // 예약·완료·정산 숫자는 shopSettlement (원장님 홈 카드·관리자 정산과 같은 함수, 이번 달 시술일 기준).
+                    // 조회수는 이 브라우저에서 상세를 연 횟수(designViews). DEMO_MODE 에서는 시연 기준값(DESIGN_REPORTS)을 따로 더해 표시.
+                    const ss = shopSettlement(myShop);
                     const stat = (d) => {
                       const base = DEMO_MODE ? (DESIGN_REPORTS[d.id] || { views: 0, sales: 0 }) : { views: 0, sales: 0 };
-                      const mine = bookings.filter(b => b.designId === d.id && (b.createdAt || 0) >= monthStart);
+                      const mine = bookings.filter(b => b.designId === d.id && b.shopId === myShopId && inThisMonth(b));
                       return {
                         views: base.views + (designViews[d.id] || 0),
-                        booked: base.sales + mine.filter(b => b.status !== 'cancelled').length,
+                        demoBooked: base.sales,
+                        booked: mine.filter(b => b.status !== 'cancelled').length,
                         completed: mine.filter(b => b.status === 'completed').length,
                         cancelled: mine.filter(b => b.status === 'cancelled').length
                       };
                     };
                     const rows = myDesigns.map(d => ({ d, r: stat(d) }));
-                    const sum = rows.reduce((a, { r }) => ({ views: a.views + r.views, booked: a.booked + r.booked, completed: a.completed + r.completed }), { views: 0, booked: 0, completed: 0 });
+                    const views = rows.reduce((a, { r }) => a + r.views, 0);
+                    const demoBooked = rows.reduce((a, { r }) => a + r.demoBooked, 0);
                     return (
                       <div className="space-y-4">
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px" }}>
-                          <div className="bg-slate-800 p-3 rounded-2xl border border-slate-700"><p className="text-xs text-slate-400 font-bold">조회수</p><p className="text-base font-black text-white mt-1">{sum.views.toLocaleString()}회</p></div>
-                          <div className="bg-slate-800 p-3 rounded-2xl border border-slate-700"><p className="text-xs text-slate-400 font-bold">이번 달 예약</p><p className="text-base font-black text-emerald-400 mt-1">{sum.booked}건</p></div>
-                          <div className="bg-slate-800 p-3 rounded-2xl border border-slate-700"><p className="text-xs text-slate-400 font-bold">시술 완료</p><p className="text-base font-black text-pink-400 mt-1">{sum.completed}건</p></div>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.5rem" }}>
+                          <div className="bg-slate-800 p-3 rounded-2xl border border-slate-700"><p className="text-xs text-slate-400 font-bold">조회수</p><p className="text-base font-black text-white mt-1">{views.toLocaleString()}회</p></div>
+                          <div className="bg-slate-800 p-3 rounded-2xl border border-slate-700"><p className="text-xs text-slate-400 font-bold">이번 달 예약</p><p className="text-base font-black text-emerald-400 mt-1">{ss.booked}건</p></div>
+                          <div className="bg-slate-800 p-3 rounded-2xl border border-slate-700"><p className="text-xs text-slate-400 font-bold">시술 완료</p><p className="text-base font-black text-pink-400 mt-1">{ss.count}건</p></div>
                         </div>
-                        {DEMO_MODE && <p className="text-xs text-slate-400">※ 시연용 기준값이 포함된 숫자예요. 조회수는 정식 서비스에서 서버 집계로 바뀝니다.</p>}
+                        <div className="bg-slate-800 p-3 rounded-2xl border border-slate-700 text-xs text-slate-300 leading-relaxed">
+                          이번 달 정산 예정 <b className="text-emerald-400">{ss.payout.toLocaleString()}원</b> · 노쇼 {ss.noShowCount}건 · 취소 {ss.cancelCount}건
+                          <span className="block text-slate-400 mt-0.5">홈 정산 카드·관리자 정산과 같은 계산(이번 달 시술일 기준)이에요.</span>
+                        </div>
+                        {DEMO_MODE && <p className="text-xs text-amber-300">[DEMO_MODE] 조회수에 시연 기준값이 포함돼 있어요{demoBooked ? ` (디자인별 예약 옆 +숫자도 시연 기준값, 합계 ${demoBooked}건)` : ''}. 정식 서비스에선 서버 집계로 바뀌어요.</p>}
                         <h3 className="text-sm font-black text-slate-200">디자인별 성과 (이번 달)</h3>
                         <div className="space-y-2">
                           {rows.sort((a, b) => b.r.booked - a.r.booked).map(({ d, r }) => (
@@ -3103,10 +3772,10 @@ function App() {
                               <Visual item={d} className="w-12 h-12 rounded-xl shrink-0" size={72} />
                               <div className="flex-1 min-w-0">
                                 <h4 className="text-sm font-bold text-white truncate">{d.title}</h4>
-                                <p className="text-xs text-slate-400">조회 {r.views.toLocaleString()} · 예약 {r.booked} · 완료 {r.completed}{r.cancelled ? ` · 취소 ${r.cancelled}` : ''}</p>
+                                <p className="text-xs text-slate-400">조회 {r.views.toLocaleString()} · 예약 {r.booked}{DEMO_MODE && r.demoBooked ? ` (+시연 ${r.demoBooked})` : ''} · 완료 {r.completed}{r.cancelled ? ` · 취소 ${r.cancelled}` : ''}</p>
                               </div>
                               <span className="text-xs font-black shrink-0 text-emerald-400" title="조회 대비 예약 비율">
-                                {r.views ? `${Math.round((r.booked / r.views) * 1000) / 10}%` : '-'}
+                                {r.views ? `${Math.round(((r.booked + r.demoBooked) / r.views) * 1000) / 10}%` : '-'}
                               </span>
                             </div>
                           ))}
@@ -3124,18 +3793,23 @@ function App() {
                       <form onSubmit={submitAd} className="space-y-3">
                         <select aria-label="광고할 디자인" value={adForm.designId} onChange={(e) => setAdForm({ ...adForm, designId: e.target.value })} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
                           <option value="">광고할 디자인 선택</option>
-                          {myDesigns.map((d) => <option key={d.id} value={d.id}>{d.title}</option>)}
+                          {myDesigns.filter(d => !hiddenDesignIds.includes(d.id)).map((d) => <option key={d.id} value={d.id}>{d.title}</option>)}
                         </select>
+                        {myDesigns.some(d => hiddenDesignIds.includes(d.id)) && <p className="text-xs text-slate-400 -mt-2">숨김 처리한 디자인은 목록에서 빠져요.</p>}
+                        {adErrors.designId && <p className="text-xs font-bold text-rose-300 -mt-2" role="alert">{adErrors.designId}</p>}
                         <select aria-label="광고 상품" value={adForm.type} onChange={(e) => setAdForm({ ...adForm, type: e.target.value })} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
                           <option>검색 상단 고정</option>
                           <option>홈 배너 노출</option>
                           <option>카테고리 상단 고정</option>
                         </select>
-                        <input type="text" value={adForm.keyword} onChange={(e) => setAdForm({ ...adForm, keyword: e.target.value })} placeholder="타겟 키워드 (예: 조례동 네일샵)" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
+                        <input type="text" aria-label="타겟 키워드" value={adForm.keyword} onChange={(e) => setAdForm({ ...adForm, keyword: e.target.value })} placeholder={adForm.type === '검색 상단 고정' ? '타겟 키워드 (필수 · 예: 조례동 네일샵)' : '타겟 키워드 (선택)'} className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none" />
+                        {adErrors.keyword && <p className="text-xs font-bold text-rose-300 -mt-2" role="alert">{adErrors.keyword}</p>}
+                        <p className="text-xs text-slate-400 -mt-1">{adForm.type === '검색 상단 고정' ? '고객이 이 키워드로 검색하면 검색 결과 맨 위에 “광고”로 나와요.' : adForm.type === '홈 배너 노출' ? '고객 홈(추천 탭) 이벤트 배너 아래 “지금 주목할 디자인”에 나와요.' : '디자인과 같은 카테고리 둘러보기 맨 위에 “광고”로 나와요.'}</p>
                         <div className="flex items-center gap-2">
-                          <input type="number" min="1" value={adForm.days} onChange={(e) => setAdForm({ ...adForm, days: Number(e.target.value) })} className="w-20 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none" />
+                          <input type="number" min="1" max="90" aria-label="광고 기간(일)" value={adForm.days} onChange={(e) => setAdForm({ ...adForm, days: Number(e.target.value) })} className="w-20 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none" />
                           <span className="text-sm text-slate-400">일 동안 · 1일당 {AD_COST[adForm.type].toLocaleString()}P</span>
                         </div>
+                        {adErrors.days && <p className="text-xs font-bold text-rose-300 -mt-2" role="alert">{adErrors.days}</p>}
                         <div className="flex gap-2">
                           {editingAdId && (
                             <button type="button" onClick={cancelAdForm} className="flex-1 bg-slate-700 text-white text-sm font-black py-2.5 rounded-xl">취소</button>
@@ -3158,7 +3832,13 @@ function App() {
                               <p className="text-xs text-slate-400">{ad.type} · {ad.days}일 · {ad.cost.toLocaleString()}P</p>
                               {ad.keyword && <p className="text-xs text-pink-400 mt-0.5">#{ad.keyword}</p>}
                             </div>
-                            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500 bg-opacity-15 text-emerald-400 shrink-0">{ad.status}</span>
+                            {(() => {
+                              const live = adActive(ad);
+                              const hidden = hiddenDesignIds.includes(ad.designId) || !d;
+                              const left = ad.startAt ? Math.max(0, Math.ceil((adEndsAt(ad) - Date.now()) / 86400000)) : null;
+                              const label = !live ? '종료' : hidden ? '노출 중지' : left != null ? `진행중 · ${left}일 남음` : '진행중';
+                              return <span title={hidden && live ? '디자인이 숨김·삭제되어 고객 화면에 나오지 않아요' : undefined} className={`text-xs font-bold px-2 py-0.5 rounded-full shrink-0 ${live && !hidden ? 'bg-emerald-500 bg-opacity-15 text-emerald-400' : 'bg-slate-700 text-slate-300'}`}>{label}</span>;
+                            })()}
                             <button onClick={() => startEditAd(ad)} aria-label="광고 수정" className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center shrink-0">
                               <span className="text-sm">📝</span>
                             </button>
@@ -3175,14 +3855,28 @@ function App() {
 
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 h-16 bg-slate-950 border-t border-slate-800 flex justify-around items-center px-1 z-40">
-                <button onClick={() => setB2bTab('home')} className="flex flex-col items-center flex-1 py-1" style={{ color: b2bTab === 'home' ? '#f472b6' : '#64748b' }}><span className="text-lg leading-none">🏠</span><span className="text-xs mt-0.5 font-bold">홈</span></button>
-                <button onClick={() => setB2bTab('profile')} className="flex flex-col items-center flex-1 py-1" style={{ color: b2bTab === 'profile' ? '#f472b6' : '#64748b' }}><Store className="w-5 h-5" /><span className="text-xs mt-0.5 font-bold">샵프로필</span></button>
-                <button onClick={() => setB2bTab('wallet')} className="flex flex-col items-center flex-1 py-1" style={{ color: b2bTab === 'wallet' ? '#f472b6' : '#64748b' }}><Wallet className="w-5 h-5" /><span className="text-xs mt-0.5 font-bold">충전/계좌</span></button>
-                <button onClick={() => setB2bTab('products')} className="flex flex-col items-center flex-1 py-1" style={{ color: b2bTab === 'products' ? '#f472b6' : '#64748b' }}><Package className="w-5 h-5" /><span className="text-xs mt-0.5 font-bold">상품관리</span></button>
-                <button onClick={() => setB2bTab('report')} className="flex flex-col items-center flex-1 py-1" style={{ color: b2bTab === 'report' ? '#f472b6' : '#64748b' }}><BarChart3 className="w-5 h-5" /><span className="text-xs mt-0.5 font-bold">리포트</span></button>
-                <button onClick={() => setB2bTab('ads')} className="flex flex-col items-center flex-1 py-1" style={{ color: b2bTab === 'ads' ? '#f472b6' : '#64748b' }}><Megaphone className="w-5 h-5" /><span className="text-xs mt-0.5 font-bold">광고관리</span></button>
-              </div>
+              {/* 원장님 하단 메뉴: 6칸 격자 + 칸 사이 간격, 글자 0.8rem·아이콘 크게, 선택 탭은 배경 강조 */}
+              <nav aria-label="원장님 메뉴" className="absolute bottom-0 left-0 right-0 bg-slate-950 border-t border-slate-800 grid grid-cols-6 gap-1 px-1.5 pt-1.5 pb-2 z-40">
+                {[
+                  { key: 'home', label: '홈', icon: <span className="text-xl leading-none" aria-hidden="true">🏠</span> },
+                  { key: 'profile', label: '샵프로필', icon: <Store className="w-6 h-6 text-xl" /> },
+                  { key: 'wallet', label: '충전/계좌', icon: <Wallet className="w-6 h-6 text-xl" /> },
+                  { key: 'products', label: '상품관리', icon: <Package className="w-6 h-6 text-xl" /> },
+                  { key: 'report', label: '리포트', icon: <BarChart3 className="w-6 h-6 text-xl" /> },
+                  { key: 'ads', label: '광고관리', icon: <Megaphone className="w-6 h-6 text-xl" /> }
+                ].map(t => (
+                  <button
+                    key={t.key}
+                    onClick={() => setB2bTab(t.key)}
+                    aria-current={b2bTab === t.key ? 'page' : undefined}
+                    className="flex flex-col items-center justify-center rounded-xl py-1.5 min-w-0"
+                    style={{ color: b2bTab === t.key ? '#f9a8d4' : '#94a3b8', background: b2bTab === t.key ? 'rgba(244,114,182,0.14)' : 'transparent' }}
+                  >
+                    {t.icon}
+                    <span className="mt-1 font-bold whitespace-nowrap" style={{ fontSize: '0.8rem', letterSpacing: '-0.03em', lineHeight: 1.1 }}>{t.label}</span>
+                  </button>
+                ))}
+              </nav>
             </div>
           )}
 
@@ -3196,13 +3890,13 @@ function App() {
                 <div className="flex items-center gap-3">
                   <button onClick={openNotifications} className="relative text-slate-600" aria-label={`관리자 알림${unreadCount ? ` (읽지 않은 알림 ${unreadCount}개)` : ''}`}>
                     <Bell className="w-5 h-5" />
-                    {unreadCount > 0 && <span className="absolute -top-1.5 -right-2 min-w-[16px] h-4 px-1 rounded-full text-white text-[10px] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{unreadCount > 9 ? '9+' : unreadCount}</span>}
+                    {unreadCount > 0 && <span className="absolute -top-1.5 -right-2 min-w-[1rem] h-4 px-1 rounded-full text-white text-[0.625rem] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{unreadCount > 9 ? '9+' : unreadCount}</span>}
                   </button>
                   <button onClick={logout} className="text-xs font-bold text-slate-500">로그아웃</button>
                 </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-4 space-y-3 pb-24">
+              <div ref={adminScrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 pb-24">
                 {adminTab === 'review' && (() => {
                   const pending = shops.filter(s => shopStatus(s) === 'pending').sort((a, b) => (a.appliedAt || 0) - (b.appliedAt || 0));
                   const recent = shops.filter(s => shopStatus(s) !== 'pending' && s.reviewedAt).sort((a, b) => b.reviewedAt - a.reviewedAt).slice(0, 5);
@@ -3305,6 +3999,55 @@ function App() {
                   );
                 })()}
 
+                {adminTab === 'disputes' && (() => {
+                  const open = disputes.filter(d => d.status === 'open').sort((a, b) => a.at - b.at);
+                  const done = disputes.filter(d => d.status !== 'open').sort((a, b) => (b.resolvedAt || 0) - (a.resolvedAt || 0)).slice(0, 10);
+                  const row = (dp) => {
+                    const b = bookings.find(x => x.id === dp.bookingId);
+                    const s = shops.find(x => x.id === dp.shopId);
+                    const acc = accounts.find(a => a.id === dp.userId);
+                    return { b, s, acc };
+                  };
+                  return (
+                    <>
+                      <h3 className="text-sm font-black text-slate-900">노쇼 이의 제기 ({open.length})</h3>
+                      {open.length === 0 && <p className="text-sm text-slate-500 text-center py-8 bg-white rounded-2xl border border-dashed border-slate-200">처리할 분쟁이 없어요.</p>}
+                      {open.map((dp) => {
+                        const { b, s, acc } = row(dp);
+                        return (
+                          <div key={dp.id} className="bg-white rounded-2xl p-4 border border-slate-200 space-y-2">
+                            <div className="flex justify-between text-xs">
+                              <span className="font-bold text-slate-700">{s ? s.name : ''}</span>
+                              <span className="text-slate-500">{new Date(dp.at).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })} 접수</span>
+                            </div>
+                            <p className="text-xs text-slate-600">{acc ? acc.name : (b ? b.userName : '')} 고객 · {b ? `${formatDateLabel(b.date)} ${b.time}` : ''} · 노쇼 누적 {noShowCount(dp.userId)}회</p>
+                            <p className="text-sm text-slate-800 bg-slate-50 rounded-xl p-2.5">“{dp.text}”</p>
+                            <input type="text" aria-label="분쟁 처리 사유" value={disputeMemos[dp.id] || ''} onChange={(e) => setDisputeMemos({ ...disputeMemos, [dp.id]: e.target.value })} placeholder="처리 사유 (필수 · 고객·원장님 알림과 처리 이력에 남아요)" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none" />
+                            <div className="flex gap-2">
+                              <button onClick={() => resolveDispute(dp, 'keep')} className="flex-1 text-xs font-bold py-2 rounded-xl border border-slate-200 text-slate-700 bg-white">노쇼 유지</button>
+                              <button onClick={() => resolveDispute(dp, 'reverse')} className="flex-1 text-xs font-bold py-2 rounded-xl text-white" style={{ background: '#4338ca' }}>노쇼 취소 (환불·횟수 -1)</button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                      {done.length > 0 && (
+                        <>
+                          <h3 className="text-sm font-black text-slate-900 pt-2">최근 처리</h3>
+                          {done.map(dp => {
+                            const { s } = row(dp);
+                            return (
+                              <div key={dp.id} className="bg-white rounded-xl px-3 py-2.5 border border-slate-200 text-xs flex justify-between gap-2">
+                                <span className="truncate text-slate-700">{s ? s.name : ''} — {dp.memo}</span>
+                                <span className={`font-bold shrink-0 ${dp.status === 'reversed' ? 'text-indigo-700' : 'text-slate-700'}`}>{dp.status === 'reversed' ? '노쇼 취소' : '노쇼 유지'}</span>
+                              </div>
+                            );
+                          })}
+                        </>
+                      )}
+                    </>
+                  );
+                })()}
+
                 {adminTab === 'settle' && (() => {
                   const rows = settlementRows();
                   const total = rows.reduce((a, r) => ({ sales: a.sales + r.sales, commission: a.commission + r.commission, payout: a.payout + r.payout }), { sales: 0, commission: 0, payout: 0 });
@@ -3312,7 +4055,7 @@ function App() {
                     <>
                       <h3 className="text-sm font-black text-slate-900">정산 현황 <span className="text-xs font-bold text-slate-500">이번 달 · {new Date().getMonth() + 1}월</span></h3>
                       <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 leading-relaxed">
-                        [검토 필요] 수수료율 {Math.round(SETTLEMENT_CONFIG.commissionRate * 100)}%는 예시 설정값이에요. 현재 시술 대금은 매장에서 현장 결제되므로,
+                        수수료율 {Math.round(SETTLEMENT_CONFIG.commissionRate * 100)}%는 예시 설정값이에요. 현재 시술 대금은 매장에서 현장 결제되므로,
                         실제 수수료 청구·세금계산서·PG 수수료 처리 방식은 확정 전입니다. (설정: SETTLEMENT_CONFIG)
                       </div>
                       <div className="grid grid-cols-3 gap-2 text-center">
@@ -3320,10 +4063,15 @@ function App() {
                         <div className="bg-white rounded-xl p-2.5 border border-slate-200"><p className="text-xs text-slate-500">수수료(예시)</p><p className="text-sm font-black text-indigo-700">{total.commission.toLocaleString()}원</p></div>
                         <div className="bg-white rounded-xl p-2.5 border border-slate-200"><p className="text-xs text-slate-500">정산 예정</p><p className="text-sm font-black text-emerald-700">{total.payout.toLocaleString()}원</p></div>
                       </div>
+                      {rows.filter(r => r.shopCancelWarn).map(r => (
+                        <div key={r.shop.id} role="alert" className="bg-rose-50 border border-rose-200 rounded-xl p-3 text-xs text-rose-800 font-bold">
+                          ⚠️ {r.shop.name}: 이번 달 가게 사정 취소 {r.shopCancelCount}회 (기준 {SHOP_CANCEL_POLICY.warnPerMonth}회 이상) — 매장 확인 필요
+                        </div>
+                      ))}
                       <div className="overflow-x-auto bg-white rounded-xl border border-slate-200">
                         <table className="w-full text-xs text-left">
                           <thead className="bg-slate-50 text-slate-600">
-                            <tr><th className="p-2 font-bold">샵</th><th className="p-2 font-bold text-right">건수</th><th className="p-2 font-bold text-right">매출</th><th className="p-2 font-bold text-right">수수료</th><th className="p-2 font-bold text-right">정산 예정</th><th className="p-2 font-bold text-right">노쇼 예약금</th></tr>
+                            <tr><th className="p-2 font-bold">샵</th><th className="p-2 font-bold text-right">완료</th><th className="p-2 font-bold text-right">매출</th><th className="p-2 font-bold text-right" title="노쇼 예약금 + 고객 늦은 취소 예약금">예약금 수입</th><th className="p-2 font-bold text-right">수수료</th><th className="p-2 font-bold text-right">정산 예정</th><th className="p-2 font-bold text-right">가게 사정 취소</th></tr>
                           </thead>
                           <tbody>
                             {rows.map(r => (
@@ -3331,73 +4079,111 @@ function App() {
                                 <td className="p-2 whitespace-nowrap">{r.shop.name}</td>
                                 <td className="p-2 text-right">{r.count}</td>
                                 <td className="p-2 text-right whitespace-nowrap">{r.sales.toLocaleString()}</td>
+                                <td className="p-2 text-right whitespace-nowrap">{r.depositIncome.toLocaleString()}</td>
                                 <td className="p-2 text-right whitespace-nowrap">{r.commission.toLocaleString()}</td>
                                 <td className="p-2 text-right whitespace-nowrap font-bold">{r.payout.toLocaleString()}</td>
-                                <td className="p-2 text-right whitespace-nowrap">{r.noShowDeposit.toLocaleString()}</td>
+                                <td className={`p-2 text-right whitespace-nowrap ${r.shopCancelWarn ? 'font-black text-rose-700' : ''}`}>{r.shopCancelWarn ? '⚠️ ' : ''}{r.shopCancelCount}회</td>
                               </tr>
                             ))}
                           </tbody>
                         </table>
                       </div>
-                      <p className="text-xs text-slate-500">이번 달 시술 완료·노쇼 처리된 예약 기준(원장님 홈 카드와 같은 계산). 금액 단위: 원.</p>
+                      <p className="text-xs text-slate-500 leading-relaxed">이번 달 시술일 기준. 예약금 수입 = 노쇼 예약금 + 고객 사정으로 {CANCEL_FREE_HOURS}시간 이내 취소된 예약금. 가게 사정·천재지변 취소와 이의 제기로 취소된 노쇼는 정산 제외. 원장님 홈 카드·리포트와 같은 계산이에요. 금액 단위: 원.</p>
                     </>
                   );
                 })()}
 
-                {adminTab === 'members' && (
+                {adminTab === 'members' && (() => {
+                  // 회원·샵 목록: 검색 + 상태 필터. 행을 누르면 상세(관리 기능은 상세에서)
+                  const qq = squash(adminQuery);
+                  const userMatches = (a) => !qq || squash(`${a.name} ${a.phone} ${a.email || ''} ${a.owner ? a.owner.shopName : ''}`).includes(qq);
+                  const shopMatches = (s) => !qq || squash(`${s.name} ${s.location} ${(ownerOfShop(s.id) || {}).name || ''}`).includes(qq);
+                  const SHOP_FILTERS = [['all', '전체'], ['approved', '승인'], ['pending', '대기'], ['suspended', '정지'], ['rejected', '반려']];
+                  const USER_FILTERS = [['all', '전체'], ['active', '정상'], ['restricted', '이용 제한']];
+                  const shopFilter = SHOP_FILTERS.some(([k]) => k === adminFilter) ? adminFilter : 'all';
+                  const userFilter = USER_FILTERS.some(([k]) => k === adminFilter) ? adminFilter : 'all';
+                  const shopList = shops.filter(s => shopMatches(s) && (shopFilter === 'all' || shopStatus(s) === shopFilter));
+                  const userList = accounts.filter(a => userMatches(a) && (userFilter === 'all' || (userFilter === 'restricted' ? !!a.restricted : !a.restricted)));
+                  const chip = (k, label) => (
+                    <button key={k} onClick={() => setAdminFilter(k)} aria-pressed={adminFilter === k} className="px-2.5 py-1 rounded-full border text-xs font-bold" style={adminFilter === k ? { background: '#4338ca', borderColor: '#4338ca', color: 'white' } : { background: 'white', borderColor: '#e2e8f0', color: '#475569' }}>{label}</button>
+                  );
+                  return (
+                    <>
+                      <input type="search" aria-label="회원·샵 검색" value={adminQuery} onChange={(e) => setAdminQuery(e.target.value)} placeholder="이름·전화번호·샵 이름으로 검색" className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+                      <div className="flex flex-wrap gap-1.5" role="group" aria-label="상태 필터">
+                        {SHOP_FILTERS.map(([k, l]) => chip(k, `샵 ${l}`))}
+                        {USER_FILTERS.filter(([k]) => k !== 'all').map(([k, l]) => chip(k, `회원 ${l}`))}
+                      </div>
+
+                      <h3 className="text-sm font-black text-slate-900 pt-1">샵 ({shopList.length})</h3>
+                      <div className="space-y-1.5">
+                        {shopList.map(s => {
+                          const ss = shopSettlement(s);
+                          return (
+                            <button key={s.id} onClick={() => setAdminDetail({ type: 'shop', id: s.id })} className="w-full text-left bg-white rounded-xl px-3 py-2.5 border border-slate-200 flex justify-between items-center gap-2">
+                              <span className="min-w-0">
+                                <span className="block text-sm font-bold text-slate-800 truncate">{s.name}</span>
+                                <span className="block text-xs text-slate-500 truncate">{(BUSINESS_TYPES.find(t => t.key === (s.bizType || 'nail')) || {}).label} · {normalizeAddress(s.location)}{ss.shopCancelWarn ? ` · ⚠️ 가게 사정 취소 ${ss.shopCancelCount}회` : ''}</span>
+                              </span>
+                              <span className={`text-xs font-bold shrink-0 ${shopStatus(s) === 'approved' ? 'text-emerald-700' : shopStatus(s) === 'pending' ? 'text-amber-700' : 'text-rose-700'}`}>{SHOP_STATUS_LABEL[shopStatus(s)]} ›</span>
+                            </button>
+                          );
+                        })}
+                        {shopList.length === 0 && <p className="text-xs text-slate-500 text-center py-4">조건에 맞는 샵이 없어요.</p>}
+                      </div>
+
+                      <h3 className="text-sm font-black text-slate-900 pt-2">회원 ({userList.length})</h3>
+                      <div className="space-y-1.5">
+                        {userList.map(a => (
+                          <button key={a.id} onClick={() => setAdminDetail({ type: 'user', id: a.id })} className="w-full text-left bg-white rounded-xl px-3 py-2.5 border border-slate-200 flex justify-between items-center gap-2">
+                            <span className="min-w-0">
+                              <span className="block text-sm font-bold text-slate-800 truncate">{a.name} <span className="text-xs font-semibold text-slate-500">{a.type === 'owner' ? '원장님' : a.type === 'admin' ? '관리자' : '고객'}</span></span>
+                              <span className="block text-xs text-slate-500">{maskPhone(a.phone)} · 노쇼 {noShowCount(a.id)}회 · 가입 {a.createdAt ? new Date(a.createdAt).toLocaleDateString('ko-KR') : '-'}</span>
+                            </span>
+                            <span className={`text-xs font-bold shrink-0 ${a.restricted ? 'text-rose-700' : 'text-slate-500'}`}>{a.restricted ? '이용 제한' : '정상'} ›</span>
+                          </button>
+                        ))}
+                        {userList.length === 0 && <p className="text-xs text-slate-500 text-center py-4">조건에 맞는 회원이 없어요.</p>}
+                      </div>
+                    </>
+                  );
+                })()}
+
+                {adminTab === 'logs' && (
                   <>
-                    <h3 className="text-sm font-black text-slate-900">회원 ({accounts.length})</h3>
-                    <div className="overflow-x-auto bg-white rounded-xl border border-slate-200">
-                      <table className="w-full text-xs text-left">
-                        <thead className="bg-slate-50 text-slate-600">
-                          <tr><th className="p-2 font-bold">이름</th><th className="p-2 font-bold">유형</th><th className="p-2 font-bold">연락처</th><th className="p-2 font-bold text-right">노쇼</th><th className="p-2 font-bold">가입일</th></tr>
-                        </thead>
-                        <tbody>
-                          {accounts.map(a => (
-                            <tr key={a.id} className="border-t border-slate-100 text-slate-700">
-                              <td className="p-2 whitespace-nowrap">{a.name}</td>
-                              <td className="p-2 whitespace-nowrap">{a.type === 'owner' ? '원장님' : a.type === 'admin' ? '관리자' : '고객'}</td>
-                              <td className="p-2 whitespace-nowrap">{maskPhone(a.phone)}</td>
-                              <td className={`p-2 text-right ${noShowCount(a.id) >= NOSHOW_POLICY.warnAt ? 'font-black text-rose-700' : ''}`}>{noShowCount(a.id)}</td>
-                              <td className="p-2 whitespace-nowrap">{a.createdAt ? new Date(a.createdAt).toLocaleDateString('ko-KR') : '-'}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    <h3 className="text-sm font-black text-slate-900 pt-2">샵 ({shops.length})</h3>
-                    <div className="overflow-x-auto bg-white rounded-xl border border-slate-200">
-                      <table className="w-full text-xs text-left">
-                        <thead className="bg-slate-50 text-slate-600">
-                          <tr><th className="p-2 font-bold">샵</th><th className="p-2 font-bold">업종</th><th className="p-2 font-bold">상태</th><th className="p-2 font-bold">위치</th></tr>
-                        </thead>
-                        <tbody>
-                          {shops.map(s => (
-                            <tr key={s.id} className="border-t border-slate-100 text-slate-700">
-                              <td className="p-2 whitespace-nowrap">{s.name}</td>
-                              <td className="p-2 whitespace-nowrap">{(BUSINESS_TYPES.find(t => t.key === (s.bizType || 'nail')) || {}).label}</td>
-                              <td className={`p-2 whitespace-nowrap font-bold ${shopStatus(s) === 'approved' ? 'text-emerald-700' : shopStatus(s) === 'rejected' ? 'text-rose-700' : 'text-amber-700'}`}>{SHOP_STATUS_LABEL[shopStatus(s)]}</td>
-                              <td className="p-2 whitespace-nowrap">{normalizeAddress(s.location)}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                    <h3 className="text-sm font-black text-slate-900">처리 이력 ({adminLogs.length})</h3>
+                    <p className="text-xs text-slate-500">관리자가 바꾼 모든 항목이 남아요. 출시 시 서버 감사 로그로 옮겨야 해요.</p>
+                    {adminLogs.length === 0 && <p className="text-sm text-slate-500 text-center py-8 bg-white rounded-2xl border border-dashed border-slate-200">아직 처리 이력이 없어요.</p>}
+                    <div className="space-y-1.5">
+                      {adminLogs.map(l => (
+                        <div key={l.id} className="bg-white rounded-xl px-3 py-2.5 border border-slate-200 text-xs space-y-0.5">
+                          <div className="flex justify-between gap-2 text-slate-500">
+                            <span>{new Date(l.at).toLocaleString('ko-KR', { year: '2-digit', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })} · {l.adminName || '관리자'}</span>
+                            <span className="font-bold text-slate-700 shrink-0">{l.field}</span>
+                          </div>
+                          <p className="font-bold text-slate-800 truncate">{l.targetName}</p>
+                          <p className="text-slate-700">{l.before} → <b>{l.after}</b></p>
+                          <p className="text-slate-500">사유: {l.reason}</p>
+                        </div>
+                      ))}
                     </div>
                   </>
                 )}
               </div>
 
-              <nav aria-label="관리자 메뉴" className="absolute bottom-0 left-0 right-0 h-16 bg-white border-t border-slate-200 flex justify-around items-center px-1 z-40">
+              <nav aria-label="관리자 메뉴" className="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200 grid grid-cols-6 gap-1 px-1.5 pt-1.5 pb-2 z-40">
                 {[
                   { key: 'review', label: '입점 심사', icon: '🏬', badge: shops.filter(s => shopStatus(s) === 'pending').length },
                   { key: 'reports', label: '신고 후기', icon: '🚩', badge: new Set(reports.filter(r => r.status === 'open').map(r => r.reviewId)).size },
+                  { key: 'disputes', label: '분쟁', icon: '⚖️', badge: disputes.filter(d => d.status === 'open').length },
                   { key: 'settle', label: '정산 현황', icon: '💰', badge: 0 },
-                  { key: 'members', label: '회원/샵', icon: '👥', badge: 0 }
+                  { key: 'members', label: '회원/샵', icon: '👥', badge: 0 },
+                  { key: 'logs', label: '처리 이력', icon: '📜', badge: 0 }
                 ].map(t => (
-                  <button key={t.key} onClick={() => setAdminTab(t.key)} aria-current={adminTab === t.key ? 'page' : undefined} className="relative flex flex-col items-center flex-1 py-1" style={{ color: adminTab === t.key ? '#4338ca' : '#64748b' }}>
+                  <button key={t.key} onClick={() => setAdminTab(t.key)} aria-current={adminTab === t.key ? 'page' : undefined} className="relative flex flex-col items-center justify-center rounded-xl py-1.5 min-w-0" style={{ color: adminTab === t.key ? '#4338ca' : '#64748b', background: adminTab === t.key ? 'rgba(67,56,202,0.08)' : 'transparent' }}>
                     <span className="text-lg leading-none" aria-hidden="true">{t.icon}</span>
-                    <span className="text-xs mt-0.5 font-bold">{t.label}</span>
-                    {t.badge > 0 && <span className="absolute top-0 right-4 min-w-[16px] h-4 px-1 rounded-full text-white text-[10px] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{t.badge}</span>}
+                    <span className="mt-1 font-bold whitespace-nowrap" style={{ fontSize: '0.75rem', letterSpacing: '-0.03em' }}>{t.label}</span>
+                    {t.badge > 0 && <span className="absolute top-0.5 right-1 min-w-[1rem] h-4 px-1 rounded-full text-white text-[0.625rem] font-black flex items-center justify-center" style={{ background: '#e11d48' }}>{t.badge}</span>}
                   </button>
                 ))}
               </nav>
@@ -3406,10 +4192,10 @@ function App() {
 
           {selectedDesign && (
             <div className="absolute inset-0 flex items-end justify-center z-50" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
-              <div role="dialog" aria-modal="true" aria-label={`${selectedDesign.title} 상세`} className="bg-white w-full flex flex-col shadow-2xl" style={{ height: '96%', borderTopLeftRadius: '28px', borderTopRightRadius: '28px', overflow: 'hidden' }}>
-                <div className="relative shrink-0" style={{ height: '42%' }}>
-                  <Visual item={selectedDesign} className="w-full h-full" size={430} eager />
-                  <div className="absolute top-4 right-4 flex gap-2">
+              <div role="dialog" aria-modal="true" aria-label={`${selectedDesign.title} 상세`} className="bg-white w-full flex flex-col shadow-2xl" style={{ height: '96%', borderTopLeftRadius: '1.75rem', borderTopRightRadius: '1.75rem', overflow: 'hidden' }}>
+                {/* 사진은 내용과 함께 스크롤(낮은 창에서도 제목·버튼이 가려지지 않게). 닫기·찜 버튼만 위에 고정 */}
+                <div className="relative flex-1 min-h-0 flex flex-col">
+                  <div className="absolute top-4 right-4 flex gap-2 z-20">
                     <button onClick={(e) => toggleLike(e, selectedDesign.id)} aria-label={likedIds.includes(selectedDesign.id) ? '찜 해제' : '찜하기'} aria-pressed={likedIds.includes(selectedDesign.id)} className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-all">
                       <Heart className="w-5 h-5" style={likedIds.includes(selectedDesign.id) ? { fill: '#f43f5e', stroke: '#f43f5e', color: '#f43f5e' } : { color: '#64748b' }} />
                     </button>
@@ -3417,13 +4203,35 @@ function App() {
                       <X className="w-5 h-5 text-slate-800" />
                     </button>
                   </div>
+                <div ref={designScrollRef} className="flex-1 overflow-y-auto">
+                <div className="relative shrink-0" style={{ height: '15rem' }}>
+                  <Visual item={selectedDesign} className="w-full h-full" size={430} eager />
                 </div>
-                <div className="p-5 flex-1 overflow-y-auto space-y-4 text-slate-700">
+                <div className="p-5 space-y-4 text-slate-700">
                   <div>
                     <button onClick={() => openShopFromDesign(selectedDesign)} className="text-xs font-bold px-2.5 py-1 rounded-full" style={{ color: PINK, background: '#FFF0F4' }}>{selectedDesign.shopName} &gt;</button>
                     <h3 className="text-lg font-black text-slate-900 mt-2">{selectedDesign.title}</h3>
                     <div className="flex gap-1.5 mt-2 flex-wrap">{selectedDesign.tags.map((t, i) => <span key={i} className="text-xs text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">#{t}</span>)}</div>
+                    <div className="mt-2">{designRating(selectedDesign)}</div>
                   </div>
+                  {(() => {
+                    const info = designInfo(selectedDesign);
+                    return (
+                      <div className="rounded-2xl border border-slate-100 p-3.5 space-y-2" aria-label="시술 정보">
+                        <div className="flex justify-between text-sm">
+                          <span className="font-bold text-slate-600">⏱️ 소요 시간</span>
+                          <span className="font-black text-slate-900">약 {formatDuration(info.duration)}</span>
+                        </div>
+                        <div className="text-sm">
+                          <p className="font-bold text-slate-600 mb-1">✅ 포함 내용</p>
+                          <ul className="flex flex-wrap gap-1.5">
+                            {info.includes.map((t) => <li key={t} className="text-xs font-semibold text-slate-700 bg-slate-50 border border-slate-200 px-2 py-1 rounded-lg">{t}</li>)}
+                          </ul>
+                        </div>
+                        {info.isDefault && <p className="text-xs text-slate-500">※ 매장 기본 안내예요. 정확한 내용은 매장마다 다를 수 있어요.</p>}
+                      </div>
+                    );
+                  })()}
                   <div className="p-3.5 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
                     <div className="flex justify-between items-center">
                       <div>
@@ -3469,7 +4277,7 @@ function App() {
                             ⚠️ 노쇼가 {ns}회 누적되었어요. {NOSHOW_POLICY.blockAt}회가 되면 예약이 제한돼요. 방문이 어려우면 미리 취소해주세요.
                           </div>
                         )}
-                        <button onClick={() => { setBookingStep(1); setSelectedDesigner(null); setSelectedDate(upcomingDays(1)[0].key); setSelectedTime(''); }} className="w-full text-white font-black py-4 rounded-2xl text-base transition-all shadow-lg active:scale-95" style={{ background: PINK, boxShadow: '0 8px 20px rgba(199,124,138,0.4)' }}>
+                        <button onClick={() => { if (isPreview) { previewGuard(); return; } if (myRestriction) { showToast(`이용이 제한된 계정이라 예약할 수 없어요. (사유: ${myRestriction.reason})`); return; } setBookingStep(1); setSelectedDesigner(null); setSelectedDate(upcomingDays(1)[0].key); setSelectedTime(''); }} className="w-full text-white font-black py-4 rounded-2xl text-base transition-all shadow-lg active:scale-95" style={{ background: PINK, boxShadow: '0 8px 20px rgba(199,124,138,0.4)' }}>
                           🗓️ 지금 바로 예약하기
                         </button>
                       </>
@@ -3509,7 +4317,7 @@ function App() {
                         return (
                           <>
                             <p className="text-sm font-bold text-slate-800 pt-1">📅 방문 날짜</p>
-                            <div className="hscroll flex gap-2 overflow-x-auto pb-1" role="group" aria-label="방문 날짜">
+                            <HRow className="flex gap-2 pb-1" role="group" aria-label="방문 날짜">
                               {days.map((day) => {
                                 const off = closed.includes(day.weekday);
                                 const on = selectedDate === day.key;
@@ -3528,7 +4336,7 @@ function App() {
                                   </button>
                                 );
                               })}
-                            </div>
+                            </HRow>
                             <p className="text-sm font-bold text-slate-800 pt-1">🕒 방문 희망 시간</p>
                             <div className="grid grid-cols-3 gap-2" role="group" aria-label="방문 시간">
                               {TIME_SLOTS.map((time) => {
@@ -3545,7 +4353,7 @@ function App() {
                                     style={!st.ok ? { background: '#f8fafc', borderColor: '#cbd5e1', borderStyle: 'dashed', color: '#64748b' } : on ? { background: '#0f172a', borderColor: '#0f172a', color: 'white' } : { background: 'white', borderColor: '#e2e8f0', color: '#475569' }}
                                   >
                                     {time}
-                                    {!st.ok && <span className="block text-[10px] font-semibold">{st.reason}</span>}
+                                    {!st.ok && <span className="block text-[0.625rem] font-semibold">{st.reason}</span>}
                                   </button>
                                 );
                               })}
@@ -3588,9 +4396,65 @@ function App() {
                         {(() => { const st = staffOf(lastBooking.shopId).find(s => s.id === lastBooking.designerId); return st ? ` (담당: ${st.name})` : ''; })()}
                         <br />[스케줄] 탭에서 확인할 수 있어요.
                       </p>
-                      <button onClick={() => { setSelectedDesign(null); resetBookingFlow(); setB2cTab('calendar'); }} className="mt-2 text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg font-bold">확인 완료</button>
+                      {/* 예전엔 '확인 완료'가 스케줄 탭으로 강제 이동했음(클릭이 메뉴로 전달된 게 아니라 코드상 이동).
+                          이제는 팝업만 닫고 현재 화면에 머무름. 클릭이 뒤로 전달되지 않게 이벤트도 막음 */}
+                      <div className="flex gap-2 justify-center mt-2">
+                        <button
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSelectedDesign(null); resetBookingFlow(); }}
+                          className="text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg font-bold"
+                        >
+                          확인 완료
+                        </button>
+                        <button
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSelectedDesign(null); resetBookingFlow(); setB2cTab('calendar'); }}
+                          className="text-xs bg-white border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg font-bold"
+                        >
+                          스케줄에서 보기
+                        </button>
+                      </div>
                     </div>
                   )}
+
+                  {/* 이 디자인의 후기 */}
+                  {(() => {
+                    const list = designReviewsOf(selectedDesign).slice().sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    return (
+                      <div>
+                        <div className="flex justify-between items-center mb-2">
+                          <h4 className="text-sm font-black text-slate-900">이 디자인 후기 ({list.length})</h4>
+                          <button onClick={() => openShopFromDesign(selectedDesign)} className="text-xs font-bold text-slate-600 underline">매장 후기 전체 보기</button>
+                        </div>
+                        {DEMO_MODE && (selectedDesign.reviews || 0) > 0 && (
+                          <p className="text-xs text-slate-500 mb-2">※ 시연용: 별점 옆 ({selectedDesign.reviews})는 출시 전 누적값으로 넣어 둔 기준 숫자예요. 아래에는 앱에서 실제 작성된 후기만 보여요.</p>
+                        )}
+                        {list.length === 0 ? (
+                          <p className="text-sm text-slate-500 bg-slate-50 rounded-xl p-3 text-center">아직 이 디자인으로 작성된 후기가 없어요.</p>
+                        ) : (
+                          <div className="space-y-2">
+                            {list.slice(0, 3).map((r) => (
+                              <div key={r.id} className="bg-white rounded-xl p-3 border border-slate-100">
+                                <div className="flex justify-between text-xs mb-1"><span className="font-bold text-slate-800">{r.author}</span><span className="text-slate-500">{r.date}{r.editedAt ? ' · 수정됨' : ''}</span></div>
+                                <div className="text-amber-500 text-xs mb-1" aria-label={`별점 ${r.rating}점`}>{'⭐'.repeat(r.rating)}</div>
+                                <p className="text-sm text-slate-600 leading-relaxed">{r.comment}</p>
+                              </div>
+                            ))}
+                            {list.length > 3 && <p className="text-xs text-slate-500 text-center">외 {list.length - 3}개 후기는 매장 후기에서 볼 수 있어요.</p>}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+
+                  {/* 취소·환불 안내 — 약관 제5조와 같은 기준 (CANCEL_FREE_HOURS, SHOP_CANCEL_POLICY) */}
+                  <div className="rounded-2xl bg-slate-50 border border-slate-100 p-3.5 text-xs text-slate-600 leading-relaxed space-y-1">
+                    <p className="text-sm font-black text-slate-800 mb-1">취소·환불 안내</p>
+                    <p>· 예약금 {PAYMENT_CONFIG.depositAmount.toLocaleString()}원은 시술 당일 시술 대금에서 차감돼요.</p>
+                    <p>· 방문 {CANCEL_FREE_HOURS}시간 전까지 취소하면 예약금 전액 환불돼요.</p>
+                    <p>· 방문 {CANCEL_FREE_HOURS}시간 이내 취소·노쇼 시 예약금은 환불되지 않아요.</p>
+                    <p>· 매장 사정이나 천재지변으로 취소되면 예약금 전액 환불되고 쿠폰·포인트도 돌려드려요.</p>
+                  </div>
+                </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -3598,14 +4462,17 @@ function App() {
 
           {selectedShop && (
             <div className="absolute inset-0 flex items-end justify-center z-50" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
-              <div role="dialog" aria-modal="true" aria-label={`${selectedShop.name} 매장 정보`} className="bg-white w-full flex flex-col shadow-2xl" style={{ height: '96%', borderTopLeftRadius: '28px', borderTopRightRadius: '28px', overflow: 'hidden' }}>
-                <div className="relative shrink-0" style={{ height: '30%' }}>
+              <div role="dialog" aria-modal="true" aria-label={`${selectedShop.name} 매장 정보`} className="bg-white w-full flex flex-col shadow-2xl" style={{ height: '96%', borderTopLeftRadius: '1.75rem', borderTopRightRadius: '1.75rem', overflow: 'hidden' }}>
+                {/* 매장 사진도 내용과 함께 스크롤, 뒤로 버튼만 고정 */}
+                <div className="relative flex-1 min-h-0 flex flex-col">
+                <button onClick={() => { setSelectedShop(null); setSelectedDesign(null); }} aria-label="뒤로" className="absolute top-4 left-4 z-20 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-all">
+                  <ChevronLeft className="w-5 h-5 text-slate-800" />
+                </button>
+                <div ref={shopScrollRef} className="flex-1 overflow-y-auto">
+                <div className="relative shrink-0" style={{ height: '11rem' }}>
                   <Visual item={selectedShop} className="w-full h-full" size={430} eager />
-                  <button onClick={() => { setSelectedShop(null); setSelectedDesign(null); }} aria-label="뒤로" className="absolute top-4 left-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-all">
-                    <ChevronLeft className="w-5 h-5 text-slate-800" />
-                  </button>
                 </div>
-                <div className="p-5 flex-1 overflow-y-auto space-y-4">
+                <div className="p-5 space-y-4">
                   <div>
                     <h3 className="text-lg font-black text-slate-900">{selectedShop.name}</h3>
                     <p className="text-sm text-slate-500 flex items-center gap-1 mt-1">
@@ -3633,7 +4500,7 @@ function App() {
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed font-medium">{selectedShop.info}</p>
+                  <p className="text-sm text-slate-600 leading-relaxed font-medium">{selectedShop.infoHidden ? '(운영 정책에 따라 숨김 처리된 소개예요)' : selectedShop.info}</p>
                   <div className="bg-slate-50 rounded-xl p-3 border border-slate-100 space-y-1.5 text-sm">
                     <div className="flex items-center gap-2 text-slate-600"><span className="text-slate-500">🕐</span> <span className="font-semibold">{selectedShop.hours}</span></div>
                     <a href={`tel:${selectedShop.phone}`} className="flex items-center gap-2 text-slate-600 hover:underline"><span className="text-slate-500">📞</span> <span className="font-semibold">{selectedShop.phone}</span></a>
@@ -3686,7 +4553,7 @@ function App() {
                   </div>
                   <div>
                     <h4 className="text-sm font-black text-slate-900 mb-2">이 샵의 디자인 시안</h4>
-                    <div style={{ columnCount: 2, columnGap: '12px' }}>
+                    <div style={{ columnCount: 2, columnGap: '0.75rem' }}>
                       {publicDesigns.filter(d => d.shopId === selectedShop.id).map((d, idx) => (
                         <PinCard key={d.id} design={d} tall={idx % 2 === 0} />
                       ))}
@@ -3695,6 +4562,8 @@ function App() {
                       )}
                     </div>
                   </div>
+                </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -3706,7 +4575,7 @@ function App() {
             const d = designs.find(x => x.id === h.designId);
             return (
               <div className="absolute inset-0 flex items-end justify-center z-50" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}>
-                <div role="dialog" aria-modal="true" aria-label="시술 일기" className="bg-white w-full flex flex-col shadow-2xl" style={{ height: '92%', borderTopLeftRadius: '28px', borderTopRightRadius: '28px', overflow: 'hidden' }}>
+                <div role="dialog" aria-modal="true" aria-label="시술 일기" className="bg-white w-full flex flex-col shadow-2xl" style={{ height: '92%', borderTopLeftRadius: '1.75rem', borderTopRightRadius: '1.75rem', overflow: 'hidden' }}>
                   <div className="px-5 pt-4 pb-3 border-b border-slate-100 flex justify-between items-center shrink-0">
                     <div>
                       <h3 className="text-base font-black text-slate-900">{d ? d.title : '삭제된 디자인'}</h3>
@@ -3776,6 +4645,16 @@ function App() {
               ) : myNotifications.map((n) => (
                 <div key={n.id} className="p-3 rounded-xl border border-slate-100 bg-slate-50">
                   <p className="text-sm text-slate-800 leading-relaxed">{n.text}</p>
+                  {n.action && n.action.type === 'rebook' && appMode === 'B2C' && (
+                    <button onClick={() => { const d = designs.find(x => x.id === n.action.designId); setShowNotifications(false); if (d) openDesign(d); else setB2cTab('home'); }} className="mt-2 text-xs font-bold text-white px-3 py-1.5 rounded-lg" style={{ background: PINK }}>{n.action.label || '다른 시간 예약하기'}</button>
+                  )}
+                  {n.action && n.action.type === 'dispute' && appMode === 'B2C' && (() => {
+                    const bk = bookings.find(x => x.id === n.action.bookingId);
+                    const dp = disputes.find(x => x.bookingId === n.action.bookingId);
+                    if (dp) return <p className="mt-2 text-xs font-bold text-slate-600">이의 제기 {dp.status === 'open' ? '검토 중' : dp.status === 'reversed' ? '인정됨(노쇼 취소)' : '기각(노쇼 유지)'}</p>;
+                    if (!bk || bk.status !== 'noshow') return null;
+                    return <button onClick={() => openDispute(bk.id)} className="mt-2 text-xs font-bold text-slate-800 bg-white border border-slate-300 px-3 py-1.5 rounded-lg">{n.action.label || '이의 제기'}</button>;
+                  })()}
                   <p className="text-xs text-slate-500 mt-1">{new Date(n.at).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
                 </div>
               ))}
@@ -3798,6 +4677,225 @@ function App() {
             <div className="p-4 overflow-y-auto text-xs text-slate-600 leading-relaxed whitespace-pre-wrap">{MARKETING_TEXT}</div>
           </Sheet>
         )}
+        {appMode === 'ADMIN' && adminDetail && (() => {
+          // 관리자 상세 화면 (회원·샵). 수정은 모두 사유 입력(askReason) → 처리 이력 + 대상 알림
+          const sec = (title, children) => (
+            <section className="space-y-1.5">
+              <h4 className="text-xs font-black text-slate-500 uppercase tracking-wide">{title}</h4>
+              {children}
+            </section>
+          );
+          const bookingRow = (b, showUser) => {
+            const d = designs.find(x => x.id === b.designId);
+            const s = shops.find(x => x.id === b.shopId);
+            return (
+              <div key={b.id} className="bg-slate-50 rounded-xl px-3 py-2 text-xs flex justify-between items-center gap-2">
+                <span className="min-w-0">
+                  <span className="block font-bold text-slate-800 truncate">{formatDateLabel(b.date)} {b.time} · {showUser ? `${b.userName} 고객` : (s ? s.name : '')}</span>
+                  <span className="block text-slate-500 truncate">{d ? d.title : '삭제된 디자인'} · {bookingStatusLabel(b)}{b.correctedReason ? ' (정정됨)' : ''}</span>
+                </span>
+                <select aria-label="예약 상태 정정" value="" onChange={(e) => adminCorrectBooking(b, e.target.value)} className="shrink-0 bg-white border border-slate-200 rounded-lg px-1.5 py-1 text-xs font-bold text-slate-700">
+                  <option value="">정정…</option>
+                  {BOOKING_STATUS_OPTIONS.filter(([k]) => k !== b.status).map(([k, l]) => <option key={k} value={k}>{l}</option>)}
+                </select>
+              </div>
+            );
+          };
+          if (adminDetail.type === 'shop') {
+            const s = shops.find(x => x.id === adminDetail.id);
+            if (!s) return null;
+            const st = shopStatus(s);
+            const owner = ownerOfShop(s.id);
+            const ss = shopSettlement(s);
+            const shopDesigns = designs.filter(d => d.shopId === s.id);
+            const reviews = shopReviews[s.id] || [];
+            const shopAds = (shopOwnerData[s.id] || {}).ads || [];
+            const shopBookings = bookings.filter(b => b.shopId === s.id).sort((a, b) => slotTime(b.date, b.time) - slotTime(a.date, a.time)).slice(0, 15);
+            const shopReports = reports.filter(r => r.shopId === s.id);
+            return (
+              <Sheet title={`샵 상세 · ${s.name}`} onClose={() => setAdminDetail(null)} height="94%">
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 text-sm">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className={`text-xs font-black px-2 py-0.5 rounded-full ${st === 'approved' ? 'bg-emerald-50 text-emerald-700' : st === 'pending' ? 'bg-amber-50 text-amber-800' : 'bg-rose-50 text-rose-700'}`}>{SHOP_STATUS_LABEL[st]}</span>
+                    {(s.suspendReason || s.rejectReason) && <span className="text-xs text-slate-600">사유: {s.suspendReason || s.rejectReason}</span>}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {st !== 'approved' && <button onClick={() => adminSetShopStatus(s, 'approved')} className="text-xs font-bold px-3 py-2 rounded-lg text-white" style={{ background: '#4338ca' }}>{st === 'suspended' ? '정지 해제' : '승인'}</button>}
+                    {st !== 'suspended' && st !== 'pending' && <button onClick={() => adminSetShopStatus(s, 'suspended')} className="text-xs font-bold px-3 py-2 rounded-lg text-white" style={{ background: '#be123c' }}>영업 정지</button>}
+                    {st === 'pending' && <button onClick={() => adminSetShopStatus(s, 'rejected')} className="text-xs font-bold px-3 py-2 rounded-lg border border-rose-200 text-rose-700 bg-rose-50">반려</button>}
+                  </div>
+                  {sec('기본 정보', (
+                    <div className="bg-slate-50 rounded-xl p-3 space-y-1 text-xs text-slate-700">
+                      <p><b>원장님</b> {owner ? `${owner.name} · ${revealedPhones[owner.id] ? formatPhone(owner.phone) : maskPhone(owner.phone)}` : '(데모·가상 매장)'} {owner && !revealedPhones[owner.id] && <button onClick={() => revealPhone(owner)} className="underline font-bold ml-1">전체 보기</button>}</p>
+                      <p><b>주소</b> {s.location}</p>
+                      <p><b>영업시간</b> {s.hours} · <b>전화</b> {s.phone}</p>
+                      <p><b>업종</b> {(BUSINESS_TYPES.find(t => t.key === (s.bizType || 'nail')) || {}).label} · <b>평점</b> {ratingText(s)}</p>
+                      <div className="pt-1">
+                        <p><b>소개</b> {s.infoHidden ? <span className="text-rose-700">(숨김: {s.infoHiddenReason})</span> : null}</p>
+                        <p className="text-slate-600">{s.info}</p>
+                        <button onClick={() => adminToggleShopInfo(s)} className="mt-1 text-xs font-bold underline text-slate-700">{s.infoHidden ? '소개 숨김 해제' : '부적절한 소개 숨김'}</button>
+                        <p className="text-[0.6875rem] text-slate-500 mt-0.5">관리자는 원장님 글을 직접 고칠 수 없어요(분쟁 방지). 숨김만 가능해요.</p>
+                      </div>
+                    </div>
+                  ))}
+                  {sec(`이번 달 정산 · 가게 사정 취소 ${ss.shopCancelCount}회${ss.shopCancelWarn ? ' ⚠️' : ''}`, (
+                    <div className="grid grid-cols-3 gap-2 text-center text-xs">
+                      <div className="bg-slate-50 rounded-xl p-2"><p className="text-slate-500">완료</p><p className="font-black">{ss.count}건</p></div>
+                      <div className="bg-slate-50 rounded-xl p-2"><p className="text-slate-500">매출+예약금</p><p className="font-black">{(ss.sales + ss.depositIncome).toLocaleString()}원</p></div>
+                      <div className="bg-slate-50 rounded-xl p-2"><p className="text-slate-500">정산 예정</p><p className="font-black text-emerald-700">{ss.payout.toLocaleString()}원</p></div>
+                    </div>
+                  ))}
+                  {sec(`디자인·상품 (${shopDesigns.length})`, shopDesigns.map(d => (
+                    <div key={d.id} className="bg-slate-50 rounded-xl px-3 py-2 text-xs flex justify-between items-center gap-2">
+                      <span className="min-w-0"><span className="block font-bold text-slate-800 truncate">{d.title}</span><span className="block text-slate-500">{d.price.toLocaleString()}원{d.adminHidden ? ' · 관리자 숨김' : hiddenDesignIds.includes(d.id) ? ' · 원장님 숨김' : ''}</span></span>
+                      <span className="flex gap-1.5 shrink-0">
+                        <button onClick={() => adminToggleDesignHidden(d)} className="font-bold underline text-slate-700">{d.adminHidden ? '숨김 해제' : '숨김'}</button>
+                        <button onClick={() => adminDeleteDesign(d)} className="font-bold underline text-rose-700">삭제</button>
+                      </span>
+                    </div>
+                  )))}
+                  {sec(`후기 (${reviews.length})`, reviews.length ? reviews.map(r => (
+                    <div key={r.id} className="bg-slate-50 rounded-xl px-3 py-2 text-xs flex justify-between items-start gap-2">
+                      <span className="min-w-0"><span className="block font-bold text-slate-800">{r.author} · {'⭐'.repeat(r.rating)} · {r.date}{r.hidden ? ' · 숨김' : ''}</span><span className="block text-slate-600">{r.comment}</span></span>
+                      <button onClick={() => adminHideReview(r, s.id)} className="shrink-0 font-bold underline text-slate-700">{r.hidden ? '숨김 해제' : '숨김'}</button>
+                    </div>
+                  )) : <p className="text-xs text-slate-500">후기가 없어요.</p>)}
+                  {sec(`광고 (${shopAds.length})`, shopAds.length ? shopAds.map(a => {
+                    const d = designs.find(x => x.id === a.designId);
+                    return <p key={a.id} className="bg-slate-50 rounded-xl px-3 py-2 text-xs text-slate-700">{a.type} · {d ? d.title : '삭제된 디자인'} · {a.days}일 · {a.cost.toLocaleString()}P · {adActive(a) ? '진행중' : '종료'}{a.keyword ? ` · #${a.keyword}` : ''}</p>;
+                  }) : <p className="text-xs text-slate-500">광고가 없어요.</p>)}
+                  {sec(`예약 내역 (최근 ${shopBookings.length}건)`, shopBookings.length ? shopBookings.map(b => bookingRow(b, true)) : <p className="text-xs text-slate-500">예약이 없어요.</p>)}
+                  {sec(`신고 이력 (${shopReports.length})`, shopReports.length ? shopReports.map(r => (
+                    <p key={r.id} className="bg-slate-50 rounded-xl px-3 py-2 text-xs text-slate-700">{new Date(r.at).toLocaleDateString('ko-KR')} · {r.reason} · {r.status === 'open' ? '처리 대기' : r.status === 'hidden' ? '숨김 처리' : '유지'}</p>
+                  )) : <p className="text-xs text-slate-500">신고 이력이 없어요.</p>)}
+                </div>
+              </Sheet>
+            );
+          }
+          const a = accountOf(adminDetail.id);
+          if (!a) return null;
+          const d = userData[a.id] || {};
+          const coupons = d.coupons || INITIAL_COUPONS;
+          const pts = pointsOf(d, a.id);
+          const userBookings = bookings.filter(b => b.userId === a.id).sort((x, y) => slotTime(y.date, y.time) - slotTime(x.date, x.time));
+          const written = Object.entries(shopReviews).flatMap(([shopId, list]) => (list || []).filter(r => r.authorId === a.id).map(r => ({ r, shopId })));
+          const madeReports = reports.filter(r => r.reporterId === a.id);
+          const writtenIds = new Set(written.map(x => x.r.id));
+          const receivedReports = reports.filter(r => writtenIds.has(r.reviewId));
+          const count = (s) => userBookings.filter(b => b.status === s).length;
+          return (
+            <Sheet title={`회원 상세 · ${a.name}`} onClose={() => setAdminDetail(null)} height="94%">
+              <div className="flex-1 overflow-y-auto p-4 space-y-4 text-sm">
+                {sec('기본 정보', (
+                  <div className="bg-slate-50 rounded-xl p-3 space-y-1 text-xs text-slate-700">
+                    <p><b>유형</b> {a.type === 'owner' ? '원장님' : a.type === 'admin' ? '관리자' : '고객'} · <b>가입일</b> {a.createdAt ? new Date(a.createdAt).toLocaleDateString('ko-KR') : '-'}</p>
+                    <p><b>전화번호</b> {revealedPhones[a.id] ? formatPhone(a.phone) : maskPhone(a.phone)} {!revealedPhones[a.id] && <button onClick={() => revealPhone(a)} className="underline font-bold ml-1">전체 보기</button>}</p>
+                    <p className="text-[0.6875rem] text-slate-500">개인정보는 기본적으로 일부만 보여요. ‘전체 보기’는 처리 이력에 열람 기록이 남아요.</p>
+                    <p><b>마케팅 수신</b> {a.marketing ? '동의' : '미동의'}</p>
+                  </div>
+                ))}
+                {sec('이용 제한', (
+                  <div className="flex items-center justify-between bg-slate-50 rounded-xl px-3 py-2 text-xs">
+                    <span className={a.restricted ? 'font-bold text-rose-700' : 'text-slate-700'}>{a.restricted ? `이용 제한 중 · ${a.restricted.reason}` : '정상'}</span>
+                    {a.type === 'owner' && <span className="text-[0.6875rem] text-slate-500 mr-2">원장님 매장 노출을 막으려면 샵 상세의 ‘영업 정지’를 쓰세요.</span>}
+                    {a.type !== 'admin' && <button onClick={() => adminToggleRestrict(a)} className="font-bold px-2.5 py-1.5 rounded-lg text-white" style={{ background: a.restricted ? '#4338ca' : '#be123c' }}>{a.restricted ? '제한 해제' : '이용 제한'}</button>}
+                  </div>
+                ))}
+                {a.type === 'customer' && sec('포인트·쿠폰', (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between bg-slate-50 rounded-xl px-3 py-2 text-xs">
+                      <span><b>포인트</b> {pts.toLocaleString()}P</span>
+                      <span className="flex gap-1">
+                        {[-1000, -100, 100, 1000].map(v => <button key={v} onClick={() => adminAdjustPoints(a, v)} className="px-2 py-1 rounded-md border border-slate-200 bg-white font-bold" aria-label={`포인트 ${v > 0 ? '+' : ''}${v}`}>{v > 0 ? `+${v}` : v}</button>)}
+                      </span>
+                    </div>
+                    {coupons.map(c => (
+                      <div key={c.id} className="flex items-center justify-between bg-slate-50 rounded-xl px-3 py-2 text-xs">
+                        <span>{c.name} · {c.used ? '사용완료' : '사용가능'}</span>
+                        <button onClick={() => adminToggleCoupon(a, c)} className="font-bold underline">{c.used ? '복구' : '사용 처리'}</button>
+                      </div>
+                    ))}
+                    <button onClick={() => adminGrantCoupon(a)} className="text-xs font-bold underline text-indigo-700">+ 쿠폰 지급</button>
+                  </div>
+                ))}
+                {a.type === 'customer' && sec('노쇼', (
+                  <div className="flex items-center justify-between bg-slate-50 rounded-xl px-3 py-2 text-xs">
+                    <span><b>노쇼 누적</b> {noShowCount(a.id)}회 {a.noShowAdjust ? `(관리자 정정 ${a.noShowAdjust > 0 ? '+' : ''}${a.noShowAdjust})` : ''} · 경고 {NOSHOW_POLICY.warnAt}회 / 제한 {NOSHOW_POLICY.blockAt}회</span>
+                    <span className="flex gap-1">
+                      <button onClick={() => adminAdjustNoShow(a, -1)} className="px-2 py-1 rounded-md border border-slate-200 bg-white font-bold" aria-label="노쇼 횟수 -1">-1</button>
+                      <button onClick={() => adminAdjustNoShow(a, 1)} className="px-2 py-1 rounded-md border border-slate-200 bg-white font-bold" aria-label="노쇼 횟수 +1">+1</button>
+                    </span>
+                  </div>
+                ))}
+                {sec(`예약 ${userBookings.length}건 · 취소 ${count('cancelled')} · 노쇼 ${count('noshow')}`, userBookings.length ? userBookings.slice(0, 20).map(b => bookingRow(b, false)) : <p className="text-xs text-slate-500">예약이 없어요.</p>)}
+                {sec(`작성 후기 (${written.length})`, written.length ? written.map(({ r, shopId }) => (
+                  <div key={r.id} className="bg-slate-50 rounded-xl px-3 py-2 text-xs flex justify-between items-start gap-2">
+                    <span className="min-w-0"><span className="block font-bold text-slate-800">{(shops.find(s => s.id === shopId) || {}).name} · {'⭐'.repeat(r.rating)}{r.hidden ? ' · 숨김' : ''}</span><span className="block text-slate-600">{r.comment}</span></span>
+                    <button onClick={() => adminHideReview(r, shopId)} className="shrink-0 font-bold underline">{r.hidden ? '숨김 해제' : '숨김'}</button>
+                  </div>
+                )) : <p className="text-xs text-slate-500">작성한 후기가 없어요.</p>)}
+                {sec('신고 이력', (
+                  <p className="bg-slate-50 rounded-xl px-3 py-2 text-xs text-slate-700">이 회원이 한 신고 {madeReports.length}건 · 이 회원 후기가 받은 신고 {receivedReports.length}건</p>
+                ))}
+              </div>
+            </Sheet>
+          );
+        })()}
+        {ownerCancel && (() => {
+          const b = ownerCancel.booking;
+          const d = designs.find(x => x.id === b.designId);
+          const out = ownerCancel.reason ? cancelOutcome(b, ownerCancel.reason) : null;
+          return (
+            <Sheet title="예약 취소" onClose={() => setOwnerCancel(null)} height="88%">
+              <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                <div className="bg-slate-50 rounded-xl p-3 text-sm text-slate-700">
+                  <p className="font-bold">{b.userName} 고객 · {d ? d.title : ''}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{formatDateLabel(b.date)} {b.time} · 예약금 {(b.deposit || PAYMENT_CONFIG.depositAmount).toLocaleString()}원</p>
+                </div>
+                <fieldset className="space-y-1.5">
+                  <legend className="text-xs font-bold text-slate-600 mb-1">취소 사유 (필수)</legend>
+                  {['customer', 'shop', 'force'].map(key => (
+                    <label key={key} className="flex items-start gap-2 p-2.5 rounded-xl border border-slate-200 cursor-pointer" style={ownerCancel.reason === key ? { borderColor: PINK, background: '#FFF0F4' } : {}}>
+                      <input type="radio" name="owner-cancel-reason" value={key} checked={ownerCancel.reason === key} onChange={() => setOwnerCancel({ ...ownerCancel, reason: key })} className="w-4 h-4 mt-0.5" />
+                      <span><span className="block text-sm font-bold text-slate-800">{CANCEL_REASONS[key].label}</span><span className="block text-xs text-slate-500">{CANCEL_REASONS[key].desc}</span></span>
+                    </label>
+                  ))}
+                </fieldset>
+                <label className="block">
+                  <span className="block text-xs font-bold text-slate-600 mb-1">메모 (선택 · 고객 알림에 함께 보내요)</span>
+                  <textarea value={ownerCancel.memo} onChange={(e) => setOwnerCancel({ ...ownerCancel, memo: e.target.value })} rows={2} maxLength={200} placeholder="예) 장비 고장으로 오늘 영업이 어려워요" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none resize-none" />
+                </label>
+                {out && (
+                  <div className="rounded-xl border border-slate-200 p-3 text-sm space-y-1" aria-live="polite">
+                    <p className="text-xs font-black text-slate-700 mb-1">처리 결과 미리보기</p>
+                    <div className="flex justify-between"><span className="text-slate-600">고객 환불</span><span className="font-bold">{out.refund.toLocaleString()}원</span></div>
+                    <div className="flex justify-between"><span className="text-slate-600">매장 정산 포함</span><span className="font-bold">{out.settlementDeposit.toLocaleString()}원</span></div>
+                    <div className="flex justify-between"><span className="text-slate-600">고객 쿠폰</span><span className="font-bold">{b.couponId ? '복구' : '-'}</span></div>
+                    {out.apology && <p className="text-xs text-slate-500 pt-1">고객에게 사과 알림과 "다른 시간 예약하기" 버튼이 함께 가요. 가게 사정 취소는 관리자 화면에 횟수가 집계돼요.</p>}
+                    {!out.apology && out.refund === 0 && <p className="text-xs text-slate-500 pt-1">방문 {CANCEL_FREE_HOURS}시간 이내 고객 요청 취소라 기존 취소 규정(환불 없음)을 적용해요.</p>}
+                  </div>
+                )}
+                <button onClick={submitOwnerCancel} className="w-full text-white text-sm font-bold py-3 rounded-xl" style={{ background: '#be123c' }}>예약 취소하기</button>
+              </div>
+            </Sheet>
+          );
+        })()}
+        {disputeTarget && (
+          <Sheet title="노쇼 이의 제기" onClose={() => setDisputeTarget(null)} height="62%">
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              <div className="bg-slate-50 rounded-xl p-3 text-sm text-slate-700">
+                <p className="font-bold">{(shops.find(s => s.id === disputeTarget.shopId) || {}).name}</p>
+                <p className="text-xs text-slate-500 mt-0.5">{formatDateLabel(disputeTarget.date)} {disputeTarget.time} · 노쇼 처리됨</p>
+              </div>
+              <label className="block">
+                <span className="block text-xs font-bold text-slate-600 mb-1">이의 제기 사유 (필수)</span>
+                <textarea value={disputeText} onChange={(e) => setDisputeText(e.target.value)} rows={4} maxLength={500} placeholder="예) 예약 시간에 방문했는데 매장이 닫혀 있었어요" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none resize-none" />
+              </label>
+              <p className="text-xs text-slate-500 leading-relaxed">운영팀이 매장과 고객 양쪽 내용을 확인한 뒤 노쇼 취소(예약금 환불·노쇼 횟수 -1) 또는 유지로 처리하고 알려드려요.</p>
+              <button onClick={submitDispute} className="w-full text-white text-sm font-bold py-3 rounded-xl" style={{ background: '#0f172a' }}>이의 제기 보내기</button>
+            </div>
+          </Sheet>
+        )}
         {reportTarget && (
           <Sheet title="후기 신고" onClose={() => setReportTarget(null)} height="62%">
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
@@ -3814,15 +4912,40 @@ function App() {
                   </label>
                 ))}
               </fieldset>
-              {/* [검토 필요] 게시중단(임시조치) 요청 절차 — 정보통신망법 제44조의2 대응 방식 확정 후 안내 문구 보완 */}
+              {/* 게시중단(임시조치) 요청 절차 — 정보통신망법 제44조의2 대응 방식 확정 후 안내 문구 보완 */}
               <p className="text-xs text-slate-500 leading-relaxed">신고된 후기는 운영팀이 확인 후 숨김 또는 유지로 처리해요. 허위 신고가 반복되면 이용이 제한될 수 있어요.</p>
               <button onClick={submitReport} className="w-full text-white text-sm font-bold py-3 rounded-xl" style={{ background: '#0f172a' }}>신고하기</button>
             </div>
           </Sheet>
         )}
         {toast && (
-          <div role="status" aria-live="polite" className="absolute left-4 right-4 bottom-20 z-[60] bg-slate-900 text-white text-sm font-semibold px-4 py-3 rounded-xl shadow-lg text-center">
+          <div role="status" aria-live="polite" className="absolute left-4 right-4 bottom-20 z-[60] bg-slate-900 text-white text-sm font-semibold px-4 py-3 rounded-xl shadow-lg text-center whitespace-pre-line">
             {toast}
+          </div>
+        )}
+        {confirmDlg && (
+          <div className="absolute inset-0 z-[70] flex items-center justify-center p-6" style={{ backgroundColor: 'rgba(0,0,0,0.55)' }} onClick={() => closeConfirm(false)}>
+            <div role="alertdialog" aria-modal="true" aria-labelledby="nm-confirm-title" aria-describedby="nm-confirm-msg" className="bg-white w-full rounded-2xl p-5 shadow-2xl space-y-3" onClick={(e) => e.stopPropagation()}>
+              <h3 id="nm-confirm-title" className="text-base font-black text-slate-900">{confirmDlg.title || '확인해 주세요'}</h3>
+              {confirmDlg.message && <p id="nm-confirm-msg" className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">{confirmDlg.message}</p>}
+              {confirmDlg.details && confirmDlg.details.length > 0 && (
+                <dl className="bg-slate-50 rounded-xl p-3 text-sm space-y-1">
+                  {confirmDlg.details.map(([k, v]) => (
+                    <div key={k} className="flex justify-between gap-3"><dt className="text-slate-600">{k}</dt><dd className="font-bold text-slate-900 text-right">{v}</dd></div>
+                  ))}
+                </dl>
+              )}
+              {confirmDlg.input && (
+                <label className="block">
+                  <span className="block text-xs font-bold text-slate-600 mb-1">{confirmDlg.input.label}</span>
+                  <textarea data-testid="confirm-input" value={confirmInput} onChange={(e) => setConfirmInput(e.target.value)} rows={2} maxLength={300} placeholder={confirmDlg.input.placeholder} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none resize-none" />
+                </label>
+              )}
+              <div className="flex gap-2 pt-1">
+                <button data-testid="confirm-cancel" onClick={() => closeConfirm(false)} className="flex-1 py-2.5 rounded-xl border border-slate-200 text-sm font-bold text-slate-700">{confirmDlg.cancelText || '취소'}</button>
+                <button data-testid="confirm-ok" autoFocus={!confirmDlg.input} disabled={!!confirmDlg.input && !confirmInput.trim()} onClick={() => closeConfirm(true)} className="flex-1 py-2.5 rounded-xl text-sm font-black text-white disabled:opacity-40" style={{ background: confirmDlg.danger ? '#be123c' : '#0f172a' }}>{confirmDlg.confirmText || '확인'}</button>
+              </div>
+            </div>
           </div>
         )}
       </div>
