@@ -4933,31 +4933,34 @@ function App() {
                       {myDesigns.map((d, di) => {
                         const isHidden = hiddenDesignIds.includes(d.id);
                         return (
-                          <div key={d.id} className="bg-slate-800 rounded-2xl p-3 border border-slate-700 flex items-center gap-3">
-                            <Visual item={d} className="w-14 h-14 rounded-xl shrink-0" size={72} />
-                            <div className="flex-1 min-w-0">
-                              <h4 className="text-sm font-bold text-white truncate">{d.title}</h4>
-                              <p className="text-xs text-slate-400">{d.price.toLocaleString()}원{d.discount ? ` · ${d.discount}% 할인` : ''} · <span className={isHidden || d.adminHidden ? 'text-slate-400' : 'text-emerald-400 font-bold'}>{isHidden || d.adminHidden ? '숨김' : '판매중'}</span></p>
-                              <button onClick={() => startEditDesign(d)} className="text-xs font-bold text-pink-300 underline">옵션 {optionsOf(d).length}개 {optionsOf(d).length ? '수정' : '추가'}</button>
-                              {d.adminHidden && <p className="text-xs font-bold text-rose-300">관리자 숨김: {d.adminHiddenReason} (해제는 고객센터 문의)</p>}
+                          <div key={d.id} className="bg-slate-800 rounded-2xl p-3 border border-slate-700">
+                            {/* 위: 사진 + 디자인 정보(이름은 2줄까지) + 순서 / 아래: 숨김·수정·삭제 버튼 한 줄 — 이름이 버튼에 가려지지 않게 */}
+                            <div className="flex items-start gap-3">
+                              <Visual item={d} className="w-16 h-16 rounded-xl shrink-0" size={80} />
+                              <div className="flex-1 min-w-0">
+                                <h4 className="text-sm font-bold text-white leading-snug" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }} title={d.title}>{d.title}</h4>
+                                <p className="text-xs text-slate-400 mt-0.5">{d.price.toLocaleString()}원{d.discount ? ` · ${d.discount}% 할인` : ''} · <span className={isHidden || d.adminHidden ? 'text-slate-400' : 'text-emerald-400 font-bold'}>{isHidden || d.adminHidden ? '숨김' : '판매중'}</span></p>
+                                <p className="text-xs text-slate-400">{catLabel(d.cat)}{d.durationMin ? ` · 약 ${formatDuration(d.durationMin)}` : ''}</p>
+                                {d.adminHidden && <p className="text-xs font-bold text-rose-300">관리자 숨김: {d.adminHiddenReason} (해제는 고객센터 문의)</p>}
+                              </div>
+                              <div className="flex flex-col shrink-0">
+                                <button onClick={() => moveDesign(d.id, -1)} disabled={di === 0} aria-label={`${d.title} 위로`} className="w-7 h-6 text-xs text-slate-300 disabled:opacity-30">▲</button>
+                                <button onClick={() => moveDesign(d.id, 1)} disabled={di === myDesigns.length - 1} aria-label={`${d.title} 아래로`} className="w-7 h-6 text-xs text-slate-300 disabled:opacity-30">▼</button>
+                              </div>
                             </div>
-                            <div className="flex flex-col shrink-0">
-                              <button onClick={() => moveDesign(d.id, -1)} disabled={di === 0} aria-label={`${d.title} 위로`} className="w-7 h-5 text-xs text-slate-300 disabled:opacity-30">▲</button>
-                              <button onClick={() => moveDesign(d.id, 1)} disabled={di === myDesigns.length - 1} aria-label={`${d.title} 아래로`} className="w-7 h-5 text-xs text-slate-300 disabled:opacity-30">▼</button>
+                            {/* 버튼: 아이콘 + 글자 라벨 + 툴팁(title). 삭제는 앱 안 확인창을 거침 */}
+                            <div className="grid grid-cols-4 gap-1.5 mt-2.5 text-xs font-bold">
+                              <button onClick={() => startEditDesign(d)} title="옵션(추가 금액·시간) 설정" className="py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-pink-300 whitespace-nowrap">{optionsOf(d).length ? `옵션 ${optionsOf(d).length}개` : '＋옵션'}</button>
+                              <button onClick={() => toggleDesignVisibility(d.id)} title={isHidden ? '고객 화면에 다시 보이기' : '고객 화면에서 숨기기 (삭제 아님)'} aria-label={isHidden ? `${d.title} 다시 노출` : `${d.title} 숨기기`} className="py-1.5 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center gap-1 text-slate-200">
+                                {isHidden ? <EyeOff className="w-3.5 h-3.5 text-slate-400" /> : <Eye className="w-3.5 h-3.5 text-emerald-400" />}{isHidden ? '노출' : '숨김'}
+                              </button>
+                              <button onClick={() => startEditDesign(d)} title="상품 정보 수정" aria-label={`${d.title} 수정`} className="py-1.5 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center gap-1 text-slate-200">
+                                <span aria-hidden="true">📝</span>수정
+                              </button>
+                              <button onClick={() => deleteMyDesign(d.id)} title="상품 삭제 (확인 후 삭제)" aria-label={`${d.title} 삭제`} className="py-1.5 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center gap-1 text-red-300">
+                                <Trash2 className="w-3.5 h-3.5 text-red-400" />삭제
+                              </button>
                             </div>
-                            {/* 아이콘 + 글자 라벨 + 툴팁(title). 삭제는 앱 안 확인창을 거침 */}
-                            <button onClick={() => toggleDesignVisibility(d.id)} title={isHidden ? '고객 화면에 다시 보이기' : '고객 화면에서 숨기기 (삭제 아님)'} aria-label={isHidden ? `${d.title} 다시 노출` : `${d.title} 숨기기`} className="w-11 py-1 rounded-lg bg-slate-900 border border-slate-700 flex flex-col items-center justify-center shrink-0">
-                              {isHidden ? <EyeOff className="w-4 h-4 text-slate-400" /> : <Eye className="w-4 h-4 text-emerald-400" />}
-                              <span className="text-[0.625rem] font-bold text-slate-300 mt-0.5">{isHidden ? '노출' : '숨김'}</span>
-                            </button>
-                            <button onClick={() => startEditDesign(d)} title="상품 정보 수정" aria-label={`${d.title} 수정`} className="w-11 py-1 rounded-lg bg-slate-900 border border-slate-700 flex flex-col items-center justify-center shrink-0">
-                              <span className="text-sm" aria-hidden="true">📝</span>
-                              <span className="text-[0.625rem] font-bold text-slate-300 mt-0.5">수정</span>
-                            </button>
-                            <button onClick={() => deleteMyDesign(d.id)} title="상품 삭제 (확인 후 삭제)" aria-label={`${d.title} 삭제`} className="w-11 py-1 rounded-lg bg-slate-900 border border-slate-700 flex flex-col items-center justify-center shrink-0">
-                              <Trash2 className="w-4 h-4 text-red-400" />
-                              <span className="text-[0.625rem] font-bold text-red-300 mt-0.5">삭제</span>
-                            </button>
                           </div>
                         );
                       })}
